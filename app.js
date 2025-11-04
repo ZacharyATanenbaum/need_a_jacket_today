@@ -19,6 +19,23 @@ const DISPLAY_HOURS = 24;
 const DEFAULT_LOCATION = { name: 'New York, NY', latitude: 40.7128, longitude: -74.006 }; // NYC default fallback
 const COORDINATE_LABEL_PATTERN = /^\d+(?:\.\d+)?°[NS], \d+(?:\.\d+)?°[EW]$/;
 const hasGeolocation = 'geolocation' in navigator;
+const COUNTRY_CODE_OVERRIDES = {
+  GB: 'United Kingdom',
+  US: 'United States',
+  KR: 'South Korea',
+  KP: 'North Korea'
+};
+const PLACE_NAME_OVERRIDES = {
+  'United Kingdom of Great Britain and Northern Ireland (the)': 'United Kingdom',
+  'United Kingdom of Great Britain and Northern Ireland': 'United Kingdom',
+  'United States of America (the)': 'United States',
+  'United States of America': 'United States',
+  'Russian Federation': 'Russia',
+  'Viet Nam': 'Vietnam',
+  'Korea (Republic of)': 'South Korea',
+  "Korea (Democratic People's Republic of)": 'North Korea',
+  'Iran (Islamic Republic of)': 'Iran'
+};
 
 const layerBands = [
   { maxF: 0, label: "Don't Go Outside", detail: "Dangerously cold — stay indoors if you can." },
@@ -33,6 +50,7 @@ const layerBands = [
 let latestRequestId = 0;
 let activeLocation = { ...DEFAULT_LOCATION };
 let locationNameRefreshInFlight = false;
+let lastAppliedLocationLabel = '';
 
 document.addEventListener('DOMContentLoaded', () => {
   attachEventHandlers();
@@ -376,7 +394,7 @@ function renderForecast(forecast) {
 function applyActiveLocation(location) {
   activeLocation = location;
   const label = location.name ?? formatCoordinates(location.latitude, location.longitude);
-  locationNameEl.textContent = label;
+  updateLocationDisplay(label);
   if (looksLikeCoordinateLabel(label)) {
     void improveLocationName(location.latitude, location.longitude);
   }
@@ -391,13 +409,23 @@ async function improveLocationName(lat, lon) {
     const resolvedName = await resolveLocationName(lat, lon);
     if (resolvedName && !looksLikeCoordinateLabel(resolvedName) && resolvedName !== activeLocation.name) {
       activeLocation = { ...activeLocation, name: resolvedName };
-      locationNameEl.textContent = resolvedName;
+      updateLocationDisplay(resolvedName);
     }
   } catch (error) {
     console.warn('Unable to refine location name', error);
   } finally {
     locationNameRefreshInFlight = false;
   }
+}
+
+function updateLocationDisplay(label) {
+  locationNameEl.textContent = label;
+  const trimmedValue = locationInput.value.trim();
+  if (!trimmedValue || trimmedValue === lastAppliedLocationLabel) {
+    locationInput.value = label;
+  }
+  locationInput.placeholder = label;
+  lastAppliedLocationLabel = label;
 }
 
 function looksLikeCoordinateLabel(label) {
@@ -472,14 +500,11 @@ function buildPlaceName(result) {
     return '';
   }
   const primary = result.name || result.admin2 || result.admin1 || result.country || '';
-  const parts = [primary];
-  if (result.admin1 && result.admin1 !== primary) {
-    parts.push(result.admin1);
-  }
-  if (result.country && result.country !== primary) {
-    parts.push(result.country);
-  }
-  return parts.filter(Boolean).join(', ');
+  return assembleLocationLabel([
+    { value: primary },
+    { value: result.admin1 },
+    { value: result.country, type: 'country', code: result.country_code }
+  ]);
 }
 
 function buildReverseGeocodeName(result) {
@@ -505,14 +530,60 @@ function buildReverseGeocodeName(result) {
     parts.push(result.principalSubdivision);
   }
   if (result.countryName && result.countryName !== primary) {
-    parts.push(result.countryName);
+    parts.push({ value: result.countryName, type: 'country', code: result.countryCode });
   }
 
-  return parts.filter(Boolean).join(', ');
+  return assembleLocationLabel(parts);
 }
 
 function formatCoordinates(lat, lon) {
   const latSuffix = lat >= 0 ? 'N' : 'S';
   const lonSuffix = lon >= 0 ? 'E' : 'W';
   return `${Math.abs(lat).toFixed(2)}°${latSuffix}, ${Math.abs(lon).toFixed(2)}°${lonSuffix}`;
+}
+
+function assembleLocationLabel(segments, { maxParts = 3 } = {}) {
+  const seen = new Set();
+  const normalized = [];
+  segments.forEach((segment) => {
+    if (!segment) {
+      return;
+    }
+    const payload = typeof segment === 'string' ? { value: segment } : segment;
+    const value = normalizePlacePart(payload.value, payload);
+    if (!value) {
+      return;
+    }
+    const key = value.toLowerCase();
+    if (seen.has(key)) {
+      return;
+    }
+    seen.add(key);
+    normalized.push(value);
+  });
+  return normalized.slice(0, maxParts).join(', ');
+}
+
+function normalizePlacePart(rawValue, { type, code } = {}) {
+  if (!rawValue || typeof rawValue !== 'string') {
+    return '';
+  }
+  let value = rawValue.trim();
+  if (!value) {
+    return '';
+  }
+  const override = PLACE_NAME_OVERRIDES[value];
+  if (override) {
+    value = override;
+  }
+  if (/\s*\(the\)$/i.test(value)) {
+    value = value.replace(/\s*\(the\)$/i, '');
+  }
+  if (type === 'country' && code) {
+    const upperCode = String(code).toUpperCase();
+    if (COUNTRY_CODE_OVERRIDES[upperCode]) {
+      value = COUNTRY_CODE_OVERRIDES[upperCode];
+    }
+  }
+  return value;
 }
