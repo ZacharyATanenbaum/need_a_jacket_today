@@ -1,72 +1,176 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Need A Jacket Today?</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <main class="container">
-    <header>
-      <h1>Need A Jacket Today?</h1>
-      <p class="tagline">Weather-based outfit guidance for the next few hours.</p>
+<!doctype html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Need a Jacket?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root { --fg:#0ea5e9; --fg2:#22c55e; --ink:#0b1220 }
+      @keyframes float { 0%{transform:translateY(0)} 50%{transform:translateY(-6px)} 100%{transform:translateY(0)} }
+      .animate-float { animation: float 3s ease-in-out infinite }
+      .no-scrollbar::-webkit-scrollbar { display: none }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none }
+    </style>
+  </head>
+  <body class="h-full">
+    <!-- Header (fixed height to prevent expansion) -->
+    <header class="h-16 px-4 border-b border-slate-800/60">
+      <div class="relative h-full flex items-center gap-3">
+        <h1 class="text-lg font-semibold tracking-tight">
+          <span class="sm:hidden">NaJ?</span>
+          <span class="hidden sm:inline">Need a Jacket?</span>
+        </h1>
+
+        <!-- Right side: either default controls or inline search (same row). Search overlays, so bar height never changes. -->
+        <div class="ml-auto flex items-center gap-2">
+          <!-- Default nav content -->
+          <div id="nav-default" class="flex items-center gap-2">
+            <!-- Unit toggle -->
+            <div class="flex items-center h-9 rounded-full bg-slate-800 text-xs overflow-hidden">
+              <button id="unit-f" class="h-full px-3 flex items-center justify-center bg-slate-100 text-slate-900">°F</button>
+              <button id="unit-c" class="h-full px-3 flex items-center justify-center text-slate-200">°C</button>
+            </div>
+            <button id="use-location" class="rounded-full px-4 h-9 flex items-center bg-slate-800 hover:bg-slate-700 text-xs sm:text-sm whitespace-nowrap">
+              <span data-label="compact" class="sm:hidden">Use location</span>
+              <span data-label="full" class="hidden sm:inline">Use my location</span>
+            </button>
+            <button id="open-search" class="rounded-full h-9 w-9 grid place-items-center bg-slate-800 hover:bg-slate-700" aria-label="Search location">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16m13 19.59-5.74-5.74a10 10 0 1 0-1.41 1.41L21.59 23 23 21.59Z"/></svg>
+            </button>
+          </div>
+
+          <!-- Inline search mode (overlay within nav; absolute so it doesn't affect layout/height) -->
+          <div id="nav-search" class="hidden absolute right-4 top-1/2 -translate-y-1/2 w-full max-w-[520px]">
+            <div class="flex items-center gap-2">
+              <div class="flex-1 flex items-center gap-2 rounded-xl bg-slate-900 border border-slate-800 px-3 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-slate-400"><path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16m13 19.59-5.74-5.74a10 10 0 1 0-1.41 1.41L21.59 23 23 21.59Z"/></svg>
+                <input id="search-input" class="flex-1 bg-transparent outline-none placeholder:text-slate-500" placeholder="City or place" />
+              </div>
+              <button id="search-submit" class="rounded-lg px-3 py-2 bg-slate-100 text-slate-900">Go</button>
+              <button id="close-search" class="rounded-lg px-3 py-2 bg-slate-800 hover:bg-slate-700">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <section class="panel location-controls" aria-labelledby="location-heading">
-      <h2 id="location-heading">Choose Location</h2>
-      <form id="search-form" class="search-form" autocomplete="off">
-        <label for="location-input">City, postal code, or coordinates</label>
-        <div class="search-row">
-          <input id="location-input" name="location" type="text" placeholder="New York" spellcheck="false">
-          <button type="submit">Search</button>
+    <!-- Main card -->
+    <main class="p-4">
+      <div class="mx-auto max-w-xl rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
+        <!-- Centered location + updated line over avatar -->
+        <div class="w-full flex items-center justify-center gap-2 text-sm text-slate-300 mb-3">
+          <div id="location-line" class="truncate">—</div>
+          <span aria-hidden>•</span>
+          <div id="updated-at" class="shrink-0">Updated —</div>
+          <button id="refresh" class="ml-1 rounded-full p-1.5 bg-slate-800 hover:bg-slate-700" title="Refresh">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 6v3l4-4-4-4v3a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6Z"/></svg>
+          </button>
         </div>
-      </form>
-      <button type="button" id="use-current" class="secondary">Use My Location</button>
-      <p class="current-location">Currently showing: <span id="location-name">New York, NY</span></p>
-    </section>
 
-    <section id="status" class="panel status">Loading forecast for New York City…</section>
+        <!-- Avatar (Duolingo‑style SVG with swappable outfits) -->
+        <div class="w-full grid place-items-center">
+          <svg id="avatar" viewBox="0 0 240 260" class="w-56 md:w-72 drop-shadow-xl animate-float">
+            <defs>
+              <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#22c55e" stop-opacity="0.18"/>
+              </linearGradient>
+              <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity=".25"/>
+              </filter>
+            </defs>
 
-    <section id="summary" class="panel hidden" aria-live="polite">
-      <div class="recommendations">
-        <article class="summary-card">
-          <h2>Your Layer</h2>
-          <p id="layer" class="callout"></p>
-          <p id="layer-detail" class="detail"></p>
-        </article>
-        <article class="summary-card">
-          <h2>Umbrella</h2>
-          <p id="umbrella" class="callout"></p>
-          <p id="umbrella-detail" class="detail"></p>
-        </article>
+            <!-- rounded card behind avatar -->
+            <rect x="10" y="8" width="220" height="244" rx="24" fill="url(#bgGrad)" stroke="#1f2937"/>
+
+            <!-- body group -->
+            <g id="body" transform="translate(0,10)" filter="url(#soft)">
+              <!-- head -->
+              <g id="head">
+                <ellipse cx="120" cy="58" rx="34" ry="30" fill="#f2d2b1"/>
+                <circle cx="103" cy="66" r="5" fill="#f9b4ac" opacity=".8"/>
+                <circle cx="137" cy="66" r="5" fill="#f9b4ac" opacity=".8"/>
+                <g>
+                  <ellipse cx="108" cy="56" rx="8.5" ry="10" fill="#fff"/>
+                  <ellipse cx="132" cy="56" rx="8.5" ry="10" fill="#fff"/>
+                  <circle cx="108" cy="58" r="4" fill="#0b1220"/>
+                  <circle cx="132" cy="58" r="4" fill="#0b1220"/>
+                </g>
+                <path id="mouth" d="M105 74c5 4 25 4 30 0" stroke="#0b1220" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <g id="acc-beanie" class="hidden">
+                  <path d="M86 48c6-16 68-16 74 0v10H86z" fill="#334155"/>
+                  <circle cx="123" cy="38" r="6" fill="#94a3b8"/>
+                </g>
+                <g id="acc-sweat" class="hidden" opacity=".9">
+                  <path d="M92 40c0-4 6-8 6-12 4 6 4 8 4 10 0 2-2 6-10 6z" fill="#22d3ee"/>
+                </g>
+              </g>
+
+              <rect x="112" y="86" width="16" height="12" rx="4" fill="#f2d2b1"/>
+              <path id="torso-skin" d="M78 96h84c16 0 28 12 28 28v60H50v-60c0-16 12-28 28-28Z" fill="#f2d2b1"/>
+
+              <!-- OUTFITS -->
+              <g id="outfit-short" class="hidden">
+                <path d="M64 110l26-12h60l26 12v70H64z" fill="#60a5fa"/>
+                <rect x="92" y="102" width="56" height="78" rx="8" fill="#3b82f6"/>
+              </g>
+              <g id="outfit-long" class="hidden">
+                <path d="M58 112l28-14h68l28 14v68H58z" fill="#a78bfa"/>
+                <rect x="90" y="100" width="64" height="80" rx="10" fill="#8b5cf6"/>
+              </g>
+              <g id="outfit-light" class="hidden">
+                <path d="M60 108l28-10h64l28 10v72H60z" fill="#38bdf8"/>
+                <path d="M98 98h44v82H98z" fill="#0ea5e9"/>
+                <circle cx="120" cy="132" r="3" fill="#cbd5e1"/>
+              </g>
+              <g id="outfit-heavy" class="hidden">
+                <path d="M56 112l30-14h68l30 14v68H56z" fill="#2563eb"/>
+                <path d="M96 96h48v84H96z" fill="#1d4ed8"/>
+              </g>
+              <g id="outfit-winter" class="hidden">
+                <path d="M50 116l32-16h76l32 16v64H50z" fill="#1e3a8a"/>
+                <path d="M86 94c10-12 22-18 34-18s24 6 34 18" fill="none" stroke="#e5e7eb" stroke-width="10" stroke-linecap="round"/>
+                <rect x="98" y="98" width="44" height="82" fill="#1e40af"/>
+              </g>
+              <g id="outfit-dontgo" class="hidden">
+                <path d="M46 118l34-18h80l34 18v62H46z" fill="#0b3a7e"/>
+                <rect x="96" y="98" width="48" height="82" fill="#0a2e6f"/>
+                <path d="M84 96c12-16 24-22 36-22s24 6 36 22" fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round"/>
+                <path d="M86 126h68" stroke="#ef4444" stroke-width="10"/>
+                <path d="M112 118v22" stroke="#ef4444" stroke-width="10"/>
+              </g>
+              <g id="outfit-shirtless" class="hidden"></g>
+
+              <g id="umbrella" class="hidden">
+                <path d="M170 102c-20 0-32 10-42 20h84c-10-10-22-20-42-20z" fill="#475569"/>
+                <rect x="167" y="122" width="4" height="66" fill="#cbd5e1"/>
+                <path d="M171 188c0 7-5 12-12 12" fill="none" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Verdict -->
+        <div class="mt-5 text-center">
+          <h2 class="text-2xl md:text-3xl font-semibold"><span class="text-slate-300">Wear:</span> <span id="wear-label">—</span></h2>
+          <p id="umbrella-line" class="mt-1 text-slate-300">Umbrella —</p>
+        </div>
+
+        <!-- Next 24 hours -->
+        <section class="mt-6">
+          <div class="flex items-center justify-between mb-2">
+            <div class="text-sm font-medium">Next 24 hours</div>
+            <div class="flex items-center gap-3">
+              <div id="hourly-summary" class="text-xs text-slate-400">—</div>
+            </div>
+          </div>
+          <div id="hourly-24" class="flex gap-2 overflow-x-auto no-scrollbar py-2"></div>
+          <div class="mt-2 text-[11px] text-slate-500">Scroll to see all hours</div>
+        </section>
       </div>
-    </section>
+    </main>
 
-    <section id="hourly" class="panel hidden">
-      <h2>Next 24 Hours</h2>
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Time</th>
-              <th scope="col">Temp</th>
-              <th scope="col">Feels Like</th>
-              <th scope="col">Precip Chance</th>
-            </tr>
-          </thead>
-          <tbody id="hourly-rows"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="error" class="panel hidden" role="alert"></section>
-  </main>
-
-  <footer>
-    <p>Forecast data from <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>.</p>
-  </footer>
-
-  <script src="app.js" type="module"></script>
-</body>
+    <script src="app.js" type="module"></script>
+  </body>
 </html>
