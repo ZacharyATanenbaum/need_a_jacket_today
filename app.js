@@ -21,12 +21,13 @@ const COORDINATE_LABEL_PATTERN = /^\d+(?:\.\d+)?°[NS], \d+(?:\.\d+)?°[EW]$/;
 const hasGeolocation = 'geolocation' in navigator;
 
 const layerBands = [
-  { maxF: 32, label: 'Winter Jacket', detail: 'Bitter cold ahead — heavy insulation recommended.' },
-  { maxF: 45, label: 'Heavy Jacket', detail: 'Chilly but manageable with a substantial coat.' },
-  { maxF: 55, label: 'Light Jacket', detail: 'Cool breeze — a lighter outer layer should do.' },
-  { maxF: 65, label: 'Long Sleeve', detail: 'Mild temps where a long sleeve is comfortable.' },
-  { maxF: 75, label: 'Short Sleeve', detail: 'Warm conditions — short sleeves are plenty.' },
-  { maxF: Infinity, label: 'Shirtless', detail: 'Hot and humid — consider minimal layers.' }
+  { maxF: 0, label: "Don't Go Outside", detail: "Dangerously cold — stay indoors if you can." },
+  { maxF: 40, label: "Winter Jacket", detail: "Frigid conditions — heavy layers are essential." },
+  { maxF: 55, label: "Heavy Jacket", detail: "Chilly weather — insulated outerwear recommended." },
+  { maxF: 65, label: "Light Jacket", detail: "Cool breeze — a lighter outer layer feels comfortable." },
+  { maxF: 70, label: "Long Sleeve", detail: "Mild temps — long sleeves should do the trick." },
+  { maxF: 85, label: "Short Sleeve", detail: "Warm weather — short sleeves are plenty." },
+  { maxF: Infinity, label: "Shirtless", detail: "Hot conditions — minimal layers suggested." }
 ];
 
 let latestRequestId = 0;
@@ -46,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     preserveOnError: false
   });
 
+  if (hasGeolocation) {
+    attemptAutoGeolocation();
+  }
 });
 
 function attachEventHandlers() {
@@ -126,6 +130,30 @@ function handleGeolocationError(error, { silent } = {}) {
     message = 'Getting your location timed out. Please try again.';
   }
   showError(message, { preserveData: true });
+}
+
+function attemptAutoGeolocation() {
+  const permissions = navigator.permissions;
+  if (!permissions || typeof permissions.query !== 'function') {
+    return;
+  }
+  permissions
+    .query({ name: 'geolocation' })
+    .then((status) => {
+      if (status.state !== 'granted') {
+        return;
+      }
+      requestCurrentPosition()
+        .then((position) => {
+          handleGeolocationSuccess(position, { triggeredBy: 'auto' });
+        })
+        .catch((error) => {
+          console.warn('Automatic geolocation failed', error);
+        });
+    })
+    .catch((error) => {
+      console.warn('Permissions API error', error);
+    });
 }
 
 function requestCurrentPosition() {
