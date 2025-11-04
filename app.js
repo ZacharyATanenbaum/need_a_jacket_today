@@ -4,6 +4,7 @@ const DEFAULT_LOCATION = { name: 'New York, NY', lat: 40.7128, lon: -74.006 };
 const GEO_TIMEOUT = 25000;
 const COORDINATE_LABEL_PATTERN = /^\d+(?:\.\d+)?°[NS], \d+(?:\.\d+)?°[EW]$/;
 const UNIT_STORAGE_KEY = 'need-a-jacket-unit';
+const PROFILE_STORAGE_KEY = 'need-a-jacket-profile';
 
 const COUNTRY_CODE_OVERRIDES = {
   GB: 'United Kingdom',
@@ -44,17 +45,25 @@ const searchSubmitBtn = el('#search-submit');
 const hourlyContainer = el('#hourly-24');
 const hourlySummaryEl = el('#hourly-summary');
 const refreshBtn = el('#refresh');
+const profileHotBtn = el('#profile-hot');
+const profileRegularBtn = el('#profile-regular');
+const profileColdBtn = el('#profile-cold');
 
 const outfitKeys = ['dontgo', 'winter', 'heavy', 'light', 'long', 'short', 'shirtless'];
+const PROFILE_BUTTON_BASE_CLASS =
+  'px-3 py-2 flex items-center justify-center whitespace-nowrap text-xs sm:text-sm';
 
 const state = {
   unit: 'F',
+  profile: 'regular',
   current: { mode: 'sample' },
   hourly24: [],
-  decisions: null
+  decisions: null,
+  horizon: HORIZON_HOURS
 };
 
 state.unit = loadStoredUnit();
+state.profile = loadStoredProfile();
 
 const sampleData = {
   asOf: new Date().toISOString(),
@@ -71,6 +80,7 @@ main();
 function main() {
   wireUi();
   syncUnitButtons();
+  syncProfileButtons();
   applySampleForecast('Loading sample data…');
   loadDefaultForecast();
   attemptAutoGeolocation();
@@ -79,6 +89,9 @@ function main() {
 function wireUi() {
   unitCBtn.addEventListener('click', () => setUnit('C'));
   unitFBtn.addEventListener('click', () => setUnit('F'));
+  profileHotBtn.addEventListener('click', () => setProfile('hot'));
+  profileRegularBtn.addEventListener('click', () => setProfile('regular'));
+  profileColdBtn.addEventListener('click', () => setProfile('cold'));
 
   openSearchBtn.addEventListener('click', openSearch);
   closeSearchBtn.addEventListener('click', closeSearch);
@@ -143,6 +156,32 @@ function syncUnitButtons() {
   }
 }
 
+function setProfile(nextProfile) {
+  if (!['hot', 'regular', 'cold'].includes(nextProfile)) {
+    return;
+  }
+  if (state.profile === nextProfile) {
+    syncProfileButtons();
+    return;
+  }
+  state.profile = nextProfile;
+  saveProfile(nextProfile);
+  syncProfileButtons();
+  recomputeDecisions();
+}
+
+function syncProfileButtons() {
+  profileHotBtn.className = profileButtonClass(state.profile === 'hot');
+  profileRegularBtn.className = profileButtonClass(state.profile === 'regular');
+  profileColdBtn.className = profileButtonClass(state.profile === 'cold');
+}
+
+function profileButtonClass(isActive) {
+  const activeClasses = `${PROFILE_BUTTON_BASE_CLASS} bg-slate-100 text-slate-900`;
+  const inactiveClasses = `${PROFILE_BUTTON_BASE_CLASS} text-slate-200`;
+  return isActive ? activeClasses : inactiveClasses;
+}
+
 function setUseLocationLabel(fullLabel, compactLabel) {
   if (!useLocationBtn) {
     return;
@@ -184,7 +223,9 @@ function updateUmbrellaLine(umbrella) {
 function applyForecast(data) {
   const hourly = normalize24(data.asOf, data.hourly ?? []);
   state.hourly24 = hourly;
-  const decisions = decideFromHourly(hourly, data.horizonHours ?? HORIZON_HOURS);
+  const horizon = data.horizonHours ?? HORIZON_HOURS;
+  state.horizon = horizon;
+  const decisions = decideFromHourly(hourly, horizon, state.profile);
   state.decisions = decisions;
 
   const outfitKey = outfitKeyForBand(decisions.band);
@@ -197,6 +238,21 @@ function applyForecast(data) {
 
   locationLineEl.textContent = data.location?.name ?? '—';
   updatedAtEl.textContent = `Updated ${new Date(data.asOf).toTimeString().slice(0, 5)}`;
+}
+
+function recomputeDecisions() {
+  if (!state.hourly24.length) {
+    return;
+  }
+  const decisions = decideFromHourly(state.hourly24, state.horizon ?? HORIZON_HOURS, state.profile);
+  state.decisions = decisions;
+
+  const outfitKey = outfitKeyForBand(decisions.band);
+  setOutfit(outfitKey);
+  setUmbrella(decisions.umbrella.label === 'Yes');
+
+  wearLabelEl.textContent = decisions.band;
+  updateUmbrellaLine(decisions.umbrella);
 }
 
 function renderHourly24(hours) {
@@ -569,17 +625,25 @@ function normalize24(asOfIso, hours) {
   return slots;
 }
 
-function decideFromHourly(hours, horizon = HORIZON_HOURS) {
+function decideFromHourly(hours, horizon = HORIZON_HOURS, profile = 'regular') {
   const slice = hours.slice(0, horizon);
   const feelsF = slice.map((entry) => cToF(entry.feelsLikeC ?? entry.tempC));
   const p10 = quantile(feelsF, 0.1);
-  const band = bandFromFeelsLikeF(p10);
+  const offset = preferenceOffset(profile);
+  const adjustedP10 = p10 + offset;
+  const band = bandFromFeelsLikeF(adjustedP10);
   const precipIndex = slice.findIndex((entry) => (entry.precipProb ?? 0) >= 50);
   const umbrella =
     precipIndex >= 0
       ? { label: 'Yes', when: labelHour(slice[precipIndex].time) }
       : { label: 'No', when: null };
   return { band, umbrella };
+}
+
+function preferenceOffset(profile) {
+  if (profile === 'hot') return 10;
+  if (profile === 'cold') return -10;
+  return 0;
 }
 
 function bandFromFeelsLikeF(value) {
@@ -752,6 +816,32 @@ function loadStoredUnit() {
   } catch (error) {
     console.debug('Unable to read unit preference', error);
     return 'F';
+  }
+}
+
+function saveProfile(profile) {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(PROFILE_STORAGE_KEY, profile);
+    }
+  } catch (error) {
+    console.debug('Unable to save comfort preference', error);
+  }
+}
+
+function loadStoredProfile() {
+  try {
+    if (typeof localStorage === 'undefined') {
+      return 'regular';
+    }
+    const stored = localStorage.getItem(PROFILE_STORAGE_KEY);
+    if (stored === 'hot' || stored === 'regular' || stored === 'cold') {
+      return stored;
+    }
+    return 'regular';
+  } catch (error) {
+    console.debug('Unable to read comfort preference', error);
+    return 'regular';
   }
 }
 
