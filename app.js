@@ -54,13 +54,31 @@ const PROFILE_BUTTON_BASE_CLASS =
   'px-3 py-2 flex items-center justify-center whitespace-nowrap text-xs sm:text-sm';
 const AVATAR_BASE_PATH = 'images/webp';
 const AVATAR_LOOKUP = {
-  dontgo: { base: '0__stay_at_home', umbrellas: false },
-  winter: { base: '1__cold', umbrellas: true },
-  heavy: { base: '2__puffer', umbrellas: true },
-  light: { base: '3__bomber', umbrellas: true },
-  long: { base: '4__long_sleeve', umbrellas: true },
-  short: { base: '5__t-shirt', umbrellas: true },
-  shirtless: { base: '6__no_shirt', umbrellas: true }
+  dontgo: { base: `${AVATAR_BASE_PATH}/0__stay_at_home.webp` },
+  winter: {
+    noUmbrella: `${AVATAR_BASE_PATH}/1__cold__no_umbrella.webp`,
+    umbrella: `${AVATAR_BASE_PATH}/1__cold__umbrella.webp`
+  },
+  heavy: {
+    noUmbrella: `${AVATAR_BASE_PATH}/2__puffer__no_umbrella.webp`,
+    umbrella: `${AVATAR_BASE_PATH}/2__puffer__umbrella.webp`
+  },
+  light: {
+    noUmbrella: `${AVATAR_BASE_PATH}/3__bomber__no_umbrella.webp`,
+    umbrella: `${AVATAR_BASE_PATH}/3__bomber__umbrella.webp`
+  },
+  long: {
+    noUmbrella: `${AVATAR_BASE_PATH}/4__long_sleeve__no_umbrella.webp`,
+    umbrella: `${AVATAR_BASE_PATH}/4__long_sleeve__umbrella.webp`
+  },
+  short: {
+    noUmbrella: `${AVATAR_BASE_PATH}/5__t-shirt__no_umbrella.webp`,
+    umbrella: `${AVATAR_BASE_PATH}/5__t-shirt__umbrella.webp`
+  },
+  shirtless: {
+    noUmbrella: `${AVATAR_BASE_PATH}/6__no_shirt__no_umbrella.webp`,
+    umbrella: `${AVATAR_BASE_PATH}/6__no_shirt__umbrella.webp`
+  }
 };
 const AVATAR_ALT_LABELS = {
   dontgo: "Stay inside avatar",
@@ -320,14 +338,51 @@ function updateAvatar(outfitKey, showUmbrella) {
     return;
   }
   const entry = AVATAR_LOOKUP[outfitKey] ?? AVATAR_LOOKUP.short;
-  const file = entry.umbrellas
-    ? `${entry.base}__${showUmbrella ? 'umbrella' : 'no_umbrella'}-512.webp`
-    : `${entry.base}-512.webp`;
-  avatarImg.src = `${AVATAR_BASE_PATH}/${file}`;
-  const altBase = AVATAR_ALT_LABELS[outfitKey] ?? 'Outfit avatar';
-  avatarImg.alt = entry.umbrellas
-    ? `${altBase} ${showUmbrella ? 'with umbrella' : 'without umbrella'}`
-    : altBase;
+  const defaultEntry = AVATAR_LOOKUP.short;
+  let src = entry.base ?? null;
+  let usedUmbrellaVariant = false;
+  let usedNoUmbrellaVariant = false;
+
+  if (entry.noUmbrella || entry.umbrella) {
+    if (showUmbrella && entry.umbrella) {
+      src = entry.umbrella;
+      usedUmbrellaVariant = true;
+    } else if (!showUmbrella && entry.noUmbrella) {
+      src = entry.noUmbrella;
+      usedNoUmbrellaVariant = true;
+    } else if (entry.noUmbrella) {
+      src = entry.noUmbrella;
+      usedNoUmbrellaVariant = true;
+    } else if (entry.umbrella) {
+      src = entry.umbrella;
+      usedUmbrellaVariant = true;
+    }
+  }
+
+  if (!src) {
+    if (defaultEntry.noUmbrella) {
+      src = defaultEntry.noUmbrella;
+      usedNoUmbrellaVariant = true;
+    } else if (defaultEntry.umbrella) {
+      src = defaultEntry.umbrella;
+      usedUmbrellaVariant = true;
+    } else {
+      src = defaultEntry.base;
+    }
+  }
+
+  if (src) {
+    avatarImg.src = src;
+  }
+  const altKey = AVATAR_ALT_LABELS[outfitKey] ? outfitKey : 'short';
+  const altBase = AVATAR_ALT_LABELS[altKey] ?? 'Outfit avatar';
+  if (usedUmbrellaVariant) {
+    avatarImg.alt = `${altBase} with umbrella`;
+  } else if (usedNoUmbrellaVariant) {
+    avatarImg.alt = `${altBase} without umbrella`;
+  } else {
+    avatarImg.alt = altBase;
+  }
 }
 
 function maybeUnit(valueC) {
