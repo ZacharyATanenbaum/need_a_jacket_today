@@ -17,6 +17,7 @@ const GEO_TIMEOUT = 25000;
 const SHORT_TERM_HOURS = 6;
 const DISPLAY_HOURS = 24;
 const DEFAULT_LOCATION = { name: 'New York, NY', latitude: 40.7128, longitude: -74.006 }; // NYC default fallback
+const COORDINATE_LABEL_PATTERN = /^\d+(?:\.\d+)?°[NS], \d+(?:\.\d+)?°[EW]$/;
 const hasGeolocation = 'geolocation' in navigator;
 
 const layerBands = [
@@ -30,6 +31,7 @@ const layerBands = [
 
 let latestRequestId = 0;
 let activeLocation = { ...DEFAULT_LOCATION };
+let locationNameRefreshInFlight = false;
 
 document.addEventListener('DOMContentLoaded', () => {
   attachEventHandlers();
@@ -212,28 +214,48 @@ async function resolveSearchQuery(query) {
 }
 
 async function resolveLocationName(lat, lon) {
+  const latitude = Number(lat);
+  const longitude = Number(lon);
+  const attempts = [
+    { latitude, longitude },
+    { latitude: Number(latitude.toFixed(3)), longitude: Number(longitude.toFixed(3)) },
+    { latitude: Number(latitude.toFixed(2)), longitude: Number(longitude.toFixed(2)) }
+  ];
+
+  for (const attempt of attempts) {
+    const placeName = await attemptReverseGeocoding(attempt.latitude, attempt.longitude);
+    if (placeName) {
+      return placeName;
+    }
+  }
+
+  return formatCoordinates(latitude, longitude);
+}
+
+async function attemptReverseGeocoding(lat, lon) {
   try {
     const params = new URLSearchParams({
-      latitude: lat,
-      longitude: lon,
-      count: '1',
-      language: 'en',
-      format: 'json'
+      latitude: lat.toString(),
+      longitude: lon.toString(),
+      count: '5',
+      language: 'en'
     });
     const response = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?${params.toString()}`);
     if (!response.ok) {
       throw new Error(`Reverse geocoding failed: ${response.status}`);
     }
     const data = await response.json();
-    const result = data?.results?.[0];
-    if (!result) {
-      return formatCoordinates(lat, lon);
+    const results = data?.results ?? [];
+    for (const entry of results) {
+      const candidate = buildPlaceName(entry);
+      if (candidate) {
+        return candidate;
+      }
     }
-    return buildPlaceName(result);
   } catch (error) {
     console.warn('Reverse geocoding error', error);
-    return formatCoordinates(lat, lon);
   }
+  return null;
 }
 
 async function fetchForecast(lat, lon) {
@@ -328,7 +350,33 @@ function renderForecast(forecast) {
 
 function applyActiveLocation(location) {
   activeLocation = location;
-  locationNameEl.textContent = location.name ?? formatCoordinates(location.latitude, location.longitude);
+  const label = location.name ?? formatCoordinates(location.latitude, location.longitude);
+  locationNameEl.textContent = label;
+  if (looksLikeCoordinateLabel(label)) {
+    void improveLocationName(location.latitude, location.longitude);
+  }
+}
+
+async function improveLocationName(lat, lon) {
+  if (locationNameRefreshInFlight) {
+    return;
+  }
+  locationNameRefreshInFlight = true;
+  try {
+    const resolvedName = await resolveLocationName(lat, lon);
+    if (resolvedName && !looksLikeCoordinateLabel(resolvedName) && resolvedName !== activeLocation.name) {
+      activeLocation = { ...activeLocation, name: resolvedName };
+      locationNameEl.textContent = resolvedName;
+    }
+  } catch (error) {
+    console.warn('Unable to refine location name', error);
+  } finally {
+    locationNameRefreshInFlight = false;
+  }
+}
+
+function looksLikeCoordinateLabel(label) {
+  return typeof label === 'string' && COORDINATE_LABEL_PATTERN.test(label);
 }
 
 function setStatus(message) {
@@ -395,11 +443,15 @@ function parseCoordinateQuery(query) {
 }
 
 function buildPlaceName(result) {
-  const parts = [result.name];
-  if (result.admin1) {
+  if (!result) {
+    return '';
+  }
+  const primary = result.name || result.admin2 || result.admin1 || result.country || '';
+  const parts = [primary];
+  if (result.admin1 && result.admin1 !== primary) {
     parts.push(result.admin1);
   }
-  if (result.country) {
+  if (result.country && result.country !== primary) {
     parts.push(result.country);
   }
   return parts.filter(Boolean).join(', ');
