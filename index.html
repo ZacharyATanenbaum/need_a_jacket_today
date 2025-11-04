@@ -68,87 +68,11 @@
           </button>
         </div>
 
-        <!-- Avatar (Duolingo‑style SVG with swappable outfits) -->
+        <!-- Avatar -->
         <div class="w-full grid place-items-center">
-          <svg id="avatar" viewBox="0 0 240 260" class="w-56 md:w-72 drop-shadow-xl animate-float">
-            <defs>
-              <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.18"/>
-                <stop offset="100%" stop-color="#22c55e" stop-opacity="0.18"/>
-              </linearGradient>
-              <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity=".25"/>
-              </filter>
-            </defs>
-
-            <!-- rounded card behind avatar -->
-            <rect x="10" y="8" width="220" height="244" rx="24" fill="url(#bgGrad)" stroke="#1f2937"/>
-
-            <!-- body group -->
-            <g id="body" transform="translate(0,10)" filter="url(#soft)">
-              <!-- head -->
-              <g id="head">
-                <ellipse cx="120" cy="58" rx="34" ry="30" fill="#f2d2b1"/>
-                <circle cx="103" cy="66" r="5" fill="#f9b4ac" opacity=".8"/>
-                <circle cx="137" cy="66" r="5" fill="#f9b4ac" opacity=".8"/>
-                <g>
-                  <ellipse cx="108" cy="56" rx="8.5" ry="10" fill="#fff"/>
-                  <ellipse cx="132" cy="56" rx="8.5" ry="10" fill="#fff"/>
-                  <circle cx="108" cy="58" r="4" fill="#0b1220"/>
-                  <circle cx="132" cy="58" r="4" fill="#0b1220"/>
-                </g>
-                <path id="mouth" d="M105 74c5 4 25 4 30 0" stroke="#0b1220" stroke-width="3" fill="none" stroke-linecap="round"/>
-                <g id="acc-beanie" class="hidden">
-                  <path d="M86 48c6-16 68-16 74 0v10H86z" fill="#334155"/>
-                  <circle cx="123" cy="38" r="6" fill="#94a3b8"/>
-                </g>
-                <g id="acc-sweat" class="hidden" opacity=".9">
-                  <path d="M92 40c0-4 6-8 6-12 4 6 4 8 4 10 0 2-2 6-10 6z" fill="#22d3ee"/>
-                </g>
-              </g>
-
-              <rect x="112" y="86" width="16" height="12" rx="4" fill="#f2d2b1"/>
-              <path id="torso-skin" d="M78 96h84c16 0 28 12 28 28v60H50v-60c0-16 12-28 28-28Z" fill="#f2d2b1"/>
-
-              <!-- OUTFITS -->
-              <g id="outfit-short" class="hidden">
-                <path d="M64 110l26-12h60l26 12v70H64z" fill="#60a5fa"/>
-                <rect x="92" y="102" width="56" height="78" rx="8" fill="#3b82f6"/>
-              </g>
-              <g id="outfit-long" class="hidden">
-                <path d="M58 112l28-14h68l28 14v68H58z" fill="#a78bfa"/>
-                <rect x="90" y="100" width="64" height="80" rx="10" fill="#8b5cf6"/>
-              </g>
-              <g id="outfit-light" class="hidden">
-                <path d="M60 108l28-10h64l28 10v72H60z" fill="#38bdf8"/>
-                <path d="M98 98h44v82H98z" fill="#0ea5e9"/>
-                <circle cx="120" cy="132" r="3" fill="#cbd5e1"/>
-              </g>
-              <g id="outfit-heavy" class="hidden">
-                <path d="M56 112l30-14h68l30 14v68H56z" fill="#2563eb"/>
-                <path d="M96 96h48v84H96z" fill="#1d4ed8"/>
-              </g>
-              <g id="outfit-winter" class="hidden">
-                <path d="M50 116l32-16h76l32 16v64H50z" fill="#1e3a8a"/>
-                <path d="M86 94c10-12 22-18 34-18s24 6 34 18" fill="none" stroke="#e5e7eb" stroke-width="10" stroke-linecap="round"/>
-                <rect x="98" y="98" width="44" height="82" fill="#1e40af"/>
-              </g>
-              <g id="outfit-dontgo" class="hidden">
-                <path d="M46 118l34-18h80l34 18v62H46z" fill="#0b3a7e"/>
-                <rect x="96" y="98" width="48" height="82" fill="#0a2e6f"/>
-                <path d="M84 96c12-16 24-22 36-22s24 6 36 22" fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round"/>
-                <path d="M86 126h68" stroke="#ef4444" stroke-width="10"/>
-                <path d="M112 118v22" stroke="#ef4444" stroke-width="10"/>
-              </g>
-              <g id="outfit-shirtless" class="hidden"></g>
-
-              <g id="umbrella" class="hidden">
-                <path d="M170 102c-20 0-32 10-42 20h84c-10-10-22-20-42-20z" fill="#475569"/>
-                <rect x="167" y="122" width="4" height="66" fill="#cbd5e1"/>
-                <path d="M171 188c0 7-5 12-12 12" fill="none" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round"/>
-              </g>
-            </g>
-          </svg>
+          <div class="w-56 md:w-72 aspect-[240/260] rounded-[32px] border border-slate-800/80 bg-slate-800/40 backdrop-blur-sm grid place-items-center overflow-hidden drop-shadow-xl animate-float">
+            <img id="avatar-image" src="images/webp/0__stay_at_home-512.webp" alt="Outfit recommendation" class="w-full h-full object-cover" />
+          </div>
         </div>
 
         <!-- Verdict -->

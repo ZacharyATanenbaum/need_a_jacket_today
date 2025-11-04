@@ -45,13 +45,32 @@ const searchSubmitBtn = el('#search-submit');
 const hourlyContainer = el('#hourly-24');
 const hourlySummaryEl = el('#hourly-summary');
 const refreshBtn = el('#refresh');
+const avatarImg = el('#avatar-image');
 const profileHotBtn = el('#profile-hot');
 const profileRegularBtn = el('#profile-regular');
 const profileColdBtn = el('#profile-cold');
 
-const outfitKeys = ['dontgo', 'winter', 'heavy', 'light', 'long', 'short', 'shirtless'];
 const PROFILE_BUTTON_BASE_CLASS =
   'px-3 py-2 flex items-center justify-center whitespace-nowrap text-xs sm:text-sm';
+const AVATAR_BASE_PATH = 'images/webp';
+const AVATAR_LOOKUP = {
+  dontgo: { base: '0__stay_at_home', umbrellas: false },
+  winter: { base: '1__cold', umbrellas: true },
+  heavy: { base: '2__puffer', umbrellas: true },
+  light: { base: '3__bomber', umbrellas: true },
+  long: { base: '4__long_sleeve', umbrellas: true },
+  short: { base: '5__t-shirt', umbrellas: true },
+  shirtless: { base: '6__no_shirt', umbrellas: true }
+};
+const AVATAR_ALT_LABELS = {
+  dontgo: "Stay inside avatar",
+  winter: 'Winter jacket avatar',
+  heavy: 'Heavy jacket avatar',
+  light: 'Light jacket avatar',
+  long: 'Long sleeve avatar',
+  short: 'Short sleeve avatar',
+  shirtless: 'Shirtless avatar'
+};
 
 const state = {
   unit: 'F',
@@ -229,8 +248,7 @@ function applyForecast(data) {
   state.decisions = decisions;
 
   const outfitKey = outfitKeyForBand(decisions.band);
-  setOutfit(outfitKey);
-  setUmbrella(decisions.umbrella.label === 'Yes');
+  updateAvatar(outfitKey, decisions.umbrella.label === 'Yes');
 
   wearLabelEl.textContent = decisions.band;
   updateUmbrellaLine(decisions.umbrella);
@@ -248,8 +266,7 @@ function recomputeDecisions() {
   state.decisions = decisions;
 
   const outfitKey = outfitKeyForBand(decisions.band);
-  setOutfit(outfitKey);
-  setUmbrella(decisions.umbrella.label === 'Yes');
+  updateAvatar(outfitKey, decisions.umbrella.label === 'Yes');
 
   wearLabelEl.textContent = decisions.band;
   updateUmbrellaLine(decisions.umbrella);
@@ -298,20 +315,19 @@ function renderHourly24(hours) {
   });
 }
 
-function setOutfit(key) {
-  outfitKeys.forEach((name) => {
-    const group = el(`#outfit-${name}`);
-    if (group) {
-      group.classList.toggle('hidden', name !== key);
-    }
-  });
-  el('#acc-beanie')?.classList.toggle('hidden', !(key === 'winter' || key === 'heavy' || key === 'dontgo'));
-  el('#acc-sweat')?.classList.toggle('hidden', !(key === 'short' || key === 'shirtless'));
-  el('#torso-skin')?.classList.toggle('hidden', key !== 'shirtless');
-}
-
-function setUmbrella(show) {
-  el('#umbrella')?.classList.toggle('hidden', !show);
+function updateAvatar(outfitKey, showUmbrella) {
+  if (!avatarImg) {
+    return;
+  }
+  const entry = AVATAR_LOOKUP[outfitKey] ?? AVATAR_LOOKUP.short;
+  const file = entry.umbrellas
+    ? `${entry.base}__${showUmbrella ? 'umbrella' : 'no_umbrella'}-512.webp`
+    : `${entry.base}-512.webp`;
+  avatarImg.src = `${AVATAR_BASE_PATH}/${file}`;
+  const altBase = AVATAR_ALT_LABELS[outfitKey] ?? 'Outfit avatar';
+  avatarImg.alt = entry.umbrellas
+    ? `${altBase} ${showUmbrella ? 'with umbrella' : 'without umbrella'}`
+    : altBase;
 }
 
 function maybeUnit(valueC) {
