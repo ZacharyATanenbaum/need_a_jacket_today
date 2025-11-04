@@ -265,20 +265,17 @@ async function attemptReverseGeocoding(lat, lon) {
     const params = new URLSearchParams({
       latitude: lat.toString(),
       longitude: lon.toString(),
-      count: '5',
-      language: 'en'
+      localityLanguage: 'en'
     });
-    const response = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?${params.toString()}`);
+    // BigDataCloud provides a browser-accessible reverse geocoding endpoint with permissive CORS.
+    const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?${params.toString()}`);
     if (!response.ok) {
       throw new Error(`Reverse geocoding failed: ${response.status}`);
     }
     const data = await response.json();
-    const results = data?.results ?? [];
-    for (const entry of results) {
-      const candidate = buildPlaceName(entry);
-      if (candidate) {
-        return candidate;
-      }
+    const candidate = buildReverseGeocodeName(data);
+    if (candidate) {
+      return candidate;
     }
   } catch (error) {
     console.warn('Reverse geocoding error', error);
@@ -482,6 +479,35 @@ function buildPlaceName(result) {
   if (result.country && result.country !== primary) {
     parts.push(result.country);
   }
+  return parts.filter(Boolean).join(', ');
+}
+
+function buildReverseGeocodeName(result) {
+  if (!result) {
+    return '';
+  }
+
+  const administrativeEntries = result?.localityInfo?.administrative ?? [];
+  const informativeEntries = result?.localityInfo?.informative ?? [];
+  const fallbackAdmin = [...administrativeEntries, ...informativeEntries]
+    .map((entry) => entry?.name)
+    .find(Boolean);
+
+  const primary = result.city
+    || result.locality
+    || fallbackAdmin
+    || result.principalSubdivision
+    || result.countryName
+    || '';
+
+  const parts = [primary];
+  if (result.principalSubdivision && result.principalSubdivision !== primary) {
+    parts.push(result.principalSubdivision);
+  }
+  if (result.countryName && result.countryName !== primary) {
+    parts.push(result.countryName);
+  }
+
   return parts.filter(Boolean).join(', ');
 }
 
