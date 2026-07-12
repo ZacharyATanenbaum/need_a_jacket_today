@@ -29,9 +29,9 @@
     };
     const storageGet=key=>{try{return localStorage.getItem(key)}catch{return null}};
     const storageSet=(key,value)=>{try{localStorage.setItem(key,value)}catch{}};
-    const state={unit:storageGet("naj.unit")||"fahrenheit",profile:storageGet("naj.profile")||"regular",location:{...CONFIG.defaultLocation,name:"Finding location…"},locationMode:"loading",weather:null,loading:false,dataMode:"loading",mascotToken:0};
+    const state={unit:storageGet("naj.unit")||"fahrenheit",profile:storageGet("naj.profile")||"regular",location:{...CONFIG.defaultLocation,name:"Finding location…"},locationMode:"loading",weather:null,loading:false,dataMode:"loading",mascotToken:0,weatherRequestToken:0};
     const $=id=>document.getElementById(id);
-    const els={locationButton:$("locationButton"),locationName:$("locationName"),geoStatusText:$("geoStatusText"),locationModal:$("locationModal"),closeModal:$("closeModal"),searchForm:$("searchForm"),searchInput:$("searchInput"),searchResults:$("searchResults"),modalStatus:$("modalStatus"),useCurrentLocation:$("useCurrentLocation"),useCurrentLocationTop:$("useCurrentLocationTop"),toast:$("toast"),temperature:$("temperature"),weatherIcon:$("weatherIcon"),condition:$("condition"),highLow:$("highLow"),verdict:$("verdict"),reason:$("reason"),updated:$("updated"),hero:$("hero"),mascot:$("mascot"),mascotImage:$("mascotImage"),jacketCard:$("jacketCard"),jacketIcon:$("jacketIcon"),jacketTitle:$("jacketTitle"),jacketStatus:$("jacketStatus"),jacketDescription:$("jacketDescription"),umbrellaCard:$("umbrellaCard"),umbrellaStatus:$("umbrellaStatus"),umbrellaDescription:$("umbrellaDescription"),feelsLike:$("feelsLike"),feelsNote:$("feelsNote"),wind:$("wind"),windNote:$("windNote"),rain:$("rain"),rainNote:$("rainNote"),sixHourLow:$("sixHourLow"),trendNote:$("trendNote"),hourlyForecast:$("hourlyForecast")};
+    const els={locationButton:$("locationButton"),locationName:$("locationName"),geoStatusText:$("geoStatusText"),refreshWeather:$("refreshWeather"),locationModal:$("locationModal"),closeModal:$("closeModal"),searchForm:$("searchForm"),searchInput:$("searchInput"),searchResults:$("searchResults"),modalStatus:$("modalStatus"),useCurrentLocation:$("useCurrentLocation"),useCurrentLocationTop:$("useCurrentLocationTop"),toast:$("toast"),temperature:$("temperature"),weatherIcon:$("weatherIcon"),condition:$("condition"),highLow:$("highLow"),verdict:$("verdict"),reason:$("reason"),updated:$("updated"),hero:$("hero"),mascot:$("mascot"),mascotImage:$("mascotImage"),jacketCard:$("jacketCard"),jacketIcon:$("jacketIcon"),jacketTitle:$("jacketTitle"),jacketStatus:$("jacketStatus"),jacketDescription:$("jacketDescription"),umbrellaCard:$("umbrellaCard"),umbrellaStatus:$("umbrellaStatus"),umbrellaDescription:$("umbrellaDescription"),feelsLike:$("feelsLike"),feelsNote:$("feelsNote"),wind:$("wind"),windNote:$("windNote"),rain:$("rain"),rainNote:$("rainNote"),sixHourLow:$("sixHourLow"),trendNote:$("trendNote"),hourlyForecast:$("hourlyForecast")};
     const CODES={0:["Clear","☀️","clear"],1:["Mostly clear","🌤️","clear"],2:["Partly cloudy","⛅","cloud"],3:["Cloudy","☁️","cloud"],45:["Foggy","🌫️","cloud"],48:["Foggy","🌫️","cloud"],51:["Light drizzle","🌦️","rain"],53:["Drizzle","🌦️","rain"],55:["Heavy drizzle","🌧️","rain"],56:["Freezing drizzle","🌧️","rain"],57:["Freezing drizzle","🌧️","rain"],61:["Light rain","🌦️","rain"],63:["Rain","🌧️","rain"],65:["Heavy rain","🌧️","rain"],66:["Freezing rain","🌧️","rain"],67:["Freezing rain","🌧️","rain"],71:["Light snow","🌨️","snow"],73:["Snow","🌨️","snow"],75:["Heavy snow","❄️","snow"],77:["Snow grains","❄️","snow"],80:["Rain showers","🌦️","rain"],81:["Rain showers","🌧️","rain"],82:["Heavy showers","⛈️","storm"],85:["Snow showers","🌨️","snow"],86:["Heavy snow showers","❄️","snow"],95:["Thunderstorms","⛈️","storm"],96:["Thunderstorms","⛈️","storm"],99:["Severe thunderstorms","⛈️","storm"]};
     const safeJson=v=>{try{return v?JSON.parse(v):null}catch{return null}};
     const escapeHtml=v=>String(v??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
@@ -141,7 +141,25 @@
     function setLoading(value){state.loading=value}
     let toastTimer;
     function toast(message){clearTimeout(toastTimer);els.toast.textContent=message;els.toast.classList.add("show");toastTimer=setTimeout(()=>els.toast.classList.remove("show"),5200)}
-    function relativeTime(iso){const mins=Math.max(0,Math.round((Date.now()-new Date(iso).getTime())/60000));return mins<=1?"Updated just now":mins<60?`Updated ${mins} min ago`:`Updated ${new Date(iso).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}`}
+    function relativeTime(iso){
+      const seconds=Math.max(0,Math.floor((Date.now()-new Date(iso).getTime())/1000));
+      if(seconds<60)return"Updated just now";
+      const minutes=Math.floor(seconds/60);if(minutes<60)return`Updated ${minutes}m ago`;
+      const hours=Math.floor(minutes/60);if(hours<24)return`Updated ${hours}h ago`;
+      return`Updated ${Math.floor(hours/24)}d ago`;
+    }
+    function updateFreshness(){
+      if(!state.weather)return;
+      const status=state.dataMode==="cached"?"Saved forecast":state.dataMode==="demo"?"Preview weather":"Live weather";
+      els.updated.textContent=`${status} · ${relativeTime(state.weather.fetchedAt||state.weather.updatedAt)}`;
+    }
+    function renderPendingWeather(){
+      els.temperature.textContent="—";els.weatherIcon.textContent="";els.condition.textContent="Updating conditions…";els.highLow.textContent="";
+      els.verdict.textContent="Checking outside…";els.reason.textContent=`Getting the latest six-hour outlook for ${state.location.name}.`;els.updated.textContent="";
+      els.jacketStatus.textContent="Updating";els.umbrellaStatus.textContent="Updating";els.hourlyForecast.innerHTML="";
+      els.feelsLike.textContent="—";els.wind.textContent="—";els.rain.textContent="—";els.sixHourLow.textContent="—";
+      els.mascotImage.style.backgroundImage="none";els.mascotImage.classList.remove("ready","changing");
+    }
 
     function render(){
       document.querySelectorAll(".unit-button").forEach(button=>button.classList.toggle("active",button.dataset.unit===state.unit));
@@ -174,8 +192,7 @@
       els.verdict.innerHTML=copy.headline;
       const profileText=decision.offset===0?"":` Your ${state.profile==="hot"?"Always hot":"Always cold"} profile shifts that to ${temp(decision.adjustedP10)}.`;
       els.reason.textContent=`The cold-end feels-like for the next six hours is ${temp(decision.p10)}.${profileText}`;
-      const status=state.dataMode==="cached"?"Saved forecast":state.dataMode==="demo"?"Preview weather":"Live weather";
-      els.updated.textContent=`${status} · ${relativeTime(weather.fetchedAt||weather.updatedAt)}`;
+      updateFreshness();
 
       updateMascot(decision.key,umbrellaYes);
       els.jacketIcon.textContent=copy.icon;
@@ -209,17 +226,21 @@
       }).join("");
     }
 
-    async function loadWeather(location,mode="manual"){
+    async function loadWeather(location,mode="manual",{preserveCurrent=false}={}){
+      const requestToken=++state.weatherRequestToken;
       setLoading(true);
       state.location=location;
       state.locationMode=mode;
+      if(!preserveCurrent)state.weather=null;
       render();
+      if(!preserveCurrent)renderPendingWeather();
       try{
         let data,primaryError;
         if(CONFIG.weatherCompanyProxy){
           try{data=await fetchWeatherCompanyProxy(location)}catch(error){primaryError=error;console.warn("Primary provider failed",error)}
         }
         if(!data)data=await fetchOpenMeteo(location);
+        if(requestToken!==state.weatherRequestToken)return;
         data.fetchedAt=new Date().toISOString();
         state.weather=data;
         state.dataMode=data.provider==="Weather demo"?"demo":"live";
@@ -229,11 +250,19 @@
         render();
         if(primaryError)toast("The primary weather source was unavailable; a live forecast is still shown.");
       }catch(error){
+        if(requestToken!==state.weatherRequestToken)return;
         console.error(error);
         const cached=loadCache(location);
         if(cached){state.weather=cached.data;state.dataMode="cached";render();toast("Showing the most recent saved forecast.")}
         else{state.dataMode="error";els.updated.textContent="Weather unavailable";els.condition.textContent="Could not load weather";els.reason.textContent="Check your connection and try again.";toast("Weather could not be loaded.")}
-      }finally{setLoading(false)}
+      }finally{if(requestToken===state.weatherRequestToken)setLoading(false)}
+    }
+
+    async function refreshWeather(){
+      if(state.loading||!Number.isFinite(state.location?.latitude)||!Number.isFinite(state.location?.longitude))return;
+      els.refreshWeather.disabled=true;els.refreshWeather.classList.add("refreshing");
+      try{await loadWeather({...state.location},state.locationMode,{preserveCurrent:true})}
+      finally{els.refreshWeather.disabled=false;els.refreshWeather.classList.remove("refreshing")}
     }
 
     async function fetchWeatherCompanyProxy(location){
@@ -349,7 +378,9 @@
     els.searchForm.addEventListener("submit",event=>{event.preventDefault();searchLocations(els.searchInput.value)});
     els.useCurrentLocation.addEventListener("click",()=>requestCurrentLocation().catch(()=>{}));
     els.useCurrentLocationTop.addEventListener("click",()=>requestCurrentLocation().catch(()=>{}));
+    els.refreshWeather.addEventListener("click",refreshWeather);
 
     render();
     initializeLocation();
+    setInterval(updateFreshness,30000);
   })();

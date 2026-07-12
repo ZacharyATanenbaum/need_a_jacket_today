@@ -24,11 +24,11 @@
         211,
         38,
         813,
-        986
+        984
       ],
-      "subject_coverage": 0.3963,
-      "bytes": 409690,
-      "sha256": "d8409238564003180dd40e943b088f8cb41e0649f7234959602cbbde2d7259fa"
+      "subject_coverage": 0.3849,
+      "bytes": 385464,
+      "sha256": "70779226c3fb08e36f5112f88981812eb23c430051b75c7e0dcc001ca97537fa"
     },
     {
       "file": "winter-jacket-no-umbrella.webp",
@@ -50,11 +50,11 @@
         206,
         38,
         818,
-        986
+        985
       ],
-      "subject_coverage": 0.3823,
-      "bytes": 384826,
-      "sha256": "cf99f302f2b2e2b9d8c47aa2c5a01121cfd58f79b6dc71f3c7e9e3d1fe26c44f"
+      "subject_coverage": 0.3689,
+      "bytes": 357642,
+      "sha256": "fa1c5d622261cce6b2e79cc6de4edcc92d115535317bc5290a4c95289acdf52c"
     },
     {
       "file": "winter-jacket-umbrella.webp",
@@ -78,9 +78,9 @@
         901,
         986
       ],
-      "subject_coverage": 0.4485,
-      "bytes": 507510,
-      "sha256": "ca2715d021c932fa79e301178042eed150abeb94be8f9c1625eb196fdff49516"
+      "subject_coverage": 0.4355,
+      "bytes": 475034,
+      "sha256": "0f7f55621a59c98bcb02f28caa0acb3923d373b3601941e7f844fe2db8b838cc"
     },
     {
       "file": "heavy-jacket-no-umbrella.webp",
@@ -104,9 +104,9 @@
         860,
         986
       ],
-      "subject_coverage": 0.4627,
-      "bytes": 410438,
-      "sha256": "ad8b241d9494db8982131e91f5d4f8a3bbfcd4298a12efc42d597be18277891f"
+      "subject_coverage": 0.4467,
+      "bytes": 378772,
+      "sha256": "06e4fbcccea425e1c10299aee21646f2dafbf41ccc25c4965ad2837e0f30f52d"
     },
     {
       "file": "heavy-jacket-umbrella.webp",
@@ -130,9 +130,9 @@
         906,
         986
       ],
-      "subject_coverage": 0.4512,
-      "bytes": 488752,
-      "sha256": "16d8c43faac3b7168ee1a791852db7545b78a382957785b2c18869f89ce670d0"
+      "subject_coverage": 0.4389,
+      "bytes": 458090,
+      "sha256": "d958420a420285483f2706e41cf8f330ca3733e17843602f687391f223042daa"
     },
     {
       "file": "light-jacket-no-umbrella.webp",
@@ -154,11 +154,11 @@
         184,
         38,
         839,
-        986
+        984
       ],
-      "subject_coverage": 0.4178,
-      "bytes": 372486,
-      "sha256": "b59c973a2de60f2ad0814bd897b9f8c553dd26636d91330aabf8118e2697d4b8"
+      "subject_coverage": 0.4022,
+      "bytes": 344040,
+      "sha256": "251019dcf2275f2e25eef67b06471c25436068587d73f296e530762f68392d17"
     },
     {
       "file": "light-jacket-umbrella.webp",
@@ -182,9 +182,9 @@
         881,
         986
       ],
-      "subject_coverage": 0.4041,
-      "bytes": 436358,
-      "sha256": "af25cc289c0191fa5a6ef19b15b537d82594349c4421b174936f67784d4faea0"
+      "subject_coverage": 0.3907,
+      "bytes": 407922,
+      "sha256": "3204b938efb7da582f29e07c2c8b92e4a420c26ffa25db2f3027a55674699cba"
     },
     {
       "file": "long-sleeve-no-umbrella.webp",
@@ -206,11 +206,11 @@
         175,
         38,
         848,
-        986
+        984
       ],
-      "subject_coverage": 0.4215,
-      "bytes": 366538,
-      "sha256": "6f37f015fb87565f11a8829b03297d7d8653b9f045980b3d64a291983ce19bd5"
+      "subject_coverage": 0.4047,
+      "bytes": 335850,
+      "sha256": "b1e4f86e0b465a63cbca8d95b195f1f81e3d42b69c8373ce3703c7dfc766fa10"
     },
     {
       "file": "long-sleeve-umbrella.webp",
@@ -234,9 +234,9 @@
         885,
         986
       ],
-      "subject_coverage": 0.4116,
-      "bytes": 428058,
-      "sha256": "a679cca28f840a465eaa1df3b81795bd6c4eef57354ac1914215fc3bfbdea60d"
+      "subject_coverage": 0.3985,
+      "bytes": 399480,
+      "sha256": "af05b542984e40a621cacc508288e1f390e22b65122d0c5108117ded163d0fc2"
     },
     {
       "file": "short-sleeve-no-umbrella.webp",
@@ -258,11 +258,11 @@
         177,
         38,
         847,
-        986
+        985
       ],
-      "subject_coverage": 0.4129,
-      "bytes": 361340,
-      "sha256": "32e4e8c5d751452f7932677ca9929109b68078865321fb8a3c0915429d7a1297"
+      "subject_coverage": 0.3963,
+      "bytes": 330262,
+      "sha256": "7c79455eab280258ef834507f4c021a47c81fb8cb6d038d5be6fb9a834917b8a"
     },
     {
       "file": "short-sleeve-umbrella.webp",
@@ -286,9 +286,9 @@
         879,
         986
       ],
-      "subject_coverage": 0.4059,
-      "bytes": 431164,
-      "sha256": "7436d61d3afe681720519fb4a1aa3f042b7565154bfd0b7aad82247db362164a"
+      "subject_coverage": 0.3925,
+      "bytes": 398508,
+      "sha256": "82355808035b712a7d503c5456b6b6d288fdcbd2908225d9e3866affa5c021f6"
     },
     {
       "file": "shirtless-no-umbrella.webp",
@@ -310,11 +310,11 @@
         180,
         38,
         844,
-        986
+        985
       ],
-      "subject_coverage": 0.4153,
-      "bytes": 369554,
-      "sha256": "ea82b4d9870d5a1fb44527de365ce194bf3ab44459fc9e083c8943f469e8bf3c"
+      "subject_coverage": 0.3982,
+      "bytes": 339944,
+      "sha256": "f7c0fb955687787e09874e1c02f572b1b790c0586d43fd842cb7d1f6a1aa59a6"
     },
     {
       "file": "shirtless-umbrella.webp",
@@ -336,11 +336,11 @@
         152,
         38,
         871,
-        986
+        985
       ],
-      "subject_coverage": 0.4026,
-      "bytes": 440726,
-      "sha256": "9bc2a453083703ac16adbc8827fc62f3aef5fbe6e8d08b8826cece74fc9897b8"
+      "subject_coverage": 0.3889,
+      "bytes": 406204,
+      "sha256": "506aad7b5a65103d0ec3b7a5f19eb8691ade71dc54bcd6b8528dbeac59dc9db9"
     }
   ],
   "notes": [
