@@ -6,26 +6,17 @@
       defaultLocation:{name:"New York, NY",latitude:40.7128,longitude:-74.0060},
       cacheMaxAgeMs:30*60*1000
     };
-    const OTTER_SHEETS=window.NAJ_OTTER_SHEETS||{};
-    const OTTER_POSITIONS={
-      no:{
-        dontgo:{cols:4,rows:2,col:0,row:0},
-        winter:{cols:4,rows:2,col:1,row:0},
-        heavy:{cols:4,rows:2,col:2,row:0},
-        light:{cols:4,rows:2,col:3,row:0},
-        long:{cols:4,rows:2,col:0,row:1},
-        short:{cols:4,rows:2,col:1,row:1},
-        shirtless:{cols:4,rows:2,col:2,row:1}
-      },
-      yes:{
-        winter:{cols:3,rows:2,col:0,row:0},
-        heavy:{cols:3,rows:2,col:1,row:0},
-        light:{cols:3,rows:2,col:2,row:0},
-        long:{cols:3,rows:2,col:0,row:1},
-        short:{cols:3,rows:2,col:1,row:1},
-        shirtless:{cols:3,rows:2,col:2,row:1}
-      }
+    const OTTER_ASSET_BASE="assets/generated-otters/v1/";
+    const OTTER_FILES={
+      dontgo:{no:"dont-go-outside.webp"},
+      winter:{no:"winter-jacket-no-umbrella.webp",yes:"winter-jacket-umbrella.webp"},
+      heavy:{no:"heavy-jacket-no-umbrella.webp",yes:"heavy-jacket-umbrella.webp"},
+      light:{no:"light-jacket-no-umbrella.webp",yes:"light-jacket-umbrella.webp"},
+      long:{no:"long-sleeve-no-umbrella.webp",yes:"long-sleeve-umbrella.webp"},
+      short:{no:"short-sleeve-no-umbrella.webp",yes:"short-sleeve-umbrella.webp"},
+      shirtless:{no:"shirtless-no-umbrella.webp",yes:"shirtless-umbrella.webp"}
     };
+    const BACKGROUND_ASSET_BASE="generated-backgrounds/v1/";
     const AVATAR_ALT_LABELS={dontgo:"Stay inside",winter:"Winter jacket",heavy:"Heavy jacket",light:"Light jacket",long:"Long sleeve",short:"Short sleeve",shirtless:"Shirtless"};
     const BAND_COPY={
       "Don't Go Outside":{key:"dontgo",headline:"Don't go<br>outside.",title:"Don't Go Outside",desc:"Stay indoors if you can. It is dangerously cold.",icon:"🏠"},
@@ -56,9 +47,12 @@
         const p=item.phrase.toLowerCase();
         const type=p.includes("thunder")?"storm":p.includes("snow")?"snow":p.includes("rain")||p.includes("shower")||p.includes("drizzle")?"rain":p.includes("clear")||p.includes("sun")?"clear":"cloud";
         const icon=type==="storm"?"⛈️":type==="snow"?"❄️":type==="rain"?"🌧️":type==="clear"?"☀️":"☁️";
-        return[item.phrase,icon,type];
+        const background=type==="cloud"&&(p.includes("partly")||p.includes("mostly clear"))?"partly-cloudy":type==="cloud"?"cloudy-foggy":type;
+        return[item.phrase,icon,type,background];
       }
-      return CODES[item.weatherCode]||["Variable conditions","🌤️","cloud"];
+      const [phrase,icon,type]=CODES[item.weatherCode]||["Variable conditions","🌤️","cloud"];
+      const background=item.weatherCode===1||item.weatherCode===2?"partly-cloudy":type==="cloud"?"cloudy-foggy":type;
+      return[phrase,icon,type,background];
     }
 
     // Exact decision logic from ZacharyATanenbaum/need_a_jacket_today.
@@ -107,15 +101,14 @@
       return{band,key:outfitKeyForBand(band),p10,adjustedP10,offset,umbrella,peakRain,peakWind,low,slice};
     }
 
-    // Generated sprite sheets are cropped at runtime using the exact state grid.
+    // Every supported outfit/rain combination has a standalone generated asset.
     function otterSprite(key,showUmbrella){
-      const sheetKey=showUmbrella&&key!=="dontgo"?"yes":"no";
-      const position=OTTER_POSITIONS[sheetKey][key]||OTTER_POSITIONS.no.short;
-      const src=OTTER_SHEETS[sheetKey];
-      return{sheetKey,position,src};
+      const variant=showUmbrella&&key!=="dontgo"?"yes":"no";
+      const file=OTTER_FILES[key]?.[variant];
+      return{variant,src:file?`${OTTER_ASSET_BASE}${file}`:""};
     }
     function updateMascot(key,showUmbrella){
-      const{sheetKey,position,src}=otterSprite(key,showUmbrella);
+      const{variant,src}=otterSprite(key,showUmbrella);
       const altBase=AVATAR_ALT_LABELS[key]||"Weather outfit";
       const alt=key==="dontgo"?altBase:`${altBase}${showUmbrella?" with umbrella":" without umbrella"}`;
       const token=++state.mascotToken;
@@ -129,12 +122,10 @@
       const preload=new Image();
       preload.onload=()=>{
         if(token!==state.mascotToken)return;
-        const x=position.cols===1?0:(position.col/(position.cols-1))*100;
-        const y=position.rows===1?0:(position.row/(position.rows-1))*100;
         els.mascotImage.style.backgroundImage=`url(${JSON.stringify(src)})`;
-        els.mascotImage.style.backgroundSize=`${position.cols*100}% ${position.rows*100}%`;
-        els.mascotImage.style.backgroundPosition=`${x}% ${y}%`;
-        els.mascotImage.dataset.sheet=sheetKey;
+        els.mascotImage.style.backgroundSize="contain";
+        els.mascotImage.style.backgroundPosition="center bottom";
+        els.mascotImage.dataset.variant=variant;
         els.mascotImage.dataset.outfit=key;
         els.mascotImage.classList.remove("changing");
         els.mascotImage.classList.add("ready");
@@ -161,7 +152,7 @@
       const weather=state.weather;
       const decision=decideFromWeather(weather);
       const copy=BAND_COPY[decision.band];
-      const [phrase,icon,type]=descriptor(weather.current);
+      const [phrase,icon,type,background]=descriptor(weather.current);
       const hour=localHour(weather.current.time||Date.now(),weather.timezone);
       const isNight=hour<6||hour>=20;
       const next24=weather.hourly.slice(0,DISPLAY_HOURS);
@@ -172,7 +163,10 @@
       document.body.dataset.weather=type;
       els.hero.dataset.weather=type;
       els.hero.dataset.daypart=isNight?"night":"day";
+      els.hero.dataset.background=background;
       els.hero.dataset.outfit=decision.key;
+      els.hero.classList.add("generated-background");
+      els.hero.style.setProperty("--weather-background",`url("${BACKGROUND_ASSET_BASE}${isNight?"night":"day"}-${background}.webp")`);
       els.temperature.textContent=temp(weather.current.temperature);
       els.weatherIcon.textContent=isNight&&type==="clear"?"🌙":icon;
       els.condition.textContent=phrase;

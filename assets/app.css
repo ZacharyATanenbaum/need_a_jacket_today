@@ -50,6 +50,9 @@
     .hero[data-daypart="night"] .scene-sun{display:none}.hero[data-daypart="night"] .scene-moon,.hero[data-daypart="night"] .scene-stars{display:block}
     .hero[data-daypart="night"] .condition,.hero[data-daypart="night"] .high-low,.hero[data-daypart="night"] .reason,.hero[data-daypart="night"] .provider{color:#d9e8ff}
     .hero[data-daypart="night"] .scenery{opacity:.28}.hero[data-daypart="night"]:before{opacity:.38}
+    .hero.generated-background{background-image:linear-gradient(90deg,rgba(238,246,255,.2),rgba(238,246,255,0) 62%),var(--weather-background);background-position:center;background-size:cover}
+    .hero.generated-background[data-daypart="night"]{background-image:linear-gradient(90deg,rgba(5,20,44,.2),rgba(5,20,44,0) 62%),var(--weather-background)}
+    .hero.generated-background:before,.hero.generated-background:after,.hero.generated-background .weather-scene,.hero.generated-background .scenery{display:none}
     .mascot-wrap{position:absolute;right:-1%;bottom:0;width:min(52%,550px);height:100%;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
     .mascot{position:relative;width:100%;height:100%;display:grid;place-items:end center}
     .mascot:before{content:"";position:absolute;width:88%;aspect-ratio:1;right:0;bottom:-17%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.82) 0,rgba(255,255,255,.38) 46%,transparent 72%);filter:blur(7px)}

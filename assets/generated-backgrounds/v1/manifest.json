@@ -1,0 +1,158 @@
+[
+  {
+    "name": "day-clear.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 102394,
+    "sha256": "78d4bf0056cb1fcb0aec4662cdba9652e64e180bd86e2f267ec9a3d5806c59fa",
+    "source_box": [
+      103,
+      228,
+      320,
+      350
+    ]
+  },
+  {
+    "name": "day-partly-cloudy.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 108986,
+    "sha256": "b41d37e4214d82554f1f8f8a316f5d6fb68c40bb21ddf92ef35ff26c06eb6576",
+    "source_box": [
+      346,
+      218,
+      577,
+      348
+    ]
+  },
+  {
+    "name": "day-cloudy-foggy.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 85242,
+    "sha256": "664a5e1ec572d1397491f0fb506fa0958b62e45b99cdf4621935e9054b46ba4b",
+    "source_box": [
+      603,
+      223,
+      814,
+      342
+    ]
+  },
+  {
+    "name": "day-rain.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 73496,
+    "sha256": "81ea99984dcf6fc8e4c34d5f4826ab74f8c8916ac4898426343c224ff0967bf6",
+    "source_box": [
+      839,
+      223,
+      1051,
+      342
+    ]
+  },
+  {
+    "name": "day-storm.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 72222,
+    "sha256": "f3254f402778e04e2b24069564fa382235604efda0a39af174359386d7ce8c46",
+    "source_box": [
+      1077,
+      218,
+      1287,
+      336
+    ]
+  },
+  {
+    "name": "day-snow.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 93938,
+    "sha256": "510dec070663dfeed0c52403bece34263d89dd6b7658dd37d2104ab99a4fd851",
+    "source_box": [
+      1313,
+      218,
+      1519,
+      334
+    ]
+  },
+  {
+    "name": "night-clear.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 73330,
+    "sha256": "5db18746c0629d9ec8e120416987ed74f8f087eeab80aeb0f05bbb61c74fb000",
+    "source_box": [
+      103,
+      464,
+      320,
+      586
+    ]
+  },
+  {
+    "name": "night-partly-cloudy.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 75196,
+    "sha256": "529e712069f7e44a2c01f4dc684603696aa9b13eb7a7f8f6d95ad4279a85060b",
+    "source_box": [
+      346,
+      459,
+      577,
+      589
+    ]
+  },
+  {
+    "name": "night-cloudy-foggy.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 56570,
+    "sha256": "f4d5878c5034a637d78e028113b1f837fedbe5067d82c056c6e6da2bc7954206",
+    "source_box": [
+      603,
+      464,
+      814,
+      583
+    ]
+  },
+  {
+    "name": "night-rain.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 66414,
+    "sha256": "b93d1e90a69ec2243565310e4b4a2c907ca8f083652eb6b05b10d6927f7a0f15",
+    "source_box": [
+      839,
+      464,
+      1051,
+      583
+    ]
+  },
+  {
+    "name": "night-storm.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 71232,
+    "sha256": "5b7700f71d4a1c45e65e445bb89f3d130eb8542d97f8d2f9ebec57ae489f8dbf",
+    "source_box": [
+      1077,
+      459,
+      1287,
+      577
+    ]
+  },
+  {
+    "name": "night-snow.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 107762,
+    "sha256": "00139629beda65a14d761bbafe64dee61ba622206a388c07cf13b62a4a4e5843",
+    "source_box": [
+      1313,
+      459,
+      1519,
+      575
+    ]
+  }
+]

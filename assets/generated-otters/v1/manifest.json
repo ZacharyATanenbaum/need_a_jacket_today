@@ -1,0 +1,351 @@
+{
+  "version": 1,
+  "description": "Standalone otter state assets cut directly from the two approved generated sprite sheets.",
+  "asset_directory": "assets/generated-otters/v1/",
+  "count": 13,
+  "states": [
+    {
+      "file": "dont-go-outside.webp",
+      "label": "Don't Go Outside",
+      "source_sheet": "cute_otter_character_variations_in_winter_attire.png",
+      "source_grid": {
+        "columns": 4,
+        "rows": 2,
+        "column": 0,
+        "row": 0
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        211,
+        38,
+        813,
+        986
+      ],
+      "subject_coverage": 0.3963,
+      "bytes": 409690,
+      "sha256": "d8409238564003180dd40e943b088f8cb41e0649f7234959602cbbde2d7259fa"
+    },
+    {
+      "file": "winter-jacket-no-umbrella.webp",
+      "label": "Winter Jacket \u2014 no umbrella",
+      "source_sheet": "cute_otter_character_variations_in_winter_attire.png",
+      "source_grid": {
+        "columns": 4,
+        "rows": 2,
+        "column": 1,
+        "row": 0
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        206,
+        38,
+        818,
+        986
+      ],
+      "subject_coverage": 0.3823,
+      "bytes": 384826,
+      "sha256": "cf99f302f2b2e2b9d8c47aa2c5a01121cfd58f79b6dc71f3c7e9e3d1fe26c44f"
+    },
+    {
+      "file": "winter-jacket-umbrella.webp",
+      "label": "Winter Jacket \u2014 umbrella",
+      "source_sheet": "charming_otter_gang_with_umbrellas.png",
+      "source_grid": {
+        "columns": 3,
+        "rows": 2,
+        "column": 0,
+        "row": 0
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        122,
+        38,
+        901,
+        986
+      ],
+      "subject_coverage": 0.4485,
+      "bytes": 507510,
+      "sha256": "ca2715d021c932fa79e301178042eed150abeb94be8f9c1625eb196fdff49516"
+    },
+    {
+      "file": "heavy-jacket-no-umbrella.webp",
+      "label": "Heavy Jacket \u2014 no umbrella",
+      "source_sheet": "cute_otter_character_variations_in_winter_attire.png",
+      "source_grid": {
+        "columns": 4,
+        "rows": 2,
+        "column": 2,
+        "row": 0
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        164,
+        38,
+        860,
+        986
+      ],
+      "subject_coverage": 0.4627,
+      "bytes": 410438,
+      "sha256": "ad8b241d9494db8982131e91f5d4f8a3bbfcd4298a12efc42d597be18277891f"
+    },
+    {
+      "file": "heavy-jacket-umbrella.webp",
+      "label": "Heavy Jacket \u2014 umbrella",
+      "source_sheet": "charming_otter_gang_with_umbrellas.png",
+      "source_grid": {
+        "columns": 3,
+        "rows": 2,
+        "column": 1,
+        "row": 0
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        118,
+        38,
+        906,
+        986
+      ],
+      "subject_coverage": 0.4512,
+      "bytes": 488752,
+      "sha256": "16d8c43faac3b7168ee1a791852db7545b78a382957785b2c18869f89ce670d0"
+    },
+    {
+      "file": "light-jacket-no-umbrella.webp",
+      "label": "Light Jacket \u2014 no umbrella",
+      "source_sheet": "cute_otter_character_variations_in_winter_attire.png",
+      "source_grid": {
+        "columns": 4,
+        "rows": 2,
+        "column": 3,
+        "row": 0
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        184,
+        38,
+        839,
+        986
+      ],
+      "subject_coverage": 0.4178,
+      "bytes": 372486,
+      "sha256": "b59c973a2de60f2ad0814bd897b9f8c553dd26636d91330aabf8118e2697d4b8"
+    },
+    {
+      "file": "light-jacket-umbrella.webp",
+      "label": "Light Jacket \u2014 umbrella",
+      "source_sheet": "charming_otter_gang_with_umbrellas.png",
+      "source_grid": {
+        "columns": 3,
+        "rows": 2,
+        "column": 2,
+        "row": 0
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        143,
+        38,
+        881,
+        986
+      ],
+      "subject_coverage": 0.4041,
+      "bytes": 436358,
+      "sha256": "af25cc289c0191fa5a6ef19b15b537d82594349c4421b174936f67784d4faea0"
+    },
+    {
+      "file": "long-sleeve-no-umbrella.webp",
+      "label": "Long Sleeve \u2014 no umbrella",
+      "source_sheet": "cute_otter_character_variations_in_winter_attire.png",
+      "source_grid": {
+        "columns": 4,
+        "rows": 2,
+        "column": 0,
+        "row": 1
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        175,
+        38,
+        848,
+        986
+      ],
+      "subject_coverage": 0.4215,
+      "bytes": 366538,
+      "sha256": "6f37f015fb87565f11a8829b03297d7d8653b9f045980b3d64a291983ce19bd5"
+    },
+    {
+      "file": "long-sleeve-umbrella.webp",
+      "label": "Long Sleeve \u2014 umbrella",
+      "source_sheet": "charming_otter_gang_with_umbrellas.png",
+      "source_grid": {
+        "columns": 3,
+        "rows": 2,
+        "column": 0,
+        "row": 1
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        139,
+        38,
+        885,
+        986
+      ],
+      "subject_coverage": 0.4116,
+      "bytes": 428058,
+      "sha256": "a679cca28f840a465eaa1df3b81795bd6c4eef57354ac1914215fc3bfbdea60d"
+    },
+    {
+      "file": "short-sleeve-no-umbrella.webp",
+      "label": "Short Sleeve \u2014 no umbrella",
+      "source_sheet": "cute_otter_character_variations_in_winter_attire.png",
+      "source_grid": {
+        "columns": 4,
+        "rows": 2,
+        "column": 1,
+        "row": 1
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        177,
+        38,
+        847,
+        986
+      ],
+      "subject_coverage": 0.4129,
+      "bytes": 361340,
+      "sha256": "32e4e8c5d751452f7932677ca9929109b68078865321fb8a3c0915429d7a1297"
+    },
+    {
+      "file": "short-sleeve-umbrella.webp",
+      "label": "Short Sleeve \u2014 umbrella",
+      "source_sheet": "charming_otter_gang_with_umbrellas.png",
+      "source_grid": {
+        "columns": 3,
+        "rows": 2,
+        "column": 1,
+        "row": 1
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        144,
+        38,
+        879,
+        986
+      ],
+      "subject_coverage": 0.4059,
+      "bytes": 431164,
+      "sha256": "7436d61d3afe681720519fb4a1aa3f042b7565154bfd0b7aad82247db362164a"
+    },
+    {
+      "file": "shirtless-no-umbrella.webp",
+      "label": "Shirtless \u2014 no umbrella",
+      "source_sheet": "cute_otter_character_variations_in_winter_attire.png",
+      "source_grid": {
+        "columns": 4,
+        "rows": 2,
+        "column": 2,
+        "row": 1
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        180,
+        38,
+        844,
+        986
+      ],
+      "subject_coverage": 0.4153,
+      "bytes": 369554,
+      "sha256": "ea82b4d9870d5a1fb44527de365ce194bf3ab44459fc9e083c8943f469e8bf3c"
+    },
+    {
+      "file": "shirtless-umbrella.webp",
+      "label": "Shirtless \u2014 umbrella",
+      "source_sheet": "charming_otter_gang_with_umbrellas.png",
+      "source_grid": {
+        "columns": 3,
+        "rows": 2,
+        "column": 2,
+        "row": 1
+      },
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "format": "WebP",
+      "alpha": true,
+      "alpha_bbox": [
+        152,
+        38,
+        871,
+        986
+      ],
+      "subject_coverage": 0.4026,
+      "bytes": 440726,
+      "sha256": "9bc2a453083703ac16adbc8827fc62f3aef5fbe6e8d08b8826cece74fc9897b8"
+    }
+  ],
+  "notes": [
+    "Don't Go Outside intentionally has no umbrella variant.",
+    "All other clothing states include umbrella and no-umbrella variants.",
+    "All outputs are 1024x1024 transparent lossless WebP files."
+  ]
+}
