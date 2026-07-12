@@ -1,114 +1,93 @@
 <!doctype html>
-<html lang="en" class="h-full bg-slate-950 text-slate-100">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Need a Jacket?</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      :root { --fg:#0ea5e9; --fg2:#22c55e; --ink:#0b1220 }
-      @keyframes float { 0%{transform:translateY(0)} 50%{transform:translateY(-6px)} 100%{transform:translateY(0)} }
-      .animate-float { animation: float 3s ease-in-out infinite }
-      .no-scrollbar::-webkit-scrollbar { display: none }
-      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none }
-    </style>
-  </head>
-  <body class="h-full">
-    <!-- Header (fixed height to prevent expansion) -->
-    <header class="h-16 px-4 border-b border-slate-800/60">
-      <div class="relative h-full flex items-center gap-3">
-        <h1 class="text-lg font-semibold tracking-tight">
-          <span class="sm:hidden">NaJ?</span>
-          <span class="hidden sm:inline">Need a Jacket?</span>
-        </h1>
-
-        <!-- Right side: either default controls or inline search (same row). Search overlays, so bar height never changes. -->
-        <div class="ml-auto flex items-center gap-2">
-          <!-- Default nav content -->
-          <div id="nav-default" class="flex items-center gap-2">
-            <!-- Unit toggle -->
-            <div class="flex items-center h-9 rounded-full bg-slate-800 text-xs overflow-hidden">
-              <button id="unit-f" class="h-full px-3 flex items-center justify-center bg-slate-100 text-slate-900">°F</button>
-              <button id="unit-c" class="h-full px-3 flex items-center justify-center text-slate-200">°C</button>
-            </div>
-            <button id="use-location" class="rounded-full px-4 h-9 flex items-center bg-slate-800 hover:bg-slate-700 text-xs sm:text-sm whitespace-nowrap">
-              <span data-label="compact" class="sm:hidden">Use location</span>
-              <span data-label="full" class="hidden sm:inline">Use my location</span>
-            </button>
-            <button id="open-search" class="rounded-full h-9 w-9 grid place-items-center bg-slate-800 hover:bg-slate-700" aria-label="Search location">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16m13 19.59-5.74-5.74a10 10 0 1 0-1.41 1.41L21.59 23 23 21.59Z"/></svg>
-            </button>
-          </div>
-
-          <!-- Inline search mode (overlay within nav; absolute so it doesn't affect layout/height) -->
-          <div id="nav-search" class="hidden absolute right-4 top-1/2 -translate-y-1/2 w-full max-w-[520px]">
-            <div class="flex items-center gap-2">
-              <div class="flex-1 flex items-center gap-2 rounded-xl bg-slate-900 border border-slate-800 px-3 py-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-slate-400"><path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16m13 19.59-5.74-5.74a10 10 0 1 0-1.41 1.41L21.59 23 23 21.59Z"/></svg>
-                <input id="search-input" class="flex-1 bg-transparent outline-none placeholder:text-slate-500" placeholder="City or place" />
-              </div>
-              <button id="search-submit" class="rounded-lg px-3 py-2 bg-slate-100 text-slate-900">Go</button>
-              <button id="close-search" class="rounded-lg px-3 py-2 bg-slate-800 hover:bg-slate-700">Cancel</button>
-            </div>
-          </div>
-        </div>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#eef6ff">
+  <meta name="description" content="A fast, visual answer to whether you need a jacket or umbrella today.">
+  <title>needajacket.today</title>
+  <link rel="stylesheet" href="assets/app.css">
+</head>
+<body data-weather="cloud">
+  <main class="shell">
+    <header class="header">
+      <div class="brand" aria-label="needajacket.today"><span class="brand-cloud" aria-hidden="true"><span class="brand-sun"></span></span><span>needa<b>jacket</b>.today</span></div>
+      <div class="header-actions">
+        <div class="geo-status" id="geoStatus"><span aria-hidden="true">⌖</span><span id="geoStatusText">Loading weather</span><span class="geo-status-dot"></span></div>
+        <div class="units" aria-label="Temperature units"><button class="unit-button active" data-unit="fahrenheit" type="button">°F</button><button class="unit-button" data-unit="celsius" type="button">°C</button></div>
       </div>
     </header>
 
-    <!-- Main card -->
-    <main class="p-4">
-      <div class="mx-auto max-w-xl rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
-        <!-- Centered location + updated line over avatar -->
-        <div class="w-full flex items-center justify-center gap-2 text-sm text-slate-300 mb-3">
-          <div id="location-line" class="truncate">—</div>
-          <span aria-hidden>•</span>
-          <div id="updated-at" class="shrink-0">Updated —</div>
-          <button id="refresh" class="ml-1 rounded-full p-1.5 bg-slate-800 hover:bg-slate-700" title="Refresh">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 6v3l4-4-4-4v3a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6Z"/></svg>
+    <div class="dashboard">
+      <aside class="left-stack">
+        <section class="location-card card">
+          <span class="kicker">Where are you?</span>
+          <button class="location-button" id="locationButton" aria-expanded="false" type="button">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" fill="#10244b"/><circle cx="12" cy="10" r="2.6" fill="white"/></svg>
+            <span class="location-name" id="locationName">Finding location…</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 8 7 7 7-7" stroke="#10244b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-        </div>
-
-        <!-- Avatar -->
-        <div class="w-full grid place-items-center">
-          <div class="w-56 md:w-72 aspect-[240/260] rounded-[32px] border border-slate-800/80 bg-slate-800/40 backdrop-blur-sm grid place-items-center overflow-hidden drop-shadow-xl animate-float">
-            <img id="avatar-image" src="images/webp/0__stay_at_home.webp" alt="Stay inside avatar" class="w-full h-full object-cover" />
-          </div>
-        </div>
-
-        <!-- Verdict -->
-        <div class="mt-5 text-center">
-          <h2 class="text-2xl md:text-3xl font-semibold"><span class="text-slate-300">Wear:</span> <span id="wear-label">—</span></h2>
-          <p id="umbrella-line" class="mt-1 text-slate-300">Umbrella —</p>
-        </div>
-
-        <!-- Next 24 hours -->
-        <section class="mt-6">
-          <div class="flex items-center justify-between mb-2">
-            <div class="text-sm font-medium">Next 24 hours</div>
-            <div class="flex items-center gap-3">
-              <div id="hourly-summary" class="text-xs text-slate-400">—</div>
-            </div>
-          </div>
-          <div id="hourly-24" class="flex gap-2 overflow-x-auto no-scrollbar py-2"></div>
-          <div class="mt-2 text-[11px] text-slate-500">Scroll to see all hours</div>
+          <button class="current-location-button" id="useCurrentLocationTop" type="button"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6.5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Use my current location</button>
         </section>
 
-        <!-- Comfort preference controls -->
-        <section class="mt-6">
-          <div class="text-center">
-            <div class="text-xs uppercase tracking-wide text-slate-500 mb-2">Comfort Profile</div>
-            <div class="flex justify-center">
-              <div class="inline-flex items-center rounded-full bg-slate-800/80 border border-slate-800 overflow-hidden">
-                <button id="profile-hot" class="px-3 py-2 flex items-center justify-center whitespace-nowrap text-xs sm:text-sm text-slate-200">Always Hot</button>
-                <button id="profile-regular" class="px-3 py-2 flex items-center justify-center whitespace-nowrap text-xs sm:text-sm bg-slate-100 text-slate-900">Regular</button>
-                <button id="profile-cold" class="px-3 py-2 flex items-center justify-center whitespace-nowrap text-xs sm:text-sm text-slate-200">Always Cold</button>
-              </div>
-            </div>
-          </div>
+        <section class="recommendations">
+          <article class="rec-card card" id="jacketCard"><span class="check">✓</span><div class="rec-top"><div class="rec-icon" id="jacketIcon">…</div><div><div class="rec-title" id="jacketTitle">Checking outfit</div><div class="rec-status" id="jacketStatus">Loading</div></div></div><p class="rec-desc" id="jacketDescription">Using the next six hours to choose a layer.</p></article>
+          <article class="rec-card card" id="umbrellaCard"><span class="check">✓</span><div class="rec-top"><div class="rec-icon">☂️</div><div><div class="rec-title">Umbrella</div><div class="rec-status" id="umbrellaStatus">Loading</div></div></div><p class="rec-desc" id="umbrellaDescription">Checking the next six hours for rain.</p></article>
         </section>
-      </div>
-    </main>
+      </aside>
 
-    <script src="app.js" type="module"></script>
-  </body>
+      <section class="hero" id="hero" data-weather="cloud" data-daypart="day" aria-live="polite">
+        <div class="weather-scene" aria-hidden="true"><span class="scene-sun"></span><span class="scene-moon"></span><span class="scene-stars"></span><span class="scene-cloud cloud-a"></span><span class="scene-cloud cloud-b"></span><span class="scene-cloud cloud-c"></span><span class="scene-rain"></span><span class="scene-snow"></span><span class="scene-lightning"></span></div>
+        <div class="scenery"><div class="hills"></div><div class="bridge"><span class="bridge-deck"></span><span class="bridge-cable"></span></div></div>
+        <div class="hero-copy">
+          <div class="temp-line"><div class="temperature" id="temperature">—</div><div class="weather-icon" id="weatherIcon">…</div></div>
+          <div class="condition" id="condition">Loading live weather…</div><div class="high-low" id="highLow"></div>
+          <h1 class="verdict" id="verdict">Checking<br>outside…</h1>
+          <p class="reason" id="reason">Loading current conditions and the next six hours.</p>
+          <div class="provider" id="updated">Connecting to live weather…</div>
+        </div>
+        <div class="mascot-wrap">
+          <div class="mascot" id="mascot">
+            <div class="mascot-image" id="mascotImage" role="img" aria-label=""></div>
+            <div class="mascot-fallback" aria-hidden="true">🦦</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="bottom-grid">
+      <section class="forecast-card card">
+        <div class="section-heading"><div><h2 class="section-title">Next 24 hours</h2><p class="section-subtitle">How conditions change through tomorrow</p></div><span class="forecast-range">Hourly forecast</span></div>
+        <div class="hourly-shell"><div class="hourly-scroll" id="hourlyForecast"></div></div>
+      </section>
+      <section class="details-card card">
+        <div class="section-heading"><div><h2 class="section-title">Details</h2><p class="section-subtitle">What it actually feels like outside</p></div></div>
+        <div class="details">
+          <div class="metric"><div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5a3 3 0 1 1 6 0v8.2a5 5 0 1 1-6 0V5Z" stroke="currentColor" stroke-width="2"/><path d="M12 8v8" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><circle cx="12" cy="17" r="2" fill="currentColor"/></svg></div><div class="metric-copy"><div class="metric-label">Feels like</div><div class="metric-note" id="feelsNote">Cooler than air temp</div></div><div class="metric-value" id="feelsLike">56°</div></div>
+          <div class="metric"><div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 8h10c2.2 0 2.2-3 0-3-1.1 0-1.8.6-2 1.4M3 12h15c3 0 3 4 0 4-1.5 0-2.4-.9-2.5-2M3 16h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="metric-copy"><div class="metric-label">Wind</div><div class="metric-note" id="windNote">Light breeze</div></div><div class="metric-value" id="wind">8 mph</div></div>
+          <div class="metric"><div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3S6 10.3 6 15a6 6 0 0 0 12 0c0-4.7-6-12-6-12Z" stroke="currentColor" stroke-width="2"/><path d="M9.5 16.5c.7 1 1.5 1.5 2.5 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="metric-copy"><div class="metric-label">Rain chance</div><div class="metric-note" id="rainNote">Low chance</div></div><div class="metric-value" id="rain">20%</div></div>
+          <div class="metric"><div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M7 3v4M17 3v4M5 11h14v9H5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="m9 15 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="metric-copy"><div class="metric-label">6h cold-end feel</div><div class="metric-note" id="trendNote">Used for outfit</div></div><div class="metric-value" id="sixHourLow">54°</div></div>
+        </div>
+      </section>
+    </div>
+
+    <section class="settings card"><div class="profile-copy"><strong>Comfort profile</strong><span>Adjust how aggressively the app recommends a layer.</span></div><div class="profile-control"><button class="profile-button" data-profile="hot" type="button">Always hot</button><button class="profile-button active" data-profile="regular" type="button">Regular</button><button class="profile-button" data-profile="cold" type="button">Always cold</button></div></section>
+    <footer class="footer"><span>♡ Made for weather wanderers.</span></footer>
+  </main>
+
+  <div class="modal-backdrop" id="locationModal" role="dialog" aria-modal="true" aria-labelledby="locationModalTitle">
+    <div class="modal"><div class="modal-top"><h2 class="modal-title" id="locationModalTitle">Choose a location</h2><button class="close-button" id="closeModal" type="button" aria-label="Close">×</button></div><form class="search-form" id="searchForm"><input class="search-input" id="searchInput" type="search" autocomplete="off" placeholder="City or ZIP code" aria-label="Search city or ZIP code"><button class="search-button" type="submit">Search</button></form><button class="current-location-button" id="useCurrentLocation" type="button">⌖ Use my current location</button><div class="search-results" id="searchResults"></div><div class="modal-status" id="modalStatus"></div></div>
+  </div>
+  <div class="loading-mask" id="loadingMask" aria-hidden="true"><div class="loader"></div></div><div class="toast" id="toast" role="status"></div>
+
+  <script src="assets/otters-no-1.js"></script>
+  <script src="assets/otters-no-2.js"></script>
+  <script src="assets/otters-no-3.js"></script>
+  <script src="assets/otters-no-4.js"></script>
+  <script src="assets/otters-yes-1.js"></script>
+  <script src="assets/otters-yes-2.js"></script>
+  <script src="assets/otters-yes-3.js"></script>
+  <script src="assets/otters-yes-4.js"></script>
+  <script src="assets/app.js"></script>
+</body>
 </html>
