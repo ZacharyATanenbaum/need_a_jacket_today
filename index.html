@@ -2,151 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#eef6ff">
-  <meta name="description" content="A fast, visual answer to what to wear and whether to bring an umbrella.">
-  <title>Need a Jacket?</title>
-  <style>
-    :root{--ink:#10244b;--muted:#667493;--blue:#075ad8;--blue2:#2878ed;--line:#d8e5f6;--card:rgba(255,255,255,.95);--green:#16814c;--shadow:0 18px 55px rgba(28,70,130,.12);--radius:24px;--safe-b:env(safe-area-inset-bottom,0px)}
-    *{box-sizing:border-box}html{min-width:320px;background:#eef6ff}body{margin:0;min-height:100svh;color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#f8fbff,#edf5ff 55%,#f8fbff);-webkit-font-smoothing:antialiased}button,input{font:inherit}button{color:inherit}.hidden{display:none!important}.opacity-0{opacity:0}.pointer-events-none{pointer-events:none}
-    .shell{width:min(1260px,100%);margin:auto;padding:18px clamp(14px,3vw,34px) calc(28px + var(--safe-b))}.header{height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:11px;font-size:clamp(20px,2vw,28px);font-weight:950;letter-spacing:-.055em}.brand b{color:var(--blue)}.logo{position:relative;width:48px;height:29px;border-radius:999px;background:linear-gradient(145deg,#78b8ff,#206ddf);box-shadow:inset 0 -3px 5px rgba(10,67,150,.18)}.logo:before,.logo:after{content:"";position:absolute;border-radius:50%;background:inherit}.logo:before{width:22px;height:22px;left:8px;top:-10px}.logo:after{width:17px;height:17px;right:6px;top:-4px}.logo i{position:absolute;width:13px;height:13px;border-radius:50%;right:-1px;top:-9px;background:#ffb11c;box-shadow:0 0 0 4px rgba(255,177,28,.14)}
-    #nav-default{display:flex;align-items:center;gap:9px;transition:.18s}.units{display:grid;grid-template-columns:1fr 1fr;padding:3px;border:1px solid var(--line);border-radius:999px;background:#fff}.units button{width:39px;height:34px;border:0;border-radius:999px;background:transparent;color:var(--muted);font-weight:850;cursor:pointer}#unit-f.bg-slate-100,#unit-c.bg-slate-100{background:var(--blue)!important;color:#fff!important}
-    .dashboard{display:grid;grid-template-columns:380px minmax(0,1fr);gap:18px}.left{display:flex;flex-direction:column;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.location-card{padding:22px}.kicker{display:block;margin:0 0 10px;font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.location-picker{width:100%;min-height:86px;padding:0 18px;display:grid;grid-template-columns:28px 1fr 26px;align-items:center;gap:12px;border:3px solid var(--blue);border-radius:18px;background:#fff;box-shadow:0 0 0 5px rgba(7,90,216,.06),0 10px 22px rgba(7,90,216,.08);cursor:pointer;text-align:left}.location-picker:hover{background:#f8fbff}.location-picker:focus-visible{outline:4px solid rgba(7,90,216,.25);outline-offset:3px}.location-picker svg{width:25px}.location-text{min-width:0;font-size:clamp(18px,2vw,24px);font-weight:950;letter-spacing:-.035em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.location-sub{display:block;margin-top:3px;color:var(--muted);font-size:11px;font-weight:700}.use-location{width:100%;min-height:56px;margin-top:14px;border:0;border-radius:15px;background:linear-gradient(180deg,#1267e4,#0755c8);color:#fff;font-weight:850;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 12px 24px rgba(7,90,216,.18)}.use-location:hover{filter:brightness(1.04)}.use-location:disabled{opacity:.55;cursor:not-allowed}.use-location svg{width:20px}
-    .recommendations{display:grid;grid-template-columns:1fr 1fr;gap:12px}.rec{position:relative;min-height:150px;padding:18px 16px;overflow:hidden}.rec-top{display:flex;align-items:center;gap:12px}.rec-icon{width:54px;height:54px;border-radius:17px;background:#eaf3ff;display:grid;place-items:center;font-size:29px}.rec-name{font-weight:950;letter-spacing:-.025em}.rec-state{margin-top:3px;color:var(--green);font-size:13px;font-weight:850}.rec-desc{margin:14px 0 0;color:var(--muted);font-size:13px;line-height:1.45}.check{position:absolute;right:13px;top:13px;width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:900;font-size:13px}.rec.off .check{background:#aeb9cb}.rec.off .rec-state{color:#73819a}.rec.off .rec-icon{filter:grayscale(1);opacity:.72}
-    .hero{position:relative;min-height:500px;overflow:hidden;border-radius:var(--radius);border:1px solid #c9def7;box-shadow:var(--shadow);isolation:isolate;background:linear-gradient(155deg,#dff3ff,#a8d7ff 48%,#eefaff)}.hero[data-weather=cloud]{background:linear-gradient(155deg,#e4edf6,#b9cde0 48%,#eef4f8)}.hero[data-weather=rain]{background:linear-gradient(155deg,#b7cadb,#7696b2 48%,#d8e4ec)}.hero[data-weather=storm]{background:linear-gradient(155deg,#7589a2,#374f70 52%,#8198ad);color:#fff}.hero[data-weather=snow]{background:linear-gradient(155deg,#f5fbff,#cfe2f1 48%,#eef8ff)}.hero[data-daypart=night]{background:linear-gradient(155deg,#1f416f,#10294d 52%,#274c75);color:#f8fbff;border-color:#385b87}.hero:before{content:"";position:absolute;inset:auto 0 0;height:34%;z-index:-2;background:linear-gradient(180deg,transparent,rgba(255,255,255,.58)),linear-gradient(90deg,#b7d9ef,#e5f5ff)}.hero-copy{position:relative;z-index:2;width:55%;padding:38px 0 34px 38px}.temp-row{display:flex;align-items:center;gap:14px}.temperature{font-size:clamp(68px,7vw,100px);line-height:.82;font-weight:950;letter-spacing:-.075em}.weather-icon{font-size:46px}.condition{margin-top:14px;font-size:20px;font-weight:900}.high-low{margin-top:5px;font-weight:750;color:rgba(16,36,75,.78)}.hero[data-daypart=night] .high-low,.hero[data-daypart=night] .reason,.hero[data-daypart=night] .updated{color:rgba(248,251,255,.78)}.verdict{margin:25px 0 10px;font-size:clamp(34px,3.6vw,52px);line-height:.96;letter-spacing:-.065em;font-weight:950}.reason{max-width:445px;margin:0;color:#263d63;font-size:16px;line-height:1.5;font-weight:600}.updated-wrap{position:absolute;left:38px;bottom:18px;display:flex;align-items:center;gap:8px}.updated{font-size:11px;color:#536684;font-weight:750}.refresh{width:28px;height:28px;border:0;border-radius:50%;background:rgba(255,255,255,.58);cursor:pointer;display:grid;place-items:center}.refresh svg{width:15px}
-    .scene{position:absolute;inset:0;z-index:-4;overflow:hidden;pointer-events:none}.sun,.moon{position:absolute;right:12%;top:10%;width:92px;height:92px;border-radius:50%}.sun{background:radial-gradient(circle at 38% 35%,#fff9c8 0 9%,#ffd65b 38%,#ffae22 72%);box-shadow:0 0 0 15px rgba(255,196,54,.13),0 0 65px rgba(255,184,39,.38)}.moon{display:none;width:74px;height:74px;background:radial-gradient(circle at 32% 30%,#fff 0 14%,#dce9ff 55%,#abc3ea);box-shadow:0 0 38px rgba(190,216,255,.45)}.moon:after{content:"";position:absolute;width:66px;height:66px;border-radius:50%;background:#18335e;left:24px;top:-8px}.cloud{position:absolute;width:150px;height:45px;border-radius:999px;background:rgba(255,255,255,.82);filter:drop-shadow(0 12px 18px rgba(48,87,126,.12))}.cloud:before,.cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}.cloud:before{width:74px;height:74px;left:22px;bottom:5px}.cloud:after{width:58px;height:58px;right:20px;bottom:8px}.c1{left:5%;top:15%;transform:scale(.9)}.c2{right:25%;top:28%;transform:scale(.62);opacity:.72}.c3{left:34%;top:7%;transform:scale(.48);opacity:.62}.rain{display:none;position:absolute;inset:0;background:repeating-linear-gradient(112deg,transparent 0 27px,rgba(255,255,255,.42) 28px 30px,transparent 31px 58px);background-size:140px 220px;animation:rain .9s linear infinite;opacity:.62}.snow{display:none;position:absolute;inset:-20%;background-image:radial-gradient(circle,#fff 0 3px,transparent 4px),radial-gradient(circle,rgba(255,255,255,.8) 0 2px,transparent 3px);background-size:88px 88px,64px 64px;animation:snow 7s linear infinite}.stars{display:none;position:absolute;inset:0;background-image:radial-gradient(circle at 16% 20%,#fff 0 1px,transparent 2px),radial-gradient(circle at 47% 19%,#fff 0 1.5px,transparent 2.5px),radial-gradient(circle at 86% 24%,#fff 0 1.5px,transparent 2.5px)}.bolt{display:none;position:absolute;right:22%;top:19%;width:62px;height:130px;background:#fff2a6;clip-path:polygon(54% 0,100% 0,66% 38%,94% 38%,20% 100%,40% 54%,8% 54%);filter:drop-shadow(0 0 20px rgba(255,239,128,.9))}@keyframes rain{to{background-position:-55px 220px}}@keyframes snow{to{background-position:40px 160px,10px 120px}}.hero[data-weather=rain] .rain,.hero[data-weather=storm] .rain{display:block}.hero[data-weather=snow] .snow{display:block}.hero[data-weather=storm] .bolt{display:block}.hero[data-daypart=night] .sun{display:none}.hero[data-daypart=night] .moon,.hero[data-daypart=night] .stars{display:block}.hero[data-weather=rain] .cloud,.hero[data-weather=storm] .cloud{background:rgba(74,94,120,.74)}
-    .mascot{position:absolute;right:-1%;bottom:-1%;width:min(51%,535px);height:100%;display:flex;align-items:flex-end;justify-content:center}.mascot:before{content:"";position:absolute;width:82%;aspect-ratio:1;right:1%;bottom:-14%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.76),rgba(255,255,255,.25) 48%,transparent 72%);filter:blur(6px)}#avatar-image{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;object-position:center bottom;padding:6px 0 0;filter:drop-shadow(0 24px 18px rgba(25,49,78,.19))}
-    .bottom{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(330px,.85fr);gap:18px;margin-top:18px}.forecast,.details-card{padding:22px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:16px}.section-title{margin:0;font-size:20px;letter-spacing:-.035em}.section-sub{margin:4px 0 0;color:var(--muted);font-size:12px}.summary{font-size:11px;color:var(--muted);font-weight:750}.hourly-shell{padding:8px;border:1px solid #e4edf8;border-radius:18px;background:#f8fbff}#hourly-24{display:flex;gap:7px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;padding:0!important}#hourly-24>div{min-width:84px!important;min-height:145px!important;padding:12px 8px!important;border:0!important;border-radius:14px!important;background:#fff!important;box-shadow:0 5px 15px rgba(39,73,120,.05);scroll-snap-align:start}#hourly-24>div:first-child{background:#eaf3ff!important;box-shadow:inset 0 0 0 2px rgba(7,90,216,.18)}#hourly-24>div>div{color:var(--muted)!important}#hourly-24>div>div:nth-child(3){color:var(--ink)!important;font-size:19px!important;font-weight:900!important}
-    .details{display:grid;grid-template-columns:1fr 1fr;border:1px solid #e5edf8;border-radius:18px;overflow:hidden;background:#fbfdff}.metric{min-height:116px;padding:17px;border-bottom:1px solid #e7eef8}.metric:nth-child(odd){border-right:1px solid #e7eef8}.metric:nth-child(n+3){border-bottom:0}.metric-label{color:var(--muted);font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}.metric-value{margin-top:7px;font-size:26px;font-weight:950;letter-spacing:-.04em}.metric-note{margin-top:4px;color:var(--muted);font-size:10px;line-height:1.35}
-    .settings{margin-top:18px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px}.settings strong{display:block;font-size:14px}.settings span{display:block;margin-top:3px;color:var(--muted);font-size:12px}.profiles{display:flex;gap:5px;padding:4px;border-radius:999px;background:#edf4fd}.profiles button{border:0;border-radius:999px;padding:9px 13px;background:transparent;color:#667493;font-size:12px;font-weight:850;cursor:pointer}.profiles button.bg-slate-100{background:#fff!important;color:var(--blue)!important;box-shadow:0 3px 12px rgba(26,65,120,.1)}.footer{padding:22px 0 0;text-align:center;color:#7a89a3;font-size:11px}
-    #nav-search{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;background:rgba(10,27,54,.48);backdrop-filter:blur(8px)}.search-panel{width:min(560px,100%);padding:24px;border-radius:24px;background:#fff;box-shadow:0 30px 90px rgba(7,24,50,.35)}.search-top{display:flex;align-items:center;justify-content:space-between}.search-top h2{margin:0;font-size:25px;letter-spacing:-.04em}.close{width:42px;height:42px;border:0;border-radius:50%;background:#edf4fd;font-size:24px;cursor:pointer}.search-row{display:grid;grid-template-columns:1fr auto;gap:9px;margin-top:18px}.search-input{min-height:54px;padding:0 16px;border:2px solid var(--line);border-radius:14px;outline:none}.search-input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(7,90,216,.1)}.search-go{border:0;border-radius:14px;padding:0 20px;background:var(--blue);color:#fff;font-weight:850;cursor:pointer}.toast{position:fixed;z-index:70;left:50%;bottom:calc(18px + var(--safe-b));transform:translate(-50%,18px);max-width:min(520px,calc(100% - 28px));padding:12px 15px;border:1px solid #efd48b;border-radius:13px;background:#fff9e9;color:#6b4b00;font-size:13px;line-height:1.4;box-shadow:0 14px 38px rgba(89,64,12,.16);opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
-    @media(max-width:980px){.dashboard{grid-template-columns:1fr}.left{display:grid;grid-template-columns:1fr 1fr}.hero{min-height:470px}.bottom{grid-template-columns:1fr}.recommendations{align-self:stretch}}
-    @media(max-width:660px){.shell{padding:12px}.header{height:58px;margin-bottom:12px}.brand{font-size:20px}.logo{transform:scale(.8);margin-right:-4px}.dashboard{gap:12px}.left{display:flex;gap:12px}.location-card{padding:14px;border-radius:18px}.location-picker{min-height:62px;border-width:2px;border-radius:14px;padding:0 13px;grid-template-columns:22px 1fr 20px}.location-picker svg{width:21px}.location-text{font-size:18px}.use-location{min-height:48px;margin-top:9px;border-radius:12px}.hero{min-height:400px;border-radius:18px}.hero-copy{width:57%;padding:21px 0 18px 18px}.temperature{font-size:53px}.weather-icon{font-size:28px}.condition{font-size:13px;margin-top:8px}.high-low{font-size:11px}.verdict{font-size:28px;margin:18px 0 8px}.reason{max-width:170px;font-size:11.5px;line-height:1.35}.updated-wrap{left:18px;bottom:12px}.mascot{right:-7%;width:58%}.recommendations{gap:8px}.rec{min-height:96px;padding:12px}.rec-icon{width:42px;height:42px;border-radius:13px;font-size:24px}.rec-name{font-size:14px}.rec-desc{display:none}.bottom{gap:12px;margin-top:12px}.forecast,.details-card{padding:15px;border-radius:18px}.section-title{font-size:16px}.summary{display:none}#hourly-24>div{min-width:76px!important}.settings{margin-top:12px;padding:13px;display:block;border-radius:18px}.profiles{margin-top:10px;display:grid;grid-template-columns:repeat(3,1fr)}.profiles button{padding:8px 4px}.search-panel{padding:18px}.search-row{grid-template-columns:1fr}.search-go{min-height:48px}}
-  </style>
+  <meta name="description" content="A fast, visual answer to whether you need a jacket or umbrella today.">
+  <title>needajacket.today</title>
+  <link rel="stylesheet" href="assets/app.css">
 </head>
-<body>
-  <div class="shell">
+<body data-weather="cloud">
+  <main class="shell">
     <header class="header">
-      <div class="brand"><span class="logo" aria-hidden="true"><i></i></span><span>Need a <b>Jacket?</b></span></div>
-      <div id="nav-default">
-        <div class="units" aria-label="Temperature unit"><button id="unit-f" type="button">°F</button><button id="unit-c" type="button">°C</button></div>
-      </div>
-      <div id="nav-search" class="hidden" role="dialog" aria-modal="true" aria-labelledby="search-title">
-        <div class="search-panel">
-          <div class="search-top"><h2 id="search-title">Choose a location</h2><button id="close-search" class="close" type="button" aria-label="Close">×</button></div>
-          <div class="search-row"><input id="search-input" class="search-input" placeholder="City, ZIP code, or coordinates" autocomplete="off"><button id="search-submit" class="search-go" type="button">Search</button></div>
-        </div>
+      <div class="brand" aria-label="needajacket.today"><span class="brand-cloud" aria-hidden="true"><span class="brand-sun"></span></span><span>needa<b>jacket</b>.today</span></div>
+      <div class="header-actions">
+        <div class="geo-status" id="geoStatus"><span aria-hidden="true">⌖</span><span id="geoStatusText">Loading weather</span><span class="geo-status-dot"></span></div>
+        <div class="units" aria-label="Temperature units"><button class="unit-button active" data-unit="fahrenheit" type="button">°F</button><button class="unit-button" data-unit="celsius" type="button">°C</button></div>
       </div>
     </header>
 
-    <main>
-      <div class="dashboard">
-        <aside class="left">
-          <section class="location-card card">
-            <span class="kicker">Your forecast</span>
-            <button id="open-search" class="location-picker" type="button" aria-label="Choose location">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.4" fill="currentColor"/></svg>
-              <span><span id="location-line" class="location-text">Finding location…</span><span class="location-sub">Tap to choose another place</span></span>
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7 9 5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <button id="use-location" class="use-location" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="6.5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-label="full">Use my location</span><span data-label="compact" class="hidden">Use location</span></button>
-          </section>
+    <div class="dashboard">
+      <aside class="left-stack">
+        <section class="location-card card">
+          <span class="kicker">Where are you?</span>
+          <button class="location-button" id="locationButton" aria-expanded="false" type="button">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" fill="#10244b"/><circle cx="12" cy="10" r="2.6" fill="white"/></svg>
+            <span class="location-name" id="locationName">Finding location…</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 8 7 7 7-7" stroke="#10244b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="current-location-button" id="useCurrentLocationTop" type="button"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6.5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Use my current location</button>
+        </section>
 
-          <section class="recommendations" aria-label="Recommendations">
-            <article class="rec card" id="outfit-card"><span class="check">✓</span><div class="rec-top"><div class="rec-icon" id="outfit-icon">🧥</div><div><div class="rec-name" id="wear-label">—</div><div class="rec-state" id="outfit-state">Checking…</div></div></div><p class="rec-desc" id="outfit-desc">Looking at the cold end of the next six hours.</p></article>
-            <article class="rec card" id="umbrella-card"><span class="check">✓</span><div class="rec-top"><div class="rec-icon">☂️</div><div><div class="rec-name">Umbrella</div><div class="rec-state" id="umbrella-state">Checking…</div></div></div><p class="rec-desc" id="umbrella-line">Umbrella —</p></article>
-          </section>
-        </aside>
+        <section class="recommendations">
+          <article class="rec-card card" id="jacketCard"><span class="check">✓</span><div class="rec-top"><div class="rec-icon" id="jacketIcon">…</div><div><div class="rec-title" id="jacketTitle">Checking outfit</div><div class="rec-status" id="jacketStatus">Loading</div></div></div><p class="rec-desc" id="jacketDescription">Using the next six hours to choose a layer.</p></article>
+          <article class="rec-card card" id="umbrellaCard"><span class="check">✓</span><div class="rec-top"><div class="rec-icon">☂️</div><div><div class="rec-title">Umbrella</div><div class="rec-status" id="umbrellaStatus">Loading</div></div></div><p class="rec-desc" id="umbrellaDescription">Checking the next six hours for rain.</p></article>
+        </section>
+      </aside>
 
-        <section class="hero" id="weather-hero" data-weather="cloud" data-daypart="day" aria-live="polite">
-          <div class="scene" aria-hidden="true"><span class="sun"></span><span class="moon"></span><span class="stars"></span><span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span><span class="rain"></span><span class="snow"></span><span class="bolt"></span></div>
-          <div class="hero-copy">
-            <div class="temp-row"><div class="temperature" id="current-temp">—</div><div class="weather-icon" id="weather-icon">…</div></div>
-            <div class="condition" id="condition">Loading live weather…</div><div class="high-low" id="high-low"></div>
-            <h1 class="verdict" id="verdict">Checking<br>outside…</h1>
-            <p class="reason" id="reason">Using the cold-end apparent temperature over the next six hours.</p>
-            <div class="updated-wrap"><span class="updated" id="updated-at">Updated —</span><button id="refresh" class="refresh" type="button" title="Refresh"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      <section class="hero" id="hero" data-weather="cloud" data-daypart="day" aria-live="polite">
+        <div class="weather-scene" aria-hidden="true"><span class="scene-sun"></span><span class="scene-moon"></span><span class="scene-stars"></span><span class="scene-cloud cloud-a"></span><span class="scene-cloud cloud-b"></span><span class="scene-cloud cloud-c"></span><span class="scene-rain"></span><span class="scene-snow"></span><span class="scene-lightning"></span></div>
+        <div class="scenery"><div class="hills"></div><div class="bridge"><span class="bridge-deck"></span><span class="bridge-cable"></span></div></div>
+        <div class="hero-copy">
+          <div class="temp-line"><div class="temperature" id="temperature">—</div><div class="weather-icon" id="weatherIcon">…</div></div>
+          <div class="condition" id="condition">Loading live weather…</div><div class="high-low" id="highLow"></div>
+          <h1 class="verdict" id="verdict">Checking<br>outside…</h1>
+          <p class="reason" id="reason">Loading current conditions and the next six hours.</p>
+          <div class="provider" id="updated">Connecting to live weather…</div>
+        </div>
+        <div class="mascot-wrap">
+          <div class="mascot" id="mascot">
+            <div class="mascot-image" id="mascotImage" role="img" aria-label=""></div>
+            <div class="mascot-fallback" aria-hidden="true">🦦</div>
           </div>
-          <div class="mascot"><img id="avatar-image" src="images/webp/0__stay_at_home.webp" alt="Weather outfit recommendation"></div>
-        </section>
-      </div>
+        </div>
+      </section>
+    </div>
 
-      <div class="bottom">
-        <section class="forecast card">
-          <div class="section-head"><div><h2 class="section-title">Next 24 hours</h2><p class="section-sub">How conditions change through tomorrow</p></div><div id="hourly-summary" class="summary">Loading…</div></div>
-          <div class="hourly-shell"><div id="hourly-24"></div></div>
-        </section>
-        <section class="details-card card">
-          <div class="section-head"><div><h2 class="section-title">Details</h2><p class="section-sub">What the recommendation is using</p></div></div>
-          <div class="details">
-            <div class="metric"><div class="metric-label">Feels like</div><div class="metric-value" id="feels-detail">—</div><div class="metric-note">Current apparent temperature</div></div>
-            <div class="metric"><div class="metric-label">Wind</div><div class="metric-value" id="wind-detail">—</div><div class="metric-note">Current sustained wind</div></div>
-            <div class="metric"><div class="metric-label">Rain chance</div><div class="metric-value" id="rain-detail">—</div><div class="metric-note">Highest chance in the next six hours</div></div>
-            <div class="metric"><div class="metric-label">6h cold-end feel</div><div class="metric-value" id="cold-detail">—</div><div class="metric-note">10th percentile used for the outfit</div></div>
-          </div>
-        </section>
-      </div>
+    <div class="bottom-grid">
+      <section class="forecast-card card">
+        <div class="section-heading"><div><h2 class="section-title">Next 24 hours</h2><p class="section-subtitle">How conditions change through tomorrow</p></div><span class="forecast-range">Hourly forecast</span></div>
+        <div class="hourly-shell"><div class="hourly-scroll" id="hourlyForecast"></div></div>
+      </section>
+      <section class="details-card card">
+        <div class="section-heading"><div><h2 class="section-title">Details</h2><p class="section-subtitle">What it actually feels like outside</p></div></div>
+        <div class="details">
+          <div class="metric"><div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5a3 3 0 1 1 6 0v8.2a5 5 0 1 1-6 0V5Z" stroke="currentColor" stroke-width="2"/><path d="M12 8v8" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><circle cx="12" cy="17" r="2" fill="currentColor"/></svg></div><div class="metric-copy"><div class="metric-label">Feels like</div><div class="metric-note" id="feelsNote">Cooler than air temp</div></div><div class="metric-value" id="feelsLike">56°</div></div>
+          <div class="metric"><div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 8h10c2.2 0 2.2-3 0-3-1.1 0-1.8.6-2 1.4M3 12h15c3 0 3 4 0 4-1.5 0-2.4-.9-2.5-2M3 16h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="metric-copy"><div class="metric-label">Wind</div><div class="metric-note" id="windNote">Light breeze</div></div><div class="metric-value" id="wind">8 mph</div></div>
+          <div class="metric"><div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3S6 10.3 6 15a6 6 0 0 0 12 0c0-4.7-6-12-6-12Z" stroke="currentColor" stroke-width="2"/><path d="M9.5 16.5c.7 1 1.5 1.5 2.5 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="metric-copy"><div class="metric-label">Rain chance</div><div class="metric-note" id="rainNote">Low chance</div></div><div class="metric-value" id="rain">20%</div></div>
+          <div class="metric"><div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M7 3v4M17 3v4M5 11h14v9H5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="m9 15 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="metric-copy"><div class="metric-label">6h cold-end feel</div><div class="metric-note" id="trendNote">Used for outfit</div></div><div class="metric-value" id="sixHourLow">54°</div></div>
+        </div>
+      </section>
+    </div>
 
-      <section class="settings card"><div><strong>Comfort profile</strong><span>Adjusts the effective temperature by ±10°F.</span></div><div class="profiles"><button id="profile-hot" type="button">Always Hot</button><button id="profile-regular" type="button">Regular</button><button id="profile-cold" type="button">Always Cold</button></div></section>
-      <footer class="footer">Made for weather wanderers.</footer>
-    </main>
+    <section class="settings card"><div class="profile-copy"><strong>Comfort profile</strong><span>Adjust how aggressively the app recommends a layer.</span></div><div class="profile-control"><button class="profile-button" data-profile="hot" type="button">Always hot</button><button class="profile-button active" data-profile="regular" type="button">Regular</button><button class="profile-button" data-profile="cold" type="button">Always cold</button></div></section>
+    <footer class="footer"><span>♡ Made for weather wanderers.</span></footer>
+  </main>
+
+  <div class="modal-backdrop" id="locationModal" role="dialog" aria-modal="true" aria-labelledby="locationModalTitle">
+    <div class="modal"><div class="modal-top"><h2 class="modal-title" id="locationModalTitle">Choose a location</h2><button class="close-button" id="closeModal" type="button" aria-label="Close">×</button></div><form class="search-form" id="searchForm"><input class="search-input" id="searchInput" type="search" autocomplete="off" placeholder="City or ZIP code" aria-label="Search city or ZIP code"><button class="search-button" type="submit">Search</button></form><button class="current-location-button" id="useCurrentLocation" type="button">⌖ Use my current location</button><div class="search-results" id="searchResults"></div><div class="modal-status" id="modalStatus"></div></div>
   </div>
+  <div class="loading-mask" id="loadingMask" aria-hidden="true"><div class="loader"></div></div><div class="toast" id="toast" role="status"></div>
 
-  <div id="location-toast" class="toast" role="status" aria-live="polite"></div>
-
-  <script>
-  (()=>{
-    "use strict";
-    const nativeFetch=window.fetch.bind(window);
-    const config=window.NAJ_CONFIG||{};
-    let latestForecast=null,toastTimer=0,manualLocationUntil=0;
-    const $=id=>document.getElementById(id);
-    const fToC=f=>(f-32)*5/9,cToF=c=>c*9/5+32,kmhToMph=k=>k*.621371;
-    const unit=()=>{try{return localStorage.getItem("need-a-jacket-unit")==="C"?"C":"F"}catch{return"F"}};
-    const profile=()=>{try{return localStorage.getItem("need-a-jacket-profile")||"regular"}catch{return"regular"}};
-    const showTemp=f=>`${Math.round(unit()==="F"?f:fToC(f))}°`;
-    const quantile=(values,p)=>{const a=[...values].sort((x,y)=>x-y),i=(a.length-1)*p,l=Math.floor(i),u=Math.ceil(i);return l===u?a[l]:a[l]+((a[u]??a[l])-a[l])*(i-l)};
-    const mapCode=code=>{if([95,96,99].includes(code))return["Thunderstorms","⛈️","storm"];if([71,73,75,77,85,86].includes(code))return["Snow","🌨️","snow"];if([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code))return["Rain","🌧️","rain"];if([2,3,45,48].includes(code))return[code===2?"Partly cloudy":"Cloudy",code===2?"⛅":"☁️","cloud"];return["Clear","☀️","clear"]};
-    function openMeteoDetail(payload){
-      const h=payload?.hourly||{},times=h.time||[];
-      return{provider:"Open-Meteo",timezone:payload.timezone||null,hourly:times.map((time,i)=>({time,tempF:cToF(h.temperature_2m?.[i]??0),feelsF:cToF(h.apparent_temperature?.[i]??h.temperature_2m?.[i]??0),precip:h.precipitation_probability?.[i]??0,windMph:kmhToMph(h.wind_speed_10m?.[i]??0),code:h.weather_code?.[i]??null}))};
-    }
-    function weatherCompanyAsOpenMeteo(data){
-      const hours=(data.hourly||[]).map(h=>({time:h.time,tempF:h.temperature,feelsF:h.feelsLike??h.temperature,precip:h.precipProbability??0,windMph:h.windSpeed??0,code:null,phrase:h.phrase||""}));
-      const payload={timezone:data.timezone||"auto",hourly:{time:hours.map(h=>h.time),temperature_2m:hours.map(h=>fToC(h.tempF)),apparent_temperature:hours.map(h=>fToC(h.feelsF)),precipitation_probability:hours.map(h=>h.precip),weather_code:hours.map(()=>0),wind_speed_10m:hours.map(h=>h.windMph/0.621371)}};
-      return{payload,detail:{provider:data.provider||"The Weather Company",timezone:data.timezone||null,hourly:hours}};
-    }
-    window.fetch=async(input,init)=>{
-      let url;try{url=new URL(typeof input==="string"?input:input.url,location.href)}catch{return nativeFetch(input,init)}
-      if(url.hostname==="api.open-meteo.com"&&url.pathname.includes("/forecast")){
-        if(config.weatherCompanyProxy){
-          try{const proxy=new URL(config.weatherCompanyProxy,location.href);proxy.search=new URLSearchParams({lat:url.searchParams.get("latitude"),lon:url.searchParams.get("longitude")});const response=await nativeFetch(proxy,init);if(response.ok){const converted=weatherCompanyAsOpenMeteo(await response.json());latestForecast=converted.detail;window.dispatchEvent(new CustomEvent("naj:forecast",{detail:latestForecast}));return new Response(JSON.stringify(converted.payload),{status:200,headers:{"Content-Type":"application/json"}})}}catch(error){console.warn("Primary weather source unavailable",error)}
-        }
-        const fields=new Set((url.searchParams.get("hourly")||"").split(",").filter(Boolean));["weather_code","wind_speed_10m"].forEach(f=>fields.add(f));url.searchParams.set("hourly",[...fields].join(","));
-        const response=await nativeFetch(url,init);if(response.ok){try{const payload=await response.clone().json();latestForecast=openMeteoDetail(payload);window.dispatchEvent(new CustomEvent("naj:forecast",{detail:latestForecast}))}catch{}}return response;
-      }
-      return nativeFetch(input,init);
-    };
-    function locationMessage(error){if(!navigator.geolocation)return"Location access is not available in this browser. Choose a city instead.";if(error?.code===1)return"Location access was blocked. Allow it in your browser settings, or choose a city.";if(error?.code===2)return"We could not determine your location. Try again, or choose a city.";if(error?.code===3)return"Location lookup timed out. Try again, or choose a city.";return"Your location could not be loaded. Try again, or choose a city."}
-    function showLocationWarning(error){const toast=$("location-toast");if(!toast)return;clearTimeout(toastTimer);toast.textContent=locationMessage(error);toast.classList.add("show");toastTimer=setTimeout(()=>toast.classList.remove("show"),5200)}
-    if(navigator.geolocation){try{const geo=navigator.geolocation,native=geo.getCurrentPosition.bind(geo);geo.getCurrentPosition=(success,failure,options)=>native(success,error=>{if(Date.now()<manualLocationUntil)showLocationWarning(error);failure?.(error)},options)}catch{}}
-    document.addEventListener("click",event=>{if(event.target.closest("#use-location")){manualLocationUntil=Date.now()+30000;if(!navigator.geolocation)showLocationWarning({code:0})}},true);
-    function syncRecommendation(){
-      const band=$("wear-label")?.textContent.trim()||"";if(!band||band==="—")return;
-      const copy={"Don't Go Outside":["Don't go","outside.","Stay inside","It is dangerously cold.","🏠"],"Winter Jacket":["Winter jacket","kind of day.","Recommended","Use your warmest winter outerwear.","🧥"],"Heavy Jacket":["Heavy jacket","kind of day.","Recommended","A puffer or similarly warm jacket is appropriate.","🧥"],"Light Jacket":["Light jacket","kind of day.","Recommended","A bomber, hoodie, or light layer should work.","🧥"],"Long Sleeve":["Long sleeve","kind of day.","No jacket needed","Keep your arms covered.","👕"],"Short Sleeve":["Short sleeve","kind of day.","No jacket needed","A T-shirt should be enough.","👕"],"Shirtless":["Shirtless","kind of day.","No layer needed","It is hot enough for the lightest clothing.","☀️"]}[band];if(!copy)return;
-      $("verdict").innerHTML=`${copy[0]}<br>${copy[1]}`;$("outfit-state").textContent=copy[2];$("outfit-desc").textContent=copy[3];$("outfit-icon").textContent=copy[4];$("outfit-card").classList.toggle("off",["Long Sleeve","Short Sleeve","Shirtless"].includes(band));
-      const umbrella=$("umbrella-line")?.textContent||"",yes=/Umbrella:\s*Yes/i.test(umbrella);$("umbrella-state").textContent=yes?"Recommended":"Not needed";$("umbrella-card").classList.toggle("off",!yes);
-    }
-    function renderWeather(){
-      if(!latestForecast?.hourly?.length)return;const now=Date.now(),hours=latestForecast.hourly.filter(h=>new Date(h.time).getTime()>=now-3600000).slice(0,24),current=hours[0]||latestForecast.hourly[0],six=hours.slice(0,6);if(!current)return;
-      const max=Math.max(...hours.map(h=>h.tempF)),min=Math.min(...hours.map(h=>h.tempF)),rain=Math.max(...six.map(h=>h.precip||0)),offset=profile()==="hot"?10:profile()==="cold"?-10:0,cold=quantile(six.map(h=>h.feelsF),.1)+offset;
-      let phrase,icon,type;if(current.phrase){phrase=current.phrase;type=rain>=60?"rain":rain>=30?"cloud":"clear";icon=type==="rain"?"🌧️":type==="cloud"?"☁️":"☀️"}else[phrase,icon,type]=mapCode(current.code);
-      const hour=new Date(current.time).getHours(),night=hour<6||hour>=20,hero=$("weather-hero");hero.dataset.weather=type;hero.dataset.daypart=night?"night":"day";$("current-temp").textContent=showTemp(current.tempF);$("weather-icon").textContent=night&&type==="clear"?"🌙":icon;$("condition").textContent=phrase;$("high-low").textContent=`H: ${showTemp(max)} · L: ${showTemp(min)}`;$("feels-detail").textContent=showTemp(current.feelsF);$("wind-detail").textContent=unit()==="F"?`${Math.round(current.windMph)} mph`:`${Math.round(current.windMph/0.621371)} km/h`;$("rain-detail").textContent=`${Math.round(rain)}%`;$("cold-detail").textContent=showTemp(cold);
-    }
-    function sync(){syncRecommendation();renderWeather()}
-    window.addEventListener("naj:forecast",sync);document.addEventListener("DOMContentLoaded",()=>{const observer=new MutationObserver(sync);["wear-label","umbrella-line","hourly-24"].forEach(id=>{const node=$(id);if(node)observer.observe(node,{childList:true,subtree:true,characterData:true})});["unit-f","unit-c","profile-hot","profile-regular","profile-cold"].forEach(id=>$(id)?.addEventListener("click",()=>setTimeout(sync,0)));sync()});
-  })();
-  </script>
-  <script src="app.js" type="module"></script>
+  <script src="assets/otters-no-1.js"></script>
+  <script src="assets/otters-no-2.js"></script>
+  <script src="assets/otters-no-3.js"></script>
+  <script src="assets/otters-no-4.js"></script>
+  <script src="assets/otters-yes-1.js"></script>
+  <script src="assets/otters-yes-2.js"></script>
+  <script src="assets/otters-yes-3.js"></script>
+  <script src="assets/otters-yes-4.js"></script>
+  <script src="assets/app.js"></script>
 </body>
 </html>
