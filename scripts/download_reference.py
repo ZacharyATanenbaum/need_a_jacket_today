@@ -4,12 +4,14 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import os
 from pathlib import Path
 import sqlite3
 import sys
 import tempfile
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
 
@@ -54,6 +56,40 @@ def firefox_cookie(profile: Path) -> str | None:
     return "; ".join(f"{name}={value}" for name, value in rows) or None
 
 
+def download_proton_image(url: str) -> tuple[bytes, str]:
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError as error:
+        raise ValueError(
+            "Playwright is required for Proton Drive shares; install it and its "
+            "Chromium browser first"
+        ) from error
+
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=True)
+        page = browser.new_page(viewport={"width": 1600, "height": 1200})
+        try:
+            page.goto(url, wait_until="domcontentloaded", timeout=45_000)
+            image = page.locator("img[src^='blob:']").first
+            image.wait_for(state="visible", timeout=45_000)
+            payload = image.evaluate(
+                """async image => {
+                    const response = await fetch(image.src);
+                    const bytes = new Uint8Array(await response.arrayBuffer());
+                    let binary = '';
+                    const chunkSize = 0x8000;
+                    for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+                        binary += String.fromCharCode(...bytes.subarray(offset, offset + chunkSize));
+                    }
+                    return {data: btoa(binary), contentType: response.headers.get('content-type') || ''};
+                }"""
+            )
+        finally:
+            browser.close()
+
+    return base64.b64decode(payload["data"]), payload["contentType"]
+
+
 def download(url: str, destination: Path, firefox_profile: Path | None = None) -> None:
     headers = {
         "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
@@ -69,10 +105,13 @@ def download(url: str, destination: Path, firefox_profile: Path | None = None) -
     if cookie:
         headers["Cookie"] = cookie
 
-    request = Request(url, headers=headers)
-    with urlopen(request, timeout=30) as response:
-        data = response.read()
-        content_type = response.headers.get_content_type()
+    if urlparse(url).hostname == "drive.proton.me":
+        data, content_type = download_proton_image(url)
+    else:
+        request = Request(url, headers=headers)
+        with urlopen(request, timeout=30) as response:
+            data = response.read()
+            content_type = response.headers.get_content_type()
 
     kind = image_kind(data)
     if not content_type.startswith("image/") or kind is None:
