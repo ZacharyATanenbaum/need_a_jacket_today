@@ -16,6 +16,7 @@ def clean(path: Path) -> tuple[int, int]:
     pixels = bytearray(image.tobytes())
     alpha = image.getchannel("A")
     transparent = alpha.point(lambda value: 255 if value == 0 else 0)
+    edge = transparent.filter(ImageFilter.MaxFilter(3)).tobytes()
     near_transparent = transparent.filter(ImageFilter.MaxFilter(7)).tobytes()
     removed = 0
     unmatted = 0
@@ -25,6 +26,14 @@ def clean(path: Path) -> tuple[int, int]:
         red, green, blue, alpha = pixels[offset : offset + 4]
         row = (offset // 4) // image.width
         if alpha == 0:
+            continue
+
+        # Contract the alpha mask by one source pixel. At 1024px this is
+        # visually negligible, but it removes the final bright antialiased
+        # row inherited from the source sheet.
+        if edge[offset // 4]:
+            pixels[offset : offset + 4] = bytes((0, 0, 0, 0))
+            removed += 1
             continue
 
         # The generated sheets include a pale studio floor ellipse beneath

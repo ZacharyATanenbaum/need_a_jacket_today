@@ -21,14 +21,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        211,
-        38,
-        813,
-        984
+        212,
+        39,
+        812,
+        978
       ],
-      "subject_coverage": 0.3849,
-      "bytes": 385464,
-      "sha256": "70779226c3fb08e36f5112f88981812eb23c430051b75c7e0dcc001ca97537fa"
+      "subject_coverage": 0.3811,
+      "bytes": 374522,
+      "sha256": "1ed85f27ce09e8df5d7b8a608b2606c804bcf5d764b27ab42dbb1952db173b9b"
     },
     {
       "file": "winter-jacket-no-umbrella.webp",
@@ -47,14 +47,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        206,
-        38,
-        818,
-        985
+        207,
+        39,
+        817,
+        978
       ],
-      "subject_coverage": 0.3689,
-      "bytes": 357642,
-      "sha256": "fa1c5d622261cce6b2e79cc6de4edcc92d115535317bc5290a4c95289acdf52c"
+      "subject_coverage": 0.3641,
+      "bytes": 344734,
+      "sha256": "b5629dc0cb90188c25870da6346272260aa99ced026a35bfaa5f15fb0f97a7d0"
     },
     {
       "file": "winter-jacket-umbrella.webp",
@@ -73,14 +73,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        122,
-        38,
-        901,
-        986
+        123,
+        39,
+        900,
+        982
       ],
-      "subject_coverage": 0.4355,
-      "bytes": 475034,
-      "sha256": "0f7f55621a59c98bcb02f28caa0acb3923d373b3601941e7f844fe2db8b838cc"
+      "subject_coverage": 0.4282,
+      "bytes": 458518,
+      "sha256": "b75d1096e3e6fdefa3e79aa36c40e0859e074e8ce100b9f5bdbc0bca7b81133d"
     },
     {
       "file": "heavy-jacket-no-umbrella.webp",
@@ -99,14 +99,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        164,
-        38,
-        860,
-        986
+        165,
+        39,
+        858,
+        976
       ],
-      "subject_coverage": 0.4467,
-      "bytes": 378772,
-      "sha256": "06e4fbcccea425e1c10299aee21646f2dafbf41ccc25c4965ad2837e0f30f52d"
+      "subject_coverage": 0.4416,
+      "bytes": 366010,
+      "sha256": "8bcca6d3815f2cd00cc7c9dbd197c1202caffc4ada190cfafda6a1c99fefac74"
     },
     {
       "file": "heavy-jacket-umbrella.webp",
@@ -125,14 +125,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        118,
-        38,
-        906,
-        986
+        119,
+        39,
+        905,
+        979
       ],
-      "subject_coverage": 0.4389,
-      "bytes": 458090,
-      "sha256": "d958420a420285483f2706e41cf8f330ca3733e17843602f687391f223042daa"
+      "subject_coverage": 0.4323,
+      "bytes": 442568,
+      "sha256": "6251e6b6324bdbd71fd8d7b84d41e1c0c1200f0c3981d1a21461b5b07d93fbef"
     },
     {
       "file": "light-jacket-no-umbrella.webp",
@@ -151,14 +151,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        184,
-        38,
-        839,
-        984
+        185,
+        39,
+        836,
+        978
       ],
-      "subject_coverage": 0.4022,
-      "bytes": 344040,
-      "sha256": "251019dcf2275f2e25eef67b06471c25436068587d73f296e530762f68392d17"
+      "subject_coverage": 0.3969,
+      "bytes": 329934,
+      "sha256": "94143ad05a55db8c27d6bd73ad655c3a5e04d6a2097716a996a0ecc4c006a8c2"
     },
     {
       "file": "light-jacket-umbrella.webp",
@@ -177,14 +177,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        143,
-        38,
-        881,
-        986
+        144,
+        39,
+        880,
+        979
       ],
-      "subject_coverage": 0.3907,
-      "bytes": 407922,
-      "sha256": "3204b938efb7da582f29e07c2c8b92e4a420c26ffa25db2f3027a55674699cba"
+      "subject_coverage": 0.3839,
+      "bytes": 388808,
+      "sha256": "6bf976d88c8bd61e8b7ab4ff855b128a950b4aee9c9a39f46adf111253be44b7"
     },
     {
       "file": "long-sleeve-no-umbrella.webp",
@@ -203,14 +203,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        175,
-        38,
-        848,
-        984
+        177,
+        39,
+        844,
+        978
       ],
-      "subject_coverage": 0.4047,
-      "bytes": 335850,
-      "sha256": "b1e4f86e0b465a63cbca8d95b195f1f81e3d42b69c8373ce3703c7dfc766fa10"
+      "subject_coverage": 0.3998,
+      "bytes": 324376,
+      "sha256": "e4cbd14051e45d253a196e8b98949ad688b811e6bda5712c4368f18fb841271b"
     },
     {
       "file": "long-sleeve-umbrella.webp",
@@ -229,14 +229,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        139,
-        38,
-        885,
-        986
+        140,
+        39,
+        884,
+        979
       ],
-      "subject_coverage": 0.3985,
-      "bytes": 399480,
-      "sha256": "af05b542984e40a621cacc508288e1f390e22b65122d0c5108117ded163d0fc2"
+      "subject_coverage": 0.3917,
+      "bytes": 383282,
+      "sha256": "1ff0c935532a2003f43ffbccd08a02c5cfe7e9e4a367bee8e647f54e8fc8637d"
     },
     {
       "file": "short-sleeve-no-umbrella.webp",
@@ -255,14 +255,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        177,
-        38,
-        847,
-        985
+        179,
+        39,
+        842,
+        976
       ],
-      "subject_coverage": 0.3963,
-      "bytes": 330262,
-      "sha256": "7c79455eab280258ef834507f4c021a47c81fb8cb6d038d5be6fb9a834917b8a"
+      "subject_coverage": 0.3911,
+      "bytes": 318122,
+      "sha256": "cfd6e32d1b2b79d31b93b381b5a2baf90ca4bb24bae98572f767b7b1e291eb6b"
     },
     {
       "file": "short-sleeve-umbrella.webp",
@@ -281,14 +281,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        144,
-        38,
-        879,
-        986
+        145,
+        39,
+        878,
+        979
       ],
-      "subject_coverage": 0.3925,
-      "bytes": 398508,
-      "sha256": "82355808035b712a7d503c5456b6b6d288fdcbd2908225d9e3866affa5c021f6"
+      "subject_coverage": 0.3857,
+      "bytes": 380062,
+      "sha256": "5a7ce3ad8876a33685a3ba93b8b9e81f45812e3def7ddba7f34c1a7d26f4cdf0"
     },
     {
       "file": "shirtless-no-umbrella.webp",
@@ -307,14 +307,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        180,
-        38,
-        844,
-        985
+        181,
+        39,
+        842,
+        978
       ],
-      "subject_coverage": 0.3982,
-      "bytes": 339944,
-      "sha256": "f7c0fb955687787e09874e1c02f572b1b790c0586d43fd842cb7d1f6a1aa59a6"
+      "subject_coverage": 0.3933,
+      "bytes": 327480,
+      "sha256": "cf3c8bfc1394464a4d868c4dae5a7925ab7bbc37c01b390b798bb093618158bf"
     },
     {
       "file": "shirtless-umbrella.webp",
@@ -333,14 +333,14 @@
       "format": "WebP",
       "alpha": true,
       "alpha_bbox": [
-        152,
-        38,
-        871,
-        985
+        154,
+        39,
+        870,
+        979
       ],
-      "subject_coverage": 0.3889,
-      "bytes": 406204,
-      "sha256": "506aad7b5a65103d0ec3b7a5f19eb8691ade71dc54bcd6b8528dbeac59dc9db9"
+      "subject_coverage": 0.3819,
+      "bytes": 391224,
+      "sha256": "9e48e38133d2ca492bde07a3157fcab995403f9e65db679cb65e8b7bdfdcde8f"
     }
   ],
   "notes": [

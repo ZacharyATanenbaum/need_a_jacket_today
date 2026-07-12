@@ -112,6 +112,7 @@
       const altBase=AVATAR_ALT_LABELS[key]||"Weather outfit";
       const alt=key==="dontgo"?altBase:`${altBase}${showUmbrella?" with umbrella":" without umbrella"}`;
       const token=++state.mascotToken;
+      els.mascotImage.classList.remove("ready");
       els.mascotImage.classList.add("changing");
       els.mascotImage.setAttribute("aria-label",alt);
       if(!src){
