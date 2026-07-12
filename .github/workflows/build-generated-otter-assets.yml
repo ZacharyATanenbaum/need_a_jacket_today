@@ -1,0 +1,285 @@
+name: Publish generated otter assets
+
+on:
+  push:
+    branches:
+      - asset-only-generated-otters-20260712
+    paths:
+      - .github/workflows/build-generated-otter-assets.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: generated-otter-assets
+  cancel-in-progress: false
+
+jobs:
+  publish-assets:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out asset branch
+        uses: actions/checkout@v4
+        with:
+          ref: asset-only-generated-otters-20260712
+          fetch-depth: 0
+
+      - name: Install image tooling
+        run: python -m pip install --disable-pip-version-check pillow
+
+      - name: Extract and validate all approved otters
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/build_otters.py <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          from collections import deque
+          import base64, hashlib, io, json, re
+
+          ROOT = Path('.')
+          OUT = ROOT / 'assets/generated-otters/v1'
+          TMP = Path('/tmp/generated-otters')
+          OUT.mkdir(parents=True, exist_ok=True)
+          TMP.mkdir(parents=True, exist_ok=True)
+
+          ASSETS = [
+              ('dont-go-outside.webp', 'no', 0, 0),
+              ('winter-jacket-no-umbrella.webp', 'no', 1, 0),
+              ('winter-jacket-umbrella.webp', 'yes', 0, 0),
+              ('heavy-jacket-no-umbrella.webp', 'no', 2, 0),
+              ('heavy-jacket-umbrella.webp', 'yes', 1, 0),
+              ('light-jacket-no-umbrella.webp', 'no', 3, 0),
+              ('light-jacket-umbrella.webp', 'yes', 2, 0),
+              ('long-sleeve-no-umbrella.webp', 'no', 0, 1),
+              ('long-sleeve-umbrella.webp', 'yes', 0, 1),
+              ('short-sleeve-no-umbrella.webp', 'no', 1, 1),
+              ('short-sleeve-umbrella.webp', 'yes', 1, 1),
+              ('shirtless-no-umbrella.webp', 'no', 2, 1),
+              ('shirtless-umbrella.webp', 'yes', 2, 1),
+          ]
+
+          def decode_sheet(kind):
+              direct = [
+                  ROOT / f'assets/otter-sheet-{kind}.webp',
+                  ROOT / f'assets/generated-otters/otter-sheet-{kind}.webp',
+              ]
+              for path in direct:
+                  if path.exists():
+                      return Image.open(path).convert('RGBA')
+
+              token = 'NO' if kind == 'no' else 'YES'
+              chunks = []
+              candidates = [ROOT / 'index.html'] + sorted((ROOT / 'assets').glob('*.js'))
+              assignment = re.compile(rf'__NAJ_OTTER_{token}\s*(?:\+?=)\s*["\']([^"\']+)["\']')
+              for path in candidates:
+                  if not path.exists():
+                      continue
+                  text = path.read_text(encoding='utf-8', errors='ignore')
+                  chunks.extend(assignment.findall(text))
+              if chunks:
+                  raw = base64.b64decode(''.join(chunks))
+                  return Image.open(io.BytesIO(raw)).convert('RGBA')
+
+              data_uri = re.compile(r'data:image/webp;base64,([A-Za-z0-9+/=]+)')
+              matches = []
+              for path in candidates:
+                  if path.exists():
+                      matches.extend(data_uri.findall(path.read_text(encoding='utf-8', errors='ignore')))
+              if len(matches) >= 2:
+                  raw = base64.b64decode(matches[0 if kind == 'no' else 1])
+                  return Image.open(io.BytesIO(raw)).convert('RGBA')
+              raise RuntimeError(f'Could not find the approved {kind}-umbrella sprite sheet')
+
+          def remove_connected_white(cell):
+              image = cell.convert('RGBA')
+              width, height = image.size
+              pixels = image.load()
+              seen = bytearray(width * height)
+              queue = deque()
+              for x in range(width):
+                  queue.append((x, 0)); queue.append((x, height - 1))
+              for y in range(height):
+                  queue.append((0, y)); queue.append((width - 1, y))
+
+              def is_background(r, g, b):
+                  return min(r, g, b) >= 220 and max(r, g, b) - min(r, g, b) <= 30
+
+              while queue:
+                  x, y = queue.popleft()
+                  index = y * width + x
+                  if seen[index]:
+                      continue
+                  seen[index] = 1
+                  r, g, b, a = pixels[x, y]
+                  if not is_background(r, g, b):
+                      continue
+                  darkness = 255 - min(r, g, b)
+                  alpha = max(0, min(255, darkness * 7 - 24))
+                  pixels[x, y] = (r, g, b, alpha)
+                  if x > 0: queue.append((x - 1, y))
+                  if x + 1 < width: queue.append((x + 1, y))
+                  if y > 0: queue.append((x, y - 1))
+                  if y + 1 < height: queue.append((x, y + 1))
+
+              alpha = image.getchannel('A').point(lambda value: 0 if value < 18 else value)
+              image.putalpha(alpha)
+              box = alpha.getbbox()
+              if box is None:
+                  raise RuntimeError('Background removal produced an empty image')
+              return image.crop(box)
+
+          def normalize(cell):
+              image = remove_connected_white(cell)
+              canvas = Image.new('RGBA', (256, 256), (0, 0, 0, 0))
+              scale = min(238 / image.width, 238 / image.height)
+              size = (max(1, round(image.width * scale)), max(1, round(image.height * scale)))
+              image = image.resize(size, Image.Resampling.LANCZOS)
+              canvas.alpha_composite(image, ((256 - size[0]) // 2, (256 - size[1]) // 2))
+              return canvas
+
+          sheets = {'no': decode_sheet('no'), 'yes': decode_sheet('yes')}
+          manifest = []
+          for filename, sheet_name, col, row in ASSETS:
+              source = sheets[sheet_name]
+              cols = 4 if sheet_name == 'no' else 3
+              rows = 2
+              x0 = round(col * source.width / cols)
+              x1 = round((col + 1) * source.width / cols)
+              y0 = round(row * source.height / rows)
+              y1 = round((row + 1) * source.height / rows)
+              image = normalize(source.crop((x0, y0, x1, y1)))
+              destination = TMP / filename
+              image.save(destination, 'WEBP', lossless=True, method=6, exact=True)
+              check = Image.open(destination).convert('RGBA')
+              alpha = check.getchannel('A')
+              if check.size != (256, 256) or alpha.getbbox() is None or alpha.getextrema()[0] != 0:
+                  raise RuntimeError(f'Validation failed for {filename}')
+              payload = destination.read_bytes()
+              manifest.append({
+                  'file': filename,
+                  'bytes': len(payload),
+                  'sha256': hashlib.sha256(payload).hexdigest(),
+                  'alpha_bbox': alpha.getbbox(),
+              })
+          Path('/tmp/generated-otters-manifest.json').write_text(json.dumps(manifest, indent=2))
+          PY
+          python /tmp/build_otters.py
+
+      - name: Add each asset as its own commit and update PR progress
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          files=(
+            dont-go-outside.webp
+            winter-jacket-no-umbrella.webp
+            winter-jacket-umbrella.webp
+            heavy-jacket-no-umbrella.webp
+            heavy-jacket-umbrella.webp
+            light-jacket-no-umbrella.webp
+            light-jacket-umbrella.webp
+            long-sleeve-no-umbrella.webp
+            long-sleeve-umbrella.webp
+            short-sleeve-no-umbrella.webp
+            short-sleeve-umbrella.webp
+            shirtless-no-umbrella.webp
+            shirtless-umbrella.webp
+          )
+
+          labels=(
+            "Don't Go Outside"
+            "Winter Jacket — no umbrella"
+            "Winter Jacket — umbrella"
+            "Heavy Jacket — no umbrella"
+            "Heavy Jacket — umbrella"
+            "Light Jacket — no umbrella"
+            "Light Jacket — umbrella"
+            "Long Sleeve — no umbrella"
+            "Long Sleeve — umbrella"
+            "Short Sleeve — no umbrella"
+            "Short Sleeve — umbrella"
+            "Shirtless — no umbrella"
+            "Shirtless — umbrella"
+          )
+
+          update_pr_body() {
+            {
+              echo 'Asset-only PR. No frontend wiring changes.'
+              echo
+              echo 'Progress:'
+              for i in "${!files[@]}"; do
+                if [[ -f "assets/generated-otters/v1/${files[$i]}" ]]; then
+                  echo "- [x] ${labels[$i]}"
+                else
+                  echo "- [ ] ${labels[$i]}"
+                fi
+              done
+              echo
+              echo 'Each image is added as a separate commit under `assets/generated-otters/v1/`. The files are 256×256 transparent WebP cutouts made directly from the two approved generated sprite sheets.'
+            } > /tmp/pr-body.md
+            gh pr edit 2 --repo "$GITHUB_REPOSITORY" --body-file /tmp/pr-body.md
+          }
+
+          for i in "${!files[@]}"; do
+            file="${files[$i]}"
+            expected="/tmp/generated-otters/$file"
+            destination="assets/generated-otters/v1/$file"
+            mkdir -p "$(dirname "$destination")"
+            needs_commit=1
+            if [[ -f "$destination" ]] && cmp -s "$expected" "$destination"; then
+              needs_commit=0
+            fi
+            if [[ "$needs_commit" -eq 1 ]]; then
+              cp "$expected" "$destination"
+              git add "$destination"
+              git commit -m "Add generated otter asset: ${file%.webp}"
+              git push origin HEAD:asset-only-generated-otters-20260712
+            fi
+            update_pr_body
+          done
+
+          # Re-validate all 13 files in the branch before finishing.
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          expected = [
+              'dont-go-outside.webp',
+              'winter-jacket-no-umbrella.webp', 'winter-jacket-umbrella.webp',
+              'heavy-jacket-no-umbrella.webp', 'heavy-jacket-umbrella.webp',
+              'light-jacket-no-umbrella.webp', 'light-jacket-umbrella.webp',
+              'long-sleeve-no-umbrella.webp', 'long-sleeve-umbrella.webp',
+              'short-sleeve-no-umbrella.webp', 'short-sleeve-umbrella.webp',
+              'shirtless-no-umbrella.webp', 'shirtless-umbrella.webp',
+          ]
+          root = Path('assets/generated-otters/v1')
+          for name in expected:
+              path = root / name
+              if not path.exists():
+                  raise SystemExit(f'Missing {path}')
+              image = Image.open(path).convert('RGBA')
+              alpha = image.getchannel('A')
+              if image.size != (256, 256) or alpha.getbbox() is None or alpha.getextrema()[0] != 0:
+                  raise SystemExit(f'Invalid {path}')
+          print('Validated all 13 generated otter assets')
+          PY
+
+          update_pr_body
+
+      - name: Remove temporary workflow from the final diff
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm .github/workflows/build-generated-otter-assets.yml
+          git commit -m 'Remove temporary otter asset publishing workflow'
+          git push origin HEAD:asset-only-generated-otters-20260712
+          gh pr edit 2 --repo "$GITHUB_REPOSITORY" --add-label assets 2>/dev/null || true
