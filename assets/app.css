@@ -51,7 +51,7 @@
     .hero[data-daypart="night"] .condition,.hero[data-daypart="night"] .high-low,.hero[data-daypart="night"] .reason,.hero[data-daypart="night"] .provider{color:#d9e8ff}
     .hero[data-daypart="night"] .scenery{opacity:.28}.hero[data-daypart="night"]:before{opacity:.38}
     .hero.generated-background{background:#cbdff0}
-    .hero.generated-background:before{display:block;content:"";position:absolute;inset:-10px;height:auto;z-index:-3;background-image:var(--weather-background);background-position:center;background-size:cover;filter:blur(3px);transform:scale(1.025)}
+    .hero.generated-background:before{display:block;content:"";position:absolute;inset:0;height:auto;z-index:-3;background-image:var(--weather-background);background-position:center;background-size:cover}
     .hero.generated-background:after{display:block;content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(238,246,255,.2),rgba(238,246,255,0) 62%)}
     .hero.generated-background[data-daypart="night"]:after{background:linear-gradient(90deg,rgba(5,20,44,.2),rgba(5,20,44,0) 62%)}
     .hero.generated-background .weather-scene,.hero.generated-background .scenery{display:none}
