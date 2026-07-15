@@ -51,13 +51,13 @@
     .hero[data-daypart="night"] .condition,.hero[data-daypart="night"] .high-low,.hero[data-daypart="night"] .reason,.hero[data-daypart="night"] .provider{color:#d9e8ff}
     .hero[data-daypart="night"] .scenery{opacity:.28}.hero[data-daypart="night"]:before{opacity:.38}
     .hero.generated-background{background:#cbdff0}
-    .hero.generated-background:before{display:block;content:"";position:absolute;inset:0;height:auto;z-index:-3;background-image:var(--weather-background);background-position:center;background-size:cover}
-    .hero.generated-background:after{display:block;content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(238,246,255,.2),rgba(238,246,255,0) 62%)}
-    .hero.generated-background[data-daypart="night"]:after{background:linear-gradient(90deg,rgba(5,20,44,.2),rgba(5,20,44,0) 62%)}
+    .hero.generated-background:before{display:block;content:"";position:absolute;inset:0;height:auto;z-index:-3;background-image:var(--weather-background);background-position:center;background-size:cover;opacity:1}
+    .hero.generated-background:after{display:block;content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(238,246,255,.1),rgba(238,246,255,0) 62%)}
+    .hero.generated-background[data-daypart="night"]:after{background:linear-gradient(90deg,rgba(5,20,44,.1),rgba(5,20,44,0) 62%)}
     .hero.generated-background .weather-scene,.hero.generated-background .scenery{display:none}
     .mascot-wrap{position:absolute;right:-1%;bottom:0;width:min(52%,550px);height:100%;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
     .mascot{position:relative;width:100%;height:100%;display:grid;place-items:end center}
-    .mascot:before{content:"";position:absolute;width:88%;aspect-ratio:1;right:0;bottom:-17%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.41) 0,rgba(255,255,255,.19) 46%,transparent 72%);filter:blur(7px)}
+    .mascot:before{content:"";position:absolute;width:88%;aspect-ratio:1;right:0;bottom:-17%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.82) 0,rgba(255,255,255,.38) 46%,transparent 72%);filter:blur(7px)}
     .mascot-image{position:relative;z-index:1;display:block;width:min(100%,500px);aspect-ratio:1;margin-top:auto;background-repeat:no-repeat;background-color:transparent;filter:drop-shadow(0 24px 20px rgba(25,49,78,.2));opacity:0;transform:translateY(7px) scale(.985);transition:opacity .22s ease,transform .3s ease}
     .mascot-image.ready{opacity:1;transform:translateY(0) scale(1)}
     .mascot-image.changing{opacity:.18;transform:translateY(7px) scale(.985)}
