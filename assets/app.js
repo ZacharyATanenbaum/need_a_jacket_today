@@ -19,6 +19,10 @@
     const BACKGROUND_ASSET_BASE="generated-backgrounds/v1/";
     const CITY_BACKGROUND_ASSET_BASE="city-backgrounds/v1/";
     const CITY_BACKGROUNDS=window.NAJ_CITY_BACKGROUNDS||{aliases:{},backgrounds:{}};
+    const CITY_BACKGROUND_CENTERS={
+      amsterdam:[52.3676,4.9041],bangkok:[13.7563,100.5018],barcelona:[41.3874,2.1686],beijing:[39.9042,116.4074],berlin:[52.52,13.405],boston:[42.3601,-71.0589],"buenos-aires":[-34.6037,-58.3816],cairo:[30.0444,31.2357],"cape-town":[-33.9249,18.4241],chicago:[41.8781,-87.6298],delhi:[28.6139,77.209],dubai:[25.2048,55.2708],"hong-kong":[22.3193,114.1694],istanbul:[41.0082,28.9784],jakarta:[-6.2088,106.8456],"kuala-lumpur":[3.139,101.6869],kyoto:[35.0116,135.7681],london:[51.5074,-.1278],"los-angeles":[34.0522,-118.2437],madrid:[40.4168,-3.7038],manila:[14.5995,120.9842],"mexico-city":[19.4326,-99.1332],milan:[45.4642,9.19],mumbai:[19.076,72.8777],nairobi:[-1.2921,36.8219],"new-york":[40.7128,-74.006],paris:[48.8566,2.3522],prague:[50.0755,14.4378],"rio-de-janeiro":[-22.9068,-43.1729],rome:[41.9028,12.4964],"san-francisco":[37.7749,-122.4194],"sao-paulo":[-23.5505,-46.6333],seoul:[37.5665,126.978],shanghai:[31.2304,121.4737],singapore:[1.3521,103.8198],sydney:[-33.8688,151.2093],tokyo:[35.6762,139.6503],toronto:[43.6532,-79.3832],vancouver:[49.2827,-123.1207],vienna:[48.2082,16.3738]
+    };
+    const CITY_BACKGROUND_RADIUS_KM=100;
     const AVATAR_ALT_LABELS={dontgo:"Stay inside",winter:"Winter jacket",heavy:"Heavy jacket",light:"Light jacket",long:"Long sleeve",short:"Short sleeve",shirtless:"Shirtless"};
     const BAND_COPY={
       "Don't Go Outside":{key:"dontgo",headline:"Don't go<br>outside.",title:"Don't Go Outside",desc:"Stay indoors if you can. It is dangerously cold.",icon:"🏠"},
@@ -47,9 +51,20 @@
     function locationSlug(value){
       return String(value||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
     }
+    function distanceKm(latitudeA,longitudeA,latitudeB,longitudeB){
+      const radians=value=>value*Math.PI/180;
+      const latitudeDelta=radians(latitudeB-latitudeA),longitudeDelta=radians(longitudeB-longitudeA);
+      const a=Math.sin(latitudeDelta/2)**2+Math.cos(radians(latitudeA))*Math.cos(radians(latitudeB))*Math.sin(longitudeDelta/2)**2;
+      return 6371*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+    }
     function cityKeyForLocation(location){
       const names=[location?.city,String(location?.name||"").split(",")[0]];
-      for(const name of names){const key=CITY_BACKGROUNDS.aliases?.[locationSlug(name)];if(key)return key}
+      const latitude=Number(location?.latitude),longitude=Number(location?.longitude);
+      if(!Number.isFinite(latitude)||!Number.isFinite(longitude))return"";
+      for(const name of names){
+        const key=CITY_BACKGROUNDS.aliases?.[locationSlug(name)],center=CITY_BACKGROUND_CENTERS[key];
+        if(key&&center&&distanceKm(latitude,longitude,center[0],center[1])<=CITY_BACKGROUND_RADIUS_KM)return key;
+      }
       return"";
     }
     function backgroundAssetFor(location,daypart,condition){
