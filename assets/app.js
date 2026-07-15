@@ -381,6 +381,30 @@
     els.useCurrentLocationTop.addEventListener("click",()=>requestCurrentLocation().catch(()=>{}));
     els.refreshWeather.addEventListener("click",refreshWeather);
 
+    let hourlyDrag=null;
+    els.hourlyForecast.addEventListener("pointerdown",event=>{
+      if(event.pointerType==="touch"||event.button!==0)return;
+      hourlyDrag={pointerId:event.pointerId,startX:event.clientX,startScrollLeft:els.hourlyForecast.scrollLeft,moved:false};
+      els.hourlyForecast.setPointerCapture(event.pointerId);
+    });
+    els.hourlyForecast.addEventListener("pointermove",event=>{
+      if(!hourlyDrag||event.pointerId!==hourlyDrag.pointerId)return;
+      const delta=event.clientX-hourlyDrag.startX;
+      if(!hourlyDrag.moved&&Math.abs(delta)<4)return;
+      hourlyDrag.moved=true;
+      els.hourlyForecast.classList.add("is-dragging");
+      els.hourlyForecast.scrollLeft=hourlyDrag.startScrollLeft-delta;
+      event.preventDefault();
+    });
+    const endHourlyDrag=event=>{
+      if(!hourlyDrag||event.pointerId!==hourlyDrag.pointerId)return;
+      if(els.hourlyForecast.hasPointerCapture(event.pointerId))els.hourlyForecast.releasePointerCapture(event.pointerId);
+      hourlyDrag=null;
+      els.hourlyForecast.classList.remove("is-dragging");
+    };
+    els.hourlyForecast.addEventListener("pointerup",endHourlyDrag);
+    els.hourlyForecast.addEventListener("pointercancel",endHourlyDrag);
+
     render();
     initializeLocation();
     setInterval(updateFreshness,30000);
