@@ -1,0 +1,481 @@
+id,effective_status,city,state,canonical_filename,verified_canonical,manual_primary_raw,duplicate_raws,all_mapped_raws,candidate_count,notes
+001,VERIFIED_CANONICAL,New York,Day — Clear,001-new-york-day-clear.png,True,,,,0,Included from prior completed-good archive.
+002,VERIFIED_CANONICAL,New York,Night — Rain,002-new-york-night-rain.png,True,,,,0,Included from prior completed-good archive.
+003,VERIFIED_CANONICAL,Chicago,Day — Snow,003-chicago-day-snow.png,True,,,,0,Included from prior completed-good archive.
+004,VERIFIED_CANONICAL,Chicago,Night — Clear,004-chicago-night-clear.png,True,,,,0,Included from prior completed-good archive.
+005,VERIFIED_CANONICAL,Tokyo,Day — Clear,005-tokyo-day-clear.png,True,,,,0,Included from prior completed-good archive.
+006,VERIFIED_CANONICAL,Tokyo,Night — Rain,006-tokyo-night-rain.png,True,,,,0,Included from prior completed-good archive.
+007,VERIFIED_CANONICAL,Paris,Day — Cloudy/Foggy,007-paris-day-cloudy-foggy.png,True,,,,0,Included from prior completed-good archive.
+008,VERIFIED_CANONICAL,Paris,Night — Clear,008-paris-night-clear.png,True,,,,0,Included from prior completed-good archive.
+009,VERIFIED_CANONICAL,San Francisco,Day — Clear,009-san-francisco-day-clear.png,True,,,,0,Included from prior completed-good archive.
+010,VERIFIED_CANONICAL,San Francisco,Day — Cloudy/Foggy,010-san-francisco-day-cloudy-foggy.png,True,,,,0,Included from prior completed-good archive.
+011,VERIFIED_CANONICAL,Los Angeles,Day — Clear,011-los-angeles-day-clear.png,True,,,,0,Included from prior completed-good archive.
+012,VERIFIED_CANONICAL,Chicago,Day — Clear,012-chicago-day-clear.png,True,,,,0,Included from prior completed-good archive.
+013,VERIFIED_CANONICAL,Boston,Day — Clear,013-boston-day-clear.png,True,,,,0,Included from prior completed-good archive.
+014,VERIFIED_CANONICAL,Paris,Day — Clear,014-paris-day-clear.png,True,,,,0,Included from prior completed-good archive.
+015,VERIFIED_CANONICAL,Hong Kong,Day — Clear,015-hong-kong-day-clear.png,True,,,,0,Included from prior completed-good archive.
+016,VERIFIED_CANONICAL,Kyoto,Day — Clear,016-kyoto-day-clear.png,True,,,,0,Included from prior completed-good archive.
+017,VERIFIED_CANONICAL,Shanghai,Day — Clear,017-shanghai-day-clear.png,True,,,,0,Included from prior completed-good archive.
+018,VERIFIED_CANONICAL,London,Day — Clear,018-london-day-clear.png,True,,,,0,Included from prior completed-good archive.
+019,VERIFIED_CANONICAL,Singapore,Day — Clear,019-singapore-day-clear.png,True,,,,0,Included from prior completed-good archive.
+020,VERIFIED_CANONICAL,Seoul,Day — Clear,020-seoul-day-clear.png,True,,,,0,Included from prior completed-good archive.
+021,VERIFIED_CANONICAL,Beijing,Day — Clear,021-beijing-day-clear.png,True,,,,0,Included from prior completed-good archive.
+022,VERIFIED_CANONICAL,Dubai,Day — Clear,022-dubai-day-clear.png,True,,,,0,Included from prior completed-good archive.
+023,VERIFIED_CANONICAL,Sydney,Day — Clear,023-sydney-day-clear.png,True,,,,0,Included from prior completed-good archive.
+024,VERIFIED_CANONICAL,Toronto,Day — Clear,024-toronto-day-clear.png,True,,,,0,Included from prior completed-good archive.
+025,VERIFIED_CANONICAL,Vancouver,Day — Clear,025-vancouver-day-clear.png,True,,,,0,Included from prior completed-good archive.
+026,VERIFIED_CANONICAL,Mexico City,Day — Clear,026-mexico-city-day-clear.png,True,,,,0,Included from prior completed-good archive.
+027,VERIFIED_CANONICAL,São Paulo,Day — Clear,027-sao-paulo-day-clear.png,True,,,,0,Included from prior completed-good archive.
+028,VERIFIED_CANONICAL,Rio de Janeiro,Day — Clear,028-rio-de-janeiro-day-clear.png,True,,,,0,Included from prior completed-good archive.
+029,VERIFIED_CANONICAL,Buenos Aires,Day — Clear,029-buenos-aires-day-clear.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+030,VERIFIED_CANONICAL,Madrid,Day — Clear,030-madrid-day-clear.png,True,,,,0,Included from prior completed-good archive. Archive 1 filename numbering was corrected by content: source 029 -> canonical 030.
+031,VERIFIED_CANONICAL,Barcelona,Day — Clear,031-barcelona-day-clear.png,True,,,,0,Included from prior completed-good archive. Archive 1 filename numbering was corrected by content: source 030 -> canonical 031.
+032,VERIFIED_CANONICAL,Rome,Day — Clear,032-rome-day-clear.png,True,,,,0,Included from prior completed-good archive. Archive 1 filename numbering was corrected by content: source 031 -> canonical 032.
+033,VERIFIED_CANONICAL,Milan,Day — Clear,033-milan-day-clear.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+034,VERIFIED_CANONICAL,Berlin,Day — Clear,034-berlin-day-clear.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+035,VERIFIED_CANONICAL,Amsterdam,Day — Clear,035-amsterdam-day-clear.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+036,VERIFIED_CANONICAL,Vienna,Day — Clear,036-vienna-day-clear.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+037,VERIFIED_CANONICAL,Prague,Day — Clear,037-prague-day-clear.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+038,VERIFIED_CANONICAL,Istanbul,Day — Clear,038-istanbul-day-clear.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+039,VERIFIED_CANONICAL,Cairo,Day — Clear,039-cairo-day-clear.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+040,VERIFIED_CANONICAL,Cape Town,Day — Clear,040-cape-town-day-clear.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+041,VERIFIED_CANONICAL,Nairobi,Day — Clear,041-nairobi-day-clear.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+042,VERIFIED_CANONICAL,Bangkok,Day — Clear,042-bangkok-day-clear.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+043,VERIFIED_CANONICAL,Mumbai,Day — Clear,043-mumbai-day-clear.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+044,VERIFIED_CANONICAL,Delhi,Day — Clear,044-delhi-day-clear.png,True,,,,0,Visual content match: India Gate / Delhi day clear.
+045,VERIFIED_CANONICAL,Kuala Lumpur,Day — Clear,045-kuala-lumpur-day-clear.png,True,,,,0,"Visual content match: Kuala Lumpur skyline with Petronas Towers, day clear."
+046,VERIFIED_CANONICAL,Jakarta,Day — Clear,046-jakarta-day-clear.png,True,,,,0,Estimated content match: Jakarta day clear waterfront skyline.
+047,VERIFIED_CANONICAL,Manila,Day — Clear,047-manila-day-clear.png,True,,,,0,Estimated content match: Manila day clear waterfront skyline.
+048,VERIFIED_CANONICAL,Los Angeles,Night — Clear,048-los-angeles-night-clear.png,True,,,,0,Visual content match: Los Angeles night clear with observatory viewpoint.
+049,VERIFIED_CANONICAL,New York,Night — Clear,049-new-york-night-clear.png,True,,,,0,Estimated content match: New York night clear.
+050,VERIFIED_CANONICAL,Boston,Night — Clear,050-boston-night-clear.png,True,,,,0,Estimated content match: Boston night clear.
+051,VERIFIED_CANONICAL,Tokyo,Night — Clear,051-tokyo-night-clear.png,True,,,,0,Visual content match: Tokyo night clear with Tokyo Tower skyline.
+052,VERIFIED_CANONICAL,Hong Kong,Night — Clear,052-hong-kong-night-clear.png,True,,,,0,Visual content match: Hong Kong night clear harbor skyline.
+053,VERIFIED_CANONICAL,Kyoto,Night — Clear,053-kyoto-night-clear.png,True,,,,0,Visual content match: Kyoto night clear with pagoda and historic skyline.
+054,VERIFIED_CANONICAL,Shanghai,Night — Clear,054-shanghai-night-clear.png,True,,,,0,Visual content match: Shanghai night clear skyline.
+055,VERIFIED_CANONICAL,London,Night — Clear,055-london-night-clear.png,True,,,,0,Visual content match: London night clear by the Thames.
+056,VERIFIED_CANONICAL,Singapore,Night — Clear,056-singapore-night-clear.png,True,,,,0,Visual content match: Singapore night clear with Marina Bay Sands.
+057,VERIFIED_CANONICAL,San Francisco,Night — Clear,057-san-francisco-night-clear.png,True,,,,0,Estimated content match: San Francisco night clear waterfront skyline.
+058,VERIFIED_CANONICAL,Seoul,Night — Clear,058-seoul-night-clear.png,True,,,,0,Visual content match: Seoul night clear with N Seoul Tower.
+059,VERIFIED_CANONICAL,Beijing,Night — Clear,059-beijing-night-clear.png,True,,,,0,Estimated content match: Beijing night clear.
+060,VERIFIED_CANONICAL,Dubai,Night — Clear,060-dubai-night-clear.png,True,,,,0,Visual content match: Dubai night clear with Burj Khalifa.
+061,VERIFIED_CANONICAL,Sydney,Night — Clear,061-sydney-night-clear.png,True,,,,0,Visual content match: Sydney night clear with Harbour Bridge/Opera House.
+062,VERIFIED_CANONICAL,Toronto,Night — Clear,062-toronto-night-clear.png,True,,,,0,Visual content match: Toronto night clear with CN Tower.
+063,VERIFIED_CANONICAL,Vancouver,Night — Clear,063-vancouver-night-clear.png,True,,,,0,Visual content match: Vancouver night clear waterfront skyline.
+064,VERIFIED_CANONICAL,Mexico City,Night — Clear,064-mexico-city-night-clear.png,True,,,,0,Visual content match: Mexico City night clear with Angel of Independence.
+065,VERIFIED_CANONICAL,São Paulo,Night — Clear,065-sao-paulo-night-clear.png,True,,,,0,Visual content match: São Paulo night clear skyline.
+066,VERIFIED_CANONICAL,Rio de Janeiro,Night — Clear,066-rio-de-janeiro-night-clear.png,True,,,,0,Visual content match: Rio de Janeiro night clear with Sugarloaf view.
+067,VERIFIED_CANONICAL,Buenos Aires,Night — Clear,067-buenos-aires-night-clear.png,True,,,,0,Visual content match: Buenos Aires night clear waterfront skyline.
+068,VERIFIED_CANONICAL,Madrid,Night — Clear,068-madrid-night-clear.png,True,,,,0,Visual content match: Madrid night clear rooftop skyline.
+069,VERIFIED_CANONICAL,Barcelona,Night — Clear,069-barcelona-night-clear.png,True,,,,0,Visual content match: Barcelona night clear with Sagrada Família skyline.
+070,VERIFIED_CANONICAL,Rome,Night — Clear,070-rome-night-clear.png,True,,,,0,Visual content match: Rome night clear with St. Peter's Basilica.
+071,VERIFIED_CANONICAL,Milan,Night — Clear,071-milan-night-clear.png,True,,,,0,Visual content match: Milan night clear with Duomo.
+072,VERIFIED_CANONICAL,Berlin,Night — Clear,072-berlin-night-clear.png,True,,,,0,Visual content match: Berlin night clear with Fernsehturm and river.
+073,VERIFIED_CANONICAL,Amsterdam,Night — Clear,073-amsterdam-night-clear.png,True,,,,0,Visual content match: Amsterdam night clear canal scene.
+074,VERIFIED_CANONICAL,Vienna,Night — Clear,074-vienna-night-clear.png,True,,,,0,Vienna skyline with St. Stephen’s Cathedral
+075,VERIFIED_CANONICAL,Prague,Night — Clear,075-prague-night-clear.png,True,,,,0,Prague Castle and Charles Bridge
+076,VERIFIED_CANONICAL,Istanbul,Night — Clear,076-istanbul-night-clear.png,True,,,,0,"Istanbul Bosphorus, Hagia Sophia and Galata Tower"
+077,VERIFIED_CANONICAL,Cairo,Night — Clear,077-cairo-night-clear.png,True,,,,0,Cairo Nile skyline and pyramids
+078,VERIFIED_CANONICAL,Cape Town,Night — Clear,078-cape-town-night-clear.png,True,,,,0,Cape Town waterfront and Table Mountain
+079,VERIFIED_CANONICAL,Nairobi,Night — Clear,079-nairobi-night-clear.png,True,,,,0,Nairobi nighttime skyline
+080,VERIFIED_CANONICAL,Bangkok,Night — Clear,080-bangkok-night-clear.png,True,,,,0,Bangkok Chao Phraya and Wat Arun
+081,VERIFIED_CANONICAL,Mumbai,Night — Clear,081-mumbai-night-clear.png,True,,,,0,Mumbai Marine Drive and Gateway of India
+082,VERIFIED_CANONICAL,Delhi,Night — Clear,082-delhi-night-clear.png,True,,,,0,Delhi India Gate at night
+083,VERIFIED_CANONICAL,Kuala Lumpur,Night — Clear,083-kuala-lumpur-night-clear.png,True,,,,0,Kuala Lumpur skyline and Petronas Towers
+084,VERIFIED_CANONICAL,Jakarta,Night — Clear,084-jakarta-night-clear.png,True,,,,0,Jakarta skyline and Monas at night
+085,VERIFIED_CANONICAL,Manila,Night — Clear,085-manila-night-clear.png,True,,,,0,Manila Bay skyline at night
+086,VERIFIED_CANONICAL,Los Angeles,Day — Partly Cloudy,086-los-angeles-day-partly-cloudy.png,True,,,,0,Los Angeles skyline from Griffith Observatory
+087,VERIFIED_CANONICAL,Chicago,Day — Partly Cloudy,087-chicago-day-partly-cloudy.png,True,,,,0,Chicago skyline from lakefront
+088,VERIFIED_CANONICAL,New York,Day — Partly Cloudy,088-new-york-day-partly-cloudy.png,True,,,,0,New York skyline and Brooklyn Bridge
+089,VERIFIED_CANONICAL,Boston,Day — Partly Cloudy,089-boston-day-partly-cloudy.png,True,,,,0,Boston waterfront skyline
+090,VERIFIED_CANONICAL,Tokyo,Day — Partly Cloudy,090-tokyo-day-partly-cloudy.png,True,,,,0,Tokyo skyline with Tokyo Tower and Skytree
+091,VERIFIED_CANONICAL,Paris,Day — Partly Cloudy,091-paris-day-partly-cloudy.png,True,,,,0,Paris skyline and Eiffel Tower
+092,VERIFIED_CANONICAL,Hong Kong,Day — Partly Cloudy,092-hong-kong-day-partly-cloudy.png,True,,,,0,Hong Kong Victoria Harbour skyline
+093,VERIFIED_CANONICAL,Kyoto,Day — Partly Cloudy,093-kyoto-day-partly-cloudy.png,True,,,,0,Kyoto temple and cityscape
+094,VERIFIED_CANONICAL,Shanghai,Day — Partly Cloudy,094-shanghai-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+095,VERIFIED_CANONICAL,London,Day — Partly Cloudy,095-london-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+096,VERIFIED_CANONICAL,Singapore,Day — Partly Cloudy,096-singapore-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+097,VERIFIED_CANONICAL,San Francisco,Day — Partly Cloudy,097-san-francisco-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+098,VERIFIED_CANONICAL,Seoul,Day — Partly Cloudy,098-seoul-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+099,VERIFIED_CANONICAL,Beijing,Day — Partly Cloudy,099-beijing-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+100,VERIFIED_CANONICAL,Dubai,Day — Partly Cloudy,100-dubai-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+101,VERIFIED_CANONICAL,Sydney,Day — Partly Cloudy,101-sydney-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+102,VERIFIED_CANONICAL,Toronto,Day — Partly Cloudy,102-toronto-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+103,VERIFIED_CANONICAL,Vancouver,Day — Partly Cloudy,103-vancouver-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+104,VERIFIED_CANONICAL,Mexico City,Day — Partly Cloudy,104-mexico-city-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+105,VERIFIED_CANONICAL,São Paulo,Day — Partly Cloudy,105-sao-paulo-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+106,VERIFIED_CANONICAL,Rio de Janeiro,Day — Partly Cloudy,106-rio-de-janeiro-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+107,VERIFIED_CANONICAL,Buenos Aires,Day — Partly Cloudy,107-buenos-aires-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+108,VERIFIED_CANONICAL,Madrid,Day — Partly Cloudy,108-madrid-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+109,VERIFIED_CANONICAL,Barcelona,Day — Partly Cloudy,109-barcelona-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+110,VERIFIED_CANONICAL,Rome,Day — Partly Cloudy,110-rome-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+111,VERIFIED_CANONICAL,Milan,Day — Partly Cloudy,111-milan-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+112,VERIFIED_CANONICAL,Berlin,Day — Partly Cloudy,112-berlin-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+113,VERIFIED_CANONICAL,Amsterdam,Day — Partly Cloudy,113-amsterdam-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+114,VERIFIED_CANONICAL,Vienna,Day — Partly Cloudy,114-vienna-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+115,VERIFIED_CANONICAL,Prague,Day — Partly Cloudy,115-prague-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+116,VERIFIED_CANONICAL,Istanbul,Day — Partly Cloudy,116-istanbul-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+117,VERIFIED_CANONICAL,Cairo,Day — Partly Cloudy,117-cairo-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+118,VERIFIED_CANONICAL,Cape Town,Day — Partly Cloudy,118-cape-town-day-partly-cloudy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+119,VERIFIED_CANONICAL,Nairobi,Day — Partly Cloudy,119-nairobi-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+120,VERIFIED_CANONICAL,Bangkok,Day — Partly Cloudy,120-bangkok-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+121,VERIFIED_CANONICAL,Mumbai,Day — Partly Cloudy,121-mumbai-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+122,VERIFIED_CANONICAL,Delhi,Day — Partly Cloudy,122-delhi-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+123,VERIFIED_CANONICAL,Kuala Lumpur,Day — Partly Cloudy,123-kuala-lumpur-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+124,VERIFIED_CANONICAL,Jakarta,Day — Partly Cloudy,124-jakarta-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+125,VERIFIED_CANONICAL,Manila,Day — Partly Cloudy,125-manila-day-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+126,VERIFIED_CANONICAL,Los Angeles,Night — Partly Cloudy,126-los-angeles-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+127,VERIFIED_CANONICAL,Chicago,Night — Partly Cloudy,127-chicago-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+128,VERIFIED_CANONICAL,New York,Night — Partly Cloudy,128-new-york-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+129,VERIFIED_CANONICAL,Boston,Night — Partly Cloudy,129-boston-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+130,VERIFIED_CANONICAL,Tokyo,Night — Partly Cloudy,130-tokyo-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+131,VERIFIED_CANONICAL,Paris,Night — Partly Cloudy,131-paris-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+132,VERIFIED_CANONICAL,Hong Kong,Night — Partly Cloudy,132-hong-kong-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+133,VERIFIED_CANONICAL,Kyoto,Night — Partly Cloudy,133-kyoto-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+134,VERIFIED_CANONICAL,Shanghai,Night — Partly Cloudy,134-shanghai-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+135,VERIFIED_CANONICAL,London,Night — Partly Cloudy,135-london-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+136,VERIFIED_CANONICAL,Singapore,Night — Partly Cloudy,136-singapore-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+137,VERIFIED_CANONICAL,San Francisco,Night — Partly Cloudy,137-san-francisco-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+138,VERIFIED_CANONICAL,Seoul,Night — Partly Cloudy,138-seoul-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+139,VERIFIED_CANONICAL,Beijing,Night — Partly Cloudy,139-beijing-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+140,VERIFIED_CANONICAL,Dubai,Night — Partly Cloudy,140-dubai-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+141,VERIFIED_CANONICAL,Sydney,Night — Partly Cloudy,141-sydney-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+142,VERIFIED_CANONICAL,Toronto,Night — Partly Cloudy,142-toronto-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+143,VERIFIED_CANONICAL,Vancouver,Night — Partly Cloudy,143-vancouver-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+144,VERIFIED_CANONICAL,Mexico City,Night — Partly Cloudy,144-mexico-city-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+145,VERIFIED_CANONICAL,São Paulo,Night — Partly Cloudy,145-sao-paulo-night-partly-cloudy.png,True,,,,0,Generated individually in current chat; canonical city/time/weather target.
+146,VERIFIED_CANONICAL,Rio de Janeiro,Night — Partly Cloudy,146-rio-de-janeiro-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+147,VERIFIED_CANONICAL,Buenos Aires,Night — Partly Cloudy,147-buenos-aires-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+148,VERIFIED_CANONICAL,Madrid,Night — Partly Cloudy,148-madrid-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+149,VERIFIED_CANONICAL,Barcelona,Night — Partly Cloudy,149-barcelona-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+150,VERIFIED_CANONICAL,Rome,Night — Partly Cloudy,150-rome-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+151,VERIFIED_CANONICAL,Milan,Night — Partly Cloudy,151-milan-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+152,VERIFIED_CANONICAL,Berlin,Night — Partly Cloudy,152-berlin-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+153,VERIFIED_CANONICAL,Amsterdam,Night — Partly Cloudy,153-amsterdam-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+154,VERIFIED_CANONICAL,Vienna,Night — Partly Cloudy,154-vienna-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+155,VERIFIED_CANONICAL,Prague,Night — Partly Cloudy,155-prague-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+156,VERIFIED_CANONICAL,Istanbul,Night — Partly Cloudy,156-istanbul-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+157,VERIFIED_CANONICAL,Cairo,Night — Partly Cloudy,157-cairo-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+158,VERIFIED_CANONICAL,Cape Town,Night — Partly Cloudy,158-cape-town-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+159,VERIFIED_CANONICAL,Nairobi,Night — Partly Cloudy,159-nairobi-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+160,VERIFIED_CANONICAL,Bangkok,Night — Partly Cloudy,160-bangkok-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+161,VERIFIED_CANONICAL,Mumbai,Night — Partly Cloudy,161-mumbai-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+162,VERIFIED_CANONICAL,Delhi,Night — Partly Cloudy,162-delhi-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+163,VERIFIED_CANONICAL,Kuala Lumpur,Night — Partly Cloudy,163-kuala-lumpur-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+164,VERIFIED_CANONICAL,Jakarta,Night — Partly Cloudy,164-jakarta-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+165,VERIFIED_CANONICAL,Manila,Night — Partly Cloudy,165-manila-night-partly-cloudy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+166,VERIFIED_CANONICAL,Los Angeles,Day — Cloudy/Foggy,166-los-angeles-day-cloudy-foggy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+167,VERIFIED_CANONICAL,Chicago,Day — Cloudy/Foggy,167-chicago-day-cloudy-foggy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+168,VERIFIED_CANONICAL,New York,Day — Cloudy/Foggy,168-new-york-day-cloudy-foggy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+169,VERIFIED_CANONICAL,Boston,Day — Cloudy/Foggy,169-boston-day-cloudy-foggy.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+170,VERIFIED_CANONICAL,Tokyo,Day — Cloudy/Foggy,170-tokyo-day-cloudy-foggy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+171,VERIFIED_CANONICAL,Hong Kong,Day — Cloudy/Foggy,171-hong-kong-day-cloudy-foggy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+172,VERIFIED_CANONICAL,Kyoto,Day — Cloudy/Foggy,172-kyoto-day-cloudy-foggy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+173,VERIFIED_CANONICAL,Shanghai,Day — Cloudy/Foggy,173-shanghai-day-cloudy-foggy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+174,VERIFIED_CANONICAL,London,Day — Cloudy/Foggy,174-london-day-cloudy-foggy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+175,VERIFIED_CANONICAL,Singapore,Day — Cloudy/Foggy,175-singapore-day-cloudy-foggy.png,True,,,,0,Standalone image generated in the current conversation and added under the canonical filename.
+176,VERIFIED_CANONICAL,Seoul,Day — Cloudy/Foggy,176-seoul-day-cloudy-foggy.png,True,,263,263 (LOW),1,Standalone image generated in the current conversation and added under the canonical filename.
+177,VERIFIED_CANONICAL,Beijing,Day — Cloudy/Foggy,177-beijing-day-cloudy-foggy.png,True,,284,284 (HIGH),1,Standalone image generated in the current conversation and added under the canonical filename. Normalized from 1671×941 to 1672×941.
+178,MANUALLY_MAPPED_CANDIDATE,Dubai,Day — Cloudy/Foggy,178-dubai-day-cloudy-foggy.png,False,285,,285 (HIGH),1,Not yet generated as a standalone canonical background.
+179,MANUALLY_MAPPED_CANDIDATE,Sydney,Day — Cloudy/Foggy,179-sydney-day-cloudy-foggy.png,False,281,,281 (HIGH),1,Not yet generated as a standalone canonical background.
+180,MANUALLY_MAPPED_CANDIDATE,Toronto,Day — Cloudy/Foggy,180-toronto-day-cloudy-foggy.png,False,283,,283 (LOW),1,Not yet generated as a standalone canonical background.
+181,MANUALLY_MAPPED_CANDIDATE,Vancouver,Day — Cloudy/Foggy,181-vancouver-day-cloudy-foggy.png,False,282,,282 (LOW),1,Not yet generated as a standalone canonical background.
+182,MANUALLY_MAPPED_CANDIDATE,Mexico City,Day — Cloudy/Foggy,182-mexico-city-day-cloudy-foggy.png,False,276,,276 (LOW),1,Not yet generated as a standalone canonical background.
+183,MANUALLY_MAPPED_CANDIDATE,São Paulo,Day — Cloudy/Foggy,183-sao-paulo-day-cloudy-foggy.png,False,279,,279 (LOW),1,Not yet generated as a standalone canonical background.
+184,MANUALLY_MAPPED_CANDIDATE,Rio de Janeiro,Day — Cloudy/Foggy,184-rio-de-janeiro-day-cloudy-foggy.png,False,278,,278 (HIGH),1,Not yet generated as a standalone canonical background.
+185,MANUALLY_MAPPED_CANDIDATE,Buenos Aires,Day — Cloudy/Foggy,185-buenos-aires-day-cloudy-foggy.png,False,280,,280 (LOW),1,Not yet generated as a standalone canonical background.
+186,MANUALLY_MAPPED_CANDIDATE,Madrid,Day — Cloudy/Foggy,186-madrid-day-cloudy-foggy.png,False,271,277,271 (LOW) | 277 (HIGH),2,Not yet generated as a standalone canonical background.
+187,STILL_MISSING,Barcelona,Day — Cloudy/Foggy,187-barcelona-day-cloudy-foggy.png,False,,,,0,Not yet generated as a standalone canonical background.
+188,MANUALLY_MAPPED_CANDIDATE,Rome,Day — Cloudy/Foggy,188-rome-day-cloudy-foggy.png,False,273,,273 (HIGH),1,Not yet generated as a standalone canonical background.
+189,MANUALLY_MAPPED_CANDIDATE,Milan,Day — Cloudy/Foggy,189-milan-day-cloudy-foggy.png,False,270,,270 (LOW),1,Not yet generated as a standalone canonical background.
+190,MANUALLY_MAPPED_CANDIDATE,Berlin,Day — Cloudy/Foggy,190-berlin-day-cloudy-foggy.png,False,268,,268 (HIGH),1,Not yet generated as a standalone canonical background.
+191,VERIFIED_CANONICAL,Amsterdam,Day — Cloudy/Foggy,191-amsterdam-day-cloudy-foggy.png,True,,274,274 (LOW),1,Primary mapped image selected from corrected-original archive.
+192,MANUALLY_MAPPED_CANDIDATE,Vienna,Day — Cloudy/Foggy,192-vienna-day-cloudy-foggy.png,False,265,,265 (LOW),1,Not yet generated as a standalone canonical background.
+193,VERIFIED_CANONICAL,Prague,Day — Cloudy/Foggy,193-prague-day-cloudy-foggy.png,True,,267,267 (HIGH),1,Primary mapped image selected from corrected-original archive.
+194,MANUALLY_MAPPED_CANDIDATE,Istanbul,Day — Cloudy/Foggy,194-istanbul-day-cloudy-foggy.png,False,275,,275 (HIGH),1,Not yet generated as a standalone canonical background.
+195,MANUALLY_MAPPED_CANDIDATE,Cairo,Day — Cloudy/Foggy,195-cairo-day-cloudy-foggy.png,False,272,,272 (LOW),1,Not yet generated as a standalone canonical background.
+196,MANUALLY_MAPPED_CANDIDATE,Cape Town,Day — Cloudy/Foggy,196-cape-town-day-cloudy-foggy.png,False,269,,269 (HIGH),1,Not yet generated as a standalone canonical background.
+197,VERIFIED_CANONICAL,Nairobi,Day — Cloudy/Foggy,197-nairobi-day-cloudy-foggy.png,True,,286,286 (LOW),1,Primary mapped image selected from corrected-original archive.
+198,MANUALLY_MAPPED_CANDIDATE,Bangkok,Day — Cloudy/Foggy,198-bangkok-day-cloudy-foggy.png,False,259,266,259 (LOW) | 266 (LOW),2,Not yet generated as a standalone canonical background.
+199,STILL_MISSING,Mumbai,Day — Cloudy/Foggy,199-mumbai-day-cloudy-foggy.png,False,,,,0,Not yet generated as a standalone canonical background.
+200,MANUALLY_MAPPED_CANDIDATE,Delhi,Day — Cloudy/Foggy,200-delhi-day-cloudy-foggy.png,False,262,,262 (HIGH),1,Not yet generated as a standalone canonical background.
+201,MANUALLY_MAPPED_CANDIDATE,Kuala Lumpur,Day — Cloudy/Foggy,201-kuala-lumpur-day-cloudy-foggy.png,False,257,,257 (LOW),1,Not yet generated as a standalone canonical background.
+202,MANUALLY_MAPPED_CANDIDATE,Jakarta,Day — Cloudy/Foggy,202-jakarta-day-cloudy-foggy.png,False,260,,260 (LOW),1,Not yet generated as a standalone canonical background.
+203,STILL_MISSING,Manila,Day — Cloudy/Foggy,203-manila-day-cloudy-foggy.png,False,,,,0,Not yet generated as a standalone canonical background.
+204,STILL_MISSING,Los Angeles,Night — Cloudy/Foggy,204-los-angeles-night-cloudy-foggy.png,False,,,,0,Not yet generated as a standalone canonical background.
+205,STILL_MISSING,Chicago,Night — Cloudy/Foggy,205-chicago-night-cloudy-foggy.png,False,,,,0,Not yet generated as a standalone canonical background.
+206,MANUALLY_MAPPED_CANDIDATE,New York,Night — Cloudy/Foggy,206-new-york-night-cloudy-foggy.png,False,258,,258 (HIGH),1,Not yet generated as a standalone canonical background.
+207,MANUALLY_MAPPED_CANDIDATE,Boston,Night — Cloudy/Foggy,207-boston-night-cloudy-foggy.png,False,254,,254 (LOW),1,Not yet generated as a standalone canonical background.
+208,MANUALLY_MAPPED_CANDIDATE,Tokyo,Night — Cloudy/Foggy,208-tokyo-night-cloudy-foggy.png,False,256,,256 (HIGH),1,Not yet generated as a standalone canonical background.
+209,MANUALLY_MAPPED_CANDIDATE,Paris,Night — Cloudy/Foggy,209-paris-night-cloudy-foggy.png,False,240,248,240 (HIGH) | 248 (HIGH),2,Not yet generated as a standalone canonical background.
+210,VERIFIED_CANONICAL,Hong Kong,Night — Cloudy/Foggy,210-hong-kong-night-cloudy-foggy.png,True,,241,241 (LOW),1,Primary mapped image selected from corrected-original archive.
+211,MANUALLY_MAPPED_CANDIDATE,Kyoto,Night — Cloudy/Foggy,211-kyoto-night-cloudy-foggy.png,False,250,,250 (HIGH),1,Not yet generated as a standalone canonical background.
+212,MANUALLY_MAPPED_CANDIDATE,Shanghai,Night — Cloudy/Foggy,212-shanghai-night-cloudy-foggy.png,False,227,251,227 (LOW) | 251 (HIGH),2,Not yet generated as a standalone canonical background.
+213,MANUALLY_MAPPED_CANDIDATE,London,Night — Cloudy/Foggy,213-london-night-cloudy-foggy.png,False,255,,255 (HIGH),1,Not yet generated as a standalone canonical background.
+214,MANUALLY_MAPPED_CANDIDATE,Singapore,Night — Cloudy/Foggy,214-singapore-night-cloudy-foggy.png,False,253,,253 (HIGH),1,Not yet generated as a standalone canonical background.
+215,MANUALLY_MAPPED_CANDIDATE,San Francisco,Night — Cloudy/Foggy,215-san-francisco-night-cloudy-foggy.png,False,249,,249 (HIGH),1,Not yet generated as a standalone canonical background.
+216,MANUALLY_MAPPED_CANDIDATE,Seoul,Night — Cloudy/Foggy,216-seoul-night-cloudy-foggy.png,False,252,,252 (LOW),1,Not yet generated as a standalone canonical background.
+217,STILL_MISSING,Beijing,Night — Cloudy/Foggy,217-beijing-night-cloudy-foggy.png,False,,,,0,Not yet generated as a standalone canonical background.
+218,MANUALLY_MAPPED_CANDIDATE,Dubai,Night — Cloudy/Foggy,218-dubai-night-cloudy-foggy.png,False,237,,237 (HIGH),1,Not yet generated as a standalone canonical background.
+219,STILL_MISSING,Sydney,Night — Cloudy/Foggy,219-sydney-night-cloudy-foggy.png,False,,,,0,Not yet generated as a standalone canonical background.
+220,MANUALLY_MAPPED_CANDIDATE,Toronto,Night — Cloudy/Foggy,220-toronto-night-cloudy-foggy.png,False,247,,247 (LOW),1,Not yet generated as a standalone canonical background.
+221,MANUALLY_MAPPED_CANDIDATE,Vancouver,Night — Cloudy/Foggy,221-vancouver-night-cloudy-foggy.png,False,236,,236 (LOW),1,Not yet generated as a standalone canonical background.
+222,MANUALLY_MAPPED_CANDIDATE,Mexico City,Night — Cloudy/Foggy,222-mexico-city-night-cloudy-foggy.png,False,239,,239 (LOW),1,Not yet generated as a standalone canonical background.
+223,MANUALLY_MAPPED_CANDIDATE,São Paulo,Night — Cloudy/Foggy,223-sao-paulo-night-cloudy-foggy.png,False,244,,244 (LOW),1,Not yet generated as a standalone canonical background.
+224,MANUALLY_MAPPED_CANDIDATE,Rio de Janeiro,Night — Cloudy/Foggy,224-rio-de-janeiro-night-cloudy-foggy.png,False,246,,246 (HIGH),1,Not yet generated as a standalone canonical background.
+225,MANUALLY_MAPPED_CANDIDATE,Buenos Aires,Night — Cloudy/Foggy,225-buenos-aires-night-cloudy-foggy.png,False,245,,245 (LOW),1,Not yet generated as a standalone canonical background.
+226,MANUALLY_MAPPED_CANDIDATE,Madrid,Night — Cloudy/Foggy,226-madrid-night-cloudy-foggy.png,False,243,,243 (LOW),1,Not yet generated as a standalone canonical background.
+227,STILL_MISSING,Barcelona,Night — Cloudy/Foggy,227-barcelona-night-cloudy-foggy.png,False,,,,0,Not yet generated as a standalone canonical background.
+228,MANUALLY_MAPPED_CANDIDATE,Rome,Night — Cloudy/Foggy,228-rome-night-cloudy-foggy.png,False,238,,238 (HIGH),1,Not yet generated as a standalone canonical background.
+229,MANUALLY_MAPPED_CANDIDATE,Milan,Night — Cloudy/Foggy,229-milan-night-cloudy-foggy.png,False,232,,232 (LOW),1,Not yet generated as a standalone canonical background.
+230,MANUALLY_MAPPED_CANDIDATE,Berlin,Night — Cloudy/Foggy,230-berlin-night-cloudy-foggy.png,False,235,,235 (LOW),1,Not yet generated as a standalone canonical background.
+231,MANUALLY_MAPPED_CANDIDATE,Amsterdam,Night — Cloudy/Foggy,231-amsterdam-night-cloudy-foggy.png,False,234,,234 (HIGH),1,Not yet generated as a standalone canonical background.
+232,MANUALLY_MAPPED_CANDIDATE,Vienna,Night — Cloudy/Foggy,232-vienna-night-cloudy-foggy.png,False,228,,228 (LOW),1,Not yet generated as a standalone canonical background.
+233,MANUALLY_MAPPED_CANDIDATE,Prague,Night — Cloudy/Foggy,233-prague-night-cloudy-foggy.png,False,233,,233 (HIGH),1,Not yet generated as a standalone canonical background.
+234,MANUALLY_MAPPED_CANDIDATE,Istanbul,Night — Cloudy/Foggy,234-istanbul-night-cloudy-foggy.png,False,230,,230 (HIGH),1,Not yet generated as a standalone canonical background.
+235,MANUALLY_MAPPED_CANDIDATE,Cairo,Night — Cloudy/Foggy,235-cairo-night-cloudy-foggy.png,False,223,231,223 (LOW) | 231 (LOW),2,Not yet generated as a standalone canonical background.
+236,MANUALLY_MAPPED_CANDIDATE,Cape Town,Night — Cloudy/Foggy,236-cape-town-night-cloudy-foggy.png,False,242,,242 (HIGH),1,Not yet generated as a standalone canonical background.
+237,MANUALLY_MAPPED_CANDIDATE,Nairobi,Night — Cloudy/Foggy,237-nairobi-night-cloudy-foggy.png,False,261,,261 (LOW),1,Not yet generated as a standalone canonical background.
+238,STILL_MISSING,Bangkok,Night — Cloudy/Foggy,238-bangkok-night-cloudy-foggy.png,False,,,,0,Not yet generated as a standalone canonical background.
+239,MANUALLY_MAPPED_CANDIDATE,Mumbai,Night — Cloudy/Foggy,239-mumbai-night-cloudy-foggy.png,False,264,,264 (HIGH),1,Not yet generated as a standalone canonical background.
+240,MANUALLY_MAPPED_CANDIDATE,Delhi,Night — Cloudy/Foggy,240-delhi-night-cloudy-foggy.png,False,222,,222 (LOW),1,Not yet generated as a standalone canonical background.
+241,MANUALLY_MAPPED_CANDIDATE,Kuala Lumpur,Night — Cloudy/Foggy,241-kuala-lumpur-night-cloudy-foggy.png,False,219,225,219 (LOW) | 225 (MEDIUM),2,Not yet generated as a standalone canonical background.
+242,MANUALLY_MAPPED_CANDIDATE,Jakarta,Night — Cloudy/Foggy,242-jakarta-night-cloudy-foggy.png,False,224,,224 (LOW),1,Not yet generated as a standalone canonical background.
+243,MANUALLY_MAPPED_CANDIDATE,Manila,Night — Cloudy/Foggy,243-manila-night-cloudy-foggy.png,False,226,,226 (LOW),1,Not yet generated as a standalone canonical background.
+244,MANUALLY_MAPPED_CANDIDATE,Los Angeles,Day — Rain,244-los-angeles-day-rain.png,False,220,,220 (HIGH),1,Not yet generated as a standalone canonical background.
+245,MANUALLY_MAPPED_CANDIDATE,Chicago,Day — Rain,245-chicago-day-rain.png,False,221,,221 (HIGH),1,Not yet generated as a standalone canonical background.
+246,VERIFIED_CANONICAL,New York,Day — Rain,246-new-york-day-rain.png,True,,229,229 (HIGH),1,Primary mapped image selected from corrected-original archive.
+247,VERIFIED_CANONICAL,Boston,Day — Rain,247-boston-day-rain.png,True,,210,210 (HIGH),1,Primary mapped image selected from corrected-original archive.
+248,MANUALLY_MAPPED_CANDIDATE,Tokyo,Day — Rain,248-tokyo-day-rain.png,False,213,,213 (HIGH),1,Not yet generated as a standalone canonical background.
+249,VERIFIED_CANONICAL,Paris,Day — Rain,249-paris-day-rain.png,True,,218,218 (HIGH),1,Primary mapped image selected from corrected-original archive.
+250,MANUALLY_MAPPED_CANDIDATE,Hong Kong,Day — Rain,250-hong-kong-day-rain.png,False,200,215,200 (LOW) | 215 (HIGH),2,Not yet generated as a standalone canonical background.
+251,MANUALLY_MAPPED_CANDIDATE,Kyoto,Day — Rain,251-kyoto-day-rain.png,False,216,,216 (HIGH),1,Not yet generated as a standalone canonical background.
+252,MANUALLY_MAPPED_CANDIDATE,Shanghai,Day — Rain,252-shanghai-day-rain.png,False,217,,217 (HIGH),1,Not yet generated as a standalone canonical background.
+253,MANUALLY_MAPPED_CANDIDATE,London,Day — Rain,253-london-day-rain.png,False,211,,211 (HIGH),1,Not yet generated as a standalone canonical background.
+254,STILL_MISSING,Singapore,Day — Rain,254-singapore-day-rain.png,False,,,,0,Not yet generated as a standalone canonical background.
+255,MANUALLY_MAPPED_CANDIDATE,San Francisco,Day — Rain,255-san-francisco-day-rain.png,False,214,,214 (HIGH),1,Not yet generated as a standalone canonical background.
+256,MANUALLY_MAPPED_CANDIDATE,Seoul,Day — Rain,256-seoul-day-rain.png,False,212,,212 (LOW),1,Not yet generated as a standalone canonical background.
+257,MANUALLY_MAPPED_CANDIDATE,Beijing,Day — Rain,257-beijing-day-rain.png,False,206,,206 (LOW),1,Not yet generated as a standalone canonical background.
+258,MANUALLY_MAPPED_CANDIDATE,Dubai,Day — Rain,258-dubai-day-rain.png,False,204,,204 (HIGH),1,Not yet generated as a standalone canonical background.
+259,MANUALLY_MAPPED_CANDIDATE,Sydney,Day — Rain,259-sydney-day-rain.png,False,208,,208 (HIGH),1,Not yet generated as a standalone canonical background.
+260,MANUALLY_MAPPED_CANDIDATE,Toronto,Day — Rain,260-toronto-day-rain.png,False,201,,201 (HIGH),1,Not yet generated as a standalone canonical background.
+261,MANUALLY_MAPPED_CANDIDATE,Vancouver,Day — Rain,261-vancouver-day-rain.png,False,203,,203 (HIGH),1,Not yet generated as a standalone canonical background.
+262,MANUALLY_MAPPED_CANDIDATE,Mexico City,Day — Rain,262-mexico-city-day-rain.png,False,202,,202 (LOW),1,Not yet generated as a standalone canonical background.
+263,STILL_MISSING,São Paulo,Day — Rain,263-sao-paulo-day-rain.png,False,,,,0,Not yet generated as a standalone canonical background.
+264,MANUALLY_MAPPED_CANDIDATE,Rio de Janeiro,Day — Rain,264-rio-de-janeiro-day-rain.png,False,207,,207 (HIGH),1,Not yet generated as a standalone canonical background.
+265,MANUALLY_MAPPED_CANDIDATE,Buenos Aires,Day — Rain,265-buenos-aires-day-rain.png,False,198,,198 (HIGH),1,Not yet generated as a standalone canonical background.
+266,MANUALLY_MAPPED_CANDIDATE,Madrid,Day — Rain,266-madrid-day-rain.png,False,205,,205 (HIGH),1,Not yet generated as a standalone canonical background.
+267,MANUALLY_MAPPED_CANDIDATE,Barcelona,Day — Rain,267-barcelona-day-rain.png,False,197,,197 (HIGH),1,Not yet generated as a standalone canonical background.
+268,MANUALLY_MAPPED_CANDIDATE,Rome,Day — Rain,268-rome-day-rain.png,False,195,,195 (HIGH),1,Not yet generated as a standalone canonical background.
+269,VERIFIED_CANONICAL,Milan,Day — Rain,269-milan-day-rain.png,True,,199,199 (HIGH),1,Primary mapped image selected from corrected-original archive.
+270,MANUALLY_MAPPED_CANDIDATE,Berlin,Day — Rain,270-berlin-day-rain.png,False,190,,190 (HIGH),1,Not yet generated as a standalone canonical background.
+271,MANUALLY_MAPPED_CANDIDATE,Amsterdam,Day — Rain,271-amsterdam-day-rain.png,False,193,,193 (HIGH),1,Not yet generated as a standalone canonical background.
+272,MANUALLY_MAPPED_CANDIDATE,Vienna,Day — Rain,272-vienna-day-rain.png,False,191,,191 (HIGH),1,Not yet generated as a standalone canonical background.
+273,MANUALLY_MAPPED_CANDIDATE,Prague,Day — Rain,273-prague-day-rain.png,False,209,,209 (HIGH),1,Not yet generated as a standalone canonical background.
+274,MANUALLY_MAPPED_CANDIDATE,Istanbul,Day — Rain,274-istanbul-day-rain.png,False,194,,194 (HIGH),1,Not yet generated as a standalone canonical background.
+275,MANUALLY_MAPPED_CANDIDATE,Cairo,Day — Rain,275-cairo-day-rain.png,False,196,,196 (HIGH),1,Not yet generated as a standalone canonical background.
+276,MANUALLY_MAPPED_CANDIDATE,Cape Town,Day — Rain,276-cape-town-day-rain.png,False,192,,192 (HIGH),1,Not yet generated as a standalone canonical background.
+277,MANUALLY_MAPPED_CANDIDATE,Nairobi,Day — Rain,277-nairobi-day-rain.png,False,179,,179 (LOW),1,Not yet generated as a standalone canonical background.
+278,STILL_MISSING,Bangkok,Day — Rain,278-bangkok-day-rain.png,False,,,,0,Not yet generated as a standalone canonical background.
+279,VERIFIED_CANONICAL,Mumbai,Day — Rain,279-mumbai-day-rain.png,True,,181,181 (LOW),1,Primary mapped image selected from corrected-original archive.
+280,MANUALLY_MAPPED_CANDIDATE,Delhi,Day — Rain,280-delhi-day-rain.png,False,183,,183 (LOW),1,Not yet generated as a standalone canonical background.
+281,MANUALLY_MAPPED_CANDIDATE,Kuala Lumpur,Day — Rain,281-kuala-lumpur-day-rain.png,False,188,,188 (LOW),1,Not yet generated as a standalone canonical background.
+282,MANUALLY_MAPPED_CANDIDATE,Jakarta,Day — Rain,282-jakarta-day-rain.png,False,182,,182 (LOW),1,Not yet generated as a standalone canonical background.
+283,MANUALLY_MAPPED_CANDIDATE,Manila,Day — Rain,283-manila-day-rain.png,False,185,186,185 (LOW) | 186 (LOW),2,Not yet generated as a standalone canonical background.
+284,MANUALLY_MAPPED_CANDIDATE,Los Angeles,Night — Rain,284-los-angeles-night-rain.png,False,184,,184 (LOW),1,Not yet generated as a standalone canonical background.
+285,MANUALLY_MAPPED_CANDIDATE,Chicago,Night — Rain,285-chicago-night-rain.png,False,187,,187 (LOW),1,Not yet generated as a standalone canonical background.
+286,MANUALLY_MAPPED_CANDIDATE,Boston,Night — Rain,286-boston-night-rain.png,False,189,,189 (LOW),1,Not yet generated as a standalone canonical background.
+287,MANUALLY_MAPPED_CANDIDATE,Paris,Night — Rain,287-paris-night-rain.png,False,162,176,162 (LOW) | 176 (HIGH),2,Not yet generated as a standalone canonical background.
+288,MANUALLY_MAPPED_CANDIDATE,Hong Kong,Night — Rain,288-hong-kong-night-rain.png,False,165,169,165 (LOW) | 169 (HIGH),2,Not yet generated as a standalone canonical background.
+289,MANUALLY_MAPPED_CANDIDATE,Kyoto,Night — Rain,289-kyoto-night-rain.png,False,178,,178 (HIGH),1,Not yet generated as a standalone canonical background.
+290,MANUALLY_MAPPED_CANDIDATE,Shanghai,Night — Rain,290-shanghai-night-rain.png,False,174,,174 (LOW),1,Not yet generated as a standalone canonical background.
+291,MANUALLY_MAPPED_CANDIDATE,London,Night — Rain,291-london-night-rain.png,False,175,,175 (HIGH),1,Not yet generated as a standalone canonical background.
+292,VERIFIED_CANONICAL,Singapore,Night — Rain,292-singapore-night-rain.png,True,,157 | 173,157 (HIGH) | 173 (LOW),2,Primary mapped image selected from corrected-original archive.
+293,MANUALLY_MAPPED_CANDIDATE,San Francisco,Night — Rain,293-san-francisco-night-rain.png,False,172,,172 (LOW),1,Not yet generated as a standalone canonical background.
+294,VERIFIED_CANONICAL,Seoul,Night — Rain,294-seoul-night-rain.png,True,,171 | 177,171 (LOW) | 177 (LOW),2,Primary mapped image selected from corrected-original archive.
+295,STILL_MISSING,Beijing,Night — Rain,295-beijing-night-rain.png,False,,,,0,Not yet generated as a standalone canonical background.
+296,MANUALLY_MAPPED_CANDIDATE,Dubai,Night — Rain,296-dubai-night-rain.png,False,180,,180 (HIGH),1,Not yet generated as a standalone canonical background.
+297,MANUALLY_MAPPED_CANDIDATE,Sydney,Night — Rain,297-sydney-night-rain.png,False,164,,164 (HIGH),1,Not yet generated as a standalone canonical background.
+298,MANUALLY_MAPPED_CANDIDATE,Toronto,Night — Rain,298-toronto-night-rain.png,False,168,,168 (HIGH),1,Not yet generated as a standalone canonical background.
+299,VERIFIED_CANONICAL,Vancouver,Night — Rain,299-vancouver-night-rain.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+300,MANUALLY_MAPPED_CANDIDATE,Mexico City,Night — Rain,300-mexico-city-night-rain.png,False,161,,161 (LOW),1,Not yet generated as a standalone canonical background.
+301,STILL_MISSING,São Paulo,Night — Rain,301-sao-paulo-night-rain.png,False,,,,0,Not yet generated as a standalone canonical background.
+302,VERIFIED_CANONICAL,Rio de Janeiro,Night — Rain,302-rio-de-janeiro-night-rain.png,True,,170,170 (HIGH),1,Primary mapped image selected from corrected-original archive.
+303,STILL_MISSING,Buenos Aires,Night — Rain,303-buenos-aires-night-rain.png,False,,,,0,Not yet generated as a standalone canonical background.
+304,MANUALLY_MAPPED_CANDIDATE,Madrid,Night — Rain,304-madrid-night-rain.png,False,166,,166 (LOW),1,Not yet generated as a standalone canonical background.
+305,MANUALLY_MAPPED_CANDIDATE,Barcelona,Night — Rain,305-barcelona-night-rain.png,False,163,,163 (HIGH),1,Not yet generated as a standalone canonical background.
+306,MANUALLY_MAPPED_CANDIDATE,Rome,Night — Rain,306-rome-night-rain.png,False,167,,167 (HIGH),1,Not yet generated as a standalone canonical background.
+307,MANUALLY_MAPPED_CANDIDATE,Milan,Night — Rain,307-milan-night-rain.png,False,158,,158 (HIGH),1,Not yet generated as a standalone canonical background.
+308,MANUALLY_MAPPED_CANDIDATE,Berlin,Night — Rain,308-berlin-night-rain.png,False,160,,160 (HIGH),1,Not yet generated as a standalone canonical background.
+309,VERIFIED_CANONICAL,Amsterdam,Night — Rain,309-amsterdam-night-rain.png,True,,159,159 (HIGH),1,Primary mapped image selected from corrected-original archive.
+310,MANUALLY_MAPPED_CANDIDATE,Vienna,Night — Rain,310-vienna-night-rain.png,False,155,,155 (LOW),1,Not yet generated as a standalone canonical background.
+311,MANUALLY_MAPPED_CANDIDATE,Prague,Night — Rain,311-prague-night-rain.png,False,154,,154 (HIGH),1,Not yet generated as a standalone canonical background.
+312,MANUALLY_MAPPED_CANDIDATE,Istanbul,Night — Rain,312-istanbul-night-rain.png,False,156,,156 (LOW),1,Not yet generated as a standalone canonical background.
+313,MANUALLY_MAPPED_CANDIDATE,Cairo,Night — Rain,313-cairo-night-rain.png,False,153,,153 (LOW),1,Not yet generated as a standalone canonical background.
+314,MANUALLY_MAPPED_CANDIDATE,Cape Town,Night — Rain,314-cape-town-night-rain.png,False,151,,151 (HIGH),1,Not yet generated as a standalone canonical background.
+315,STILL_MISSING,Nairobi,Night — Rain,315-nairobi-night-rain.png,False,,,,0,Not yet generated as a standalone canonical background.
+316,MANUALLY_MAPPED_CANDIDATE,Bangkok,Night — Rain,316-bangkok-night-rain.png,False,152,,152 (LOW),1,Not yet generated as a standalone canonical background.
+317,MANUALLY_MAPPED_CANDIDATE,Mumbai,Night — Rain,317-mumbai-night-rain.png,False,148,,148 (HIGH),1,Not yet generated as a standalone canonical background.
+318,MANUALLY_MAPPED_CANDIDATE,Delhi,Night — Rain,318-delhi-night-rain.png,False,142,,142 (LOW),1,Not yet generated as a standalone canonical background.
+319,MANUALLY_MAPPED_CANDIDATE,Kuala Lumpur,Night — Rain,319-kuala-lumpur-night-rain.png,False,150,,150 (HIGH),1,Not yet generated as a standalone canonical background.
+320,MANUALLY_MAPPED_CANDIDATE,Jakarta,Night — Rain,320-jakarta-night-rain.png,False,149,,149 (LOW),1,Not yet generated as a standalone canonical background.
+321,STILL_MISSING,Manila,Night — Rain,321-manila-night-rain.png,False,,,,0,Not yet generated as a standalone canonical background.
+322,MANUALLY_MAPPED_CANDIDATE,Los Angeles,Day — Storm,322-los-angeles-day-storm.png,False,143,,143 (LOW),1,Not yet generated as a standalone canonical background.
+323,MANUALLY_MAPPED_CANDIDATE,Chicago,Day — Storm,323-chicago-day-storm.png,False,147,,147 (LOW),1,Not yet generated as a standalone canonical background.
+324,MANUALLY_MAPPED_CANDIDATE,New York,Day — Storm,324-new-york-day-storm.png,False,146,,146 (HIGH),1,Not yet generated as a standalone canonical background.
+325,MANUALLY_MAPPED_CANDIDATE,Boston,Day — Storm,325-boston-day-storm.png,False,144,,144 (LOW),1,Not yet generated as a standalone canonical background.
+326,MANUALLY_MAPPED_CANDIDATE,Tokyo,Day — Storm,326-tokyo-day-storm.png,False,145,,145 (HIGH),1,Not yet generated as a standalone canonical background.
+327,MANUALLY_MAPPED_CANDIDATE,Paris,Day — Storm,327-paris-day-storm.png,False,116,139,116 (HIGH) | 139 (HIGH),2,Not yet generated as a standalone canonical background.
+328,MANUALLY_MAPPED_CANDIDATE,Hong Kong,Day — Storm,328-hong-kong-day-storm.png,False,128,,128 (LOW),1,Not yet generated as a standalone canonical background.
+329,MANUALLY_MAPPED_CANDIDATE,Kyoto,Day — Storm,329-kyoto-day-storm.png,False,140,,140 (HIGH),1,Not yet generated as a standalone canonical background.
+330,MANUALLY_MAPPED_CANDIDATE,Shanghai,Day — Storm,330-shanghai-day-storm.png,False,138,,138 (LOW),1,Not yet generated as a standalone canonical background.
+331,MANUALLY_MAPPED_CANDIDATE,London,Day — Storm,331-london-day-storm.png,False,135,,135 (HIGH),1,Not yet generated as a standalone canonical background.
+332,VERIFIED_CANONICAL,Singapore,Day — Storm,332-singapore-day-storm.png,True,,,,0,Primary mapped image selected from corrected-original archive.
+333,MANUALLY_MAPPED_CANDIDATE,San Francisco,Day — Storm,333-san-francisco-day-storm.png,False,137,,137 (HIGH),1,Not yet generated as a standalone canonical background.
+334,MANUALLY_MAPPED_CANDIDATE,Seoul,Day — Storm,334-seoul-day-storm.png,False,131,,131 (LOW),1,Not yet generated as a standalone canonical background.
+335,MANUALLY_MAPPED_CANDIDATE,Beijing,Day — Storm,335-beijing-day-storm.png,False,136,,136 (LOW),1,Not yet generated as a standalone canonical background.
+336,STILL_MISSING,Dubai,Day — Storm,336-dubai-day-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+337,MANUALLY_MAPPED_CANDIDATE,Sydney,Day — Storm,337-sydney-day-storm.png,False,132,,132 (HIGH),1,Not yet generated as a standalone canonical background.
+338,MANUALLY_MAPPED_CANDIDATE,Toronto,Day — Storm,338-toronto-day-storm.png,False,130,,130 (LOW),1,Not yet generated as a standalone canonical background.
+339,MANUALLY_MAPPED_CANDIDATE,Vancouver,Day — Storm,339-vancouver-day-storm.png,False,141,,141 (LOW),1,Not yet generated as a standalone canonical background.
+340,MANUALLY_MAPPED_CANDIDATE,Mexico City,Day — Storm,340-mexico-city-day-storm.png,False,134,,134 (LOW),1,Not yet generated as a standalone canonical background.
+341,STILL_MISSING,São Paulo,Day — Storm,341-sao-paulo-day-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+342,MANUALLY_MAPPED_CANDIDATE,Rio de Janeiro,Day — Storm,342-rio-de-janeiro-day-storm.png,False,133,,133 (HIGH),1,Not yet generated as a standalone canonical background.
+343,MANUALLY_MAPPED_CANDIDATE,Buenos Aires,Day — Storm,343-buenos-aires-day-storm.png,False,125,,125 (LOW),1,Not yet generated as a standalone canonical background.
+344,MANUALLY_MAPPED_CANDIDATE,Madrid,Day — Storm,344-madrid-day-storm.png,False,124,,124 (LOW),1,Not yet generated as a standalone canonical background.
+345,MANUALLY_MAPPED_CANDIDATE,Barcelona,Day — Storm,345-barcelona-day-storm.png,False,129,,129 (HIGH),1,Not yet generated as a standalone canonical background.
+346,MANUALLY_MAPPED_CANDIDATE,Rome,Day — Storm,346-rome-day-storm.png,False,127,,127 (HIGH),1,Not yet generated as a standalone canonical background.
+347,STILL_MISSING,Milan,Day — Storm,347-milan-day-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+348,MANUALLY_MAPPED_CANDIDATE,Berlin,Day — Storm,348-berlin-day-storm.png,False,112,,112 (HIGH),1,Not yet generated as a standalone canonical background.
+349,MANUALLY_MAPPED_CANDIDATE,Amsterdam,Day — Storm,349-amsterdam-day-storm.png,False,123,,123 (HIGH),1,Not yet generated as a standalone canonical background.
+350,STILL_MISSING,Vienna,Day — Storm,350-vienna-day-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+351,MANUALLY_MAPPED_CANDIDATE,Prague,Day — Storm,351-prague-day-storm.png,False,118,,118 (HIGH),1,Not yet generated as a standalone canonical background.
+352,MANUALLY_MAPPED_CANDIDATE,Istanbul,Day — Storm,352-istanbul-day-storm.png,False,117,,117 (HIGH),1,Not yet generated as a standalone canonical background.
+353,MANUALLY_MAPPED_CANDIDATE,Cairo,Day — Storm,353-cairo-day-storm.png,False,120,,120 (LOW),1,Not yet generated as a standalone canonical background.
+354,MANUALLY_MAPPED_CANDIDATE,Cape Town,Day — Storm,354-cape-town-day-storm.png,False,126,,126 (HIGH),1,Not yet generated as a standalone canonical background.
+355,MANUALLY_MAPPED_CANDIDATE,Nairobi,Day — Storm,355-nairobi-day-storm.png,False,121,,121 (HIGH),1,Not yet generated as a standalone canonical background.
+356,MANUALLY_MAPPED_CANDIDATE,Bangkok,Day — Storm,356-bangkok-day-storm.png,False,122,,122 (LOW),1,Not yet generated as a standalone canonical background.
+357,STILL_MISSING,Mumbai,Day — Storm,357-mumbai-day-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+358,MANUALLY_MAPPED_CANDIDATE,Delhi,Day — Storm,358-delhi-day-storm.png,False,106,,106 (LOW),1,Not yet generated as a standalone canonical background.
+359,MANUALLY_MAPPED_CANDIDATE,Kuala Lumpur,Day — Storm,359-kuala-lumpur-day-storm.png,False,107,119,107 (HIGH) | 119 (HIGH),2,Not yet generated as a standalone canonical background.
+360,MANUALLY_MAPPED_CANDIDATE,Jakarta,Day — Storm,360-jakarta-day-storm.png,False,110,,110 (LOW),1,Not yet generated as a standalone canonical background.
+361,MANUALLY_MAPPED_CANDIDATE,Manila,Day — Storm,361-manila-day-storm.png,False,108,109,108 (LOW) | 109 (LOW),2,Not yet generated as a standalone canonical background.
+362,MANUALLY_MAPPED_CANDIDATE,Los Angeles,Night — Storm,362-los-angeles-night-storm.png,False,070,115 | 287 | 290,070 (LOW) | 115 (LOW) | 287 (LOW) | 290 (LOW),4,Not yet generated as a standalone canonical background.
+363,MANUALLY_MAPPED_CANDIDATE,Chicago,Night — Storm,363-chicago-night-storm.png,False,073,111,073 (LOW) | 111 (LOW),2,Not yet generated as a standalone canonical background.
+364,MANUALLY_MAPPED_CANDIDATE,New York,Night — Storm,364-new-york-night-storm.png,False,113,,113 (HIGH),1,Not yet generated as a standalone canonical background.
+365,MANUALLY_MAPPED_CANDIDATE,Boston,Night — Storm,365-boston-night-storm.png,False,083,114,083 (LOW) | 114 (LOW),2,Not yet generated as a standalone canonical background.
+366,MANUALLY_MAPPED_CANDIDATE,Tokyo,Night — Storm,366-tokyo-night-storm.png,False,105,288,105 (HIGH) | 288 (LOW),2,Not yet generated as a standalone canonical background.
+367,MANUALLY_MAPPED_CANDIDATE,Paris,Night — Storm,367-paris-night-storm.png,False,099,,099 (HIGH),1,Not yet generated as a standalone canonical background.
+368,MANUALLY_MAPPED_CANDIDATE,Hong Kong,Night — Storm,368-hong-kong-night-storm.png,False,100,,100 (HIGH),1,Not yet generated as a standalone canonical background.
+369,MANUALLY_MAPPED_CANDIDATE,Kyoto,Night — Storm,369-kyoto-night-storm.png,False,102,,102 (HIGH),1,Not yet generated as a standalone canonical background.
+370,MANUALLY_MAPPED_CANDIDATE,Shanghai,Night — Storm,370-shanghai-night-storm.png,False,104,,104 (LOW),1,Not yet generated as a standalone canonical background.
+371,MANUALLY_MAPPED_CANDIDATE,London,Night — Storm,371-london-night-storm.png,False,098,,098 (HIGH),1,Not yet generated as a standalone canonical background.
+372,MANUALLY_MAPPED_CANDIDATE,Singapore,Night — Storm,372-singapore-night-storm.png,False,101,,101 (HIGH),1,Not yet generated as a standalone canonical background.
+373,MANUALLY_MAPPED_CANDIDATE,San Francisco,Night — Storm,373-san-francisco-night-storm.png,False,289,,289 (HIGH),1,Not yet generated as a standalone canonical background.
+374,MANUALLY_MAPPED_CANDIDATE,Seoul,Night — Storm,374-seoul-night-storm.png,False,097,,097 (HIGH),1,Not yet generated as a standalone canonical background.
+375,STILL_MISSING,Beijing,Night — Storm,375-beijing-night-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+376,MANUALLY_MAPPED_CANDIDATE,Dubai,Night — Storm,376-dubai-night-storm.png,False,096,103,096 (LOW) | 103 (HIGH),2,Not yet generated as a standalone canonical background.
+377,MANUALLY_MAPPED_CANDIDATE,Sydney,Night — Storm,377-sydney-night-storm.png,False,093,,093 (HIGH),1,Not yet generated as a standalone canonical background.
+378,MANUALLY_MAPPED_CANDIDATE,Toronto,Night — Storm,378-toronto-night-storm.png,False,095,,095 (HIGH),1,Not yet generated as a standalone canonical background.
+379,MANUALLY_MAPPED_CANDIDATE,Vancouver,Night — Storm,379-vancouver-night-storm.png,False,094,,094 (LOW),1,Not yet generated as a standalone canonical background.
+380,MANUALLY_MAPPED_CANDIDATE,Mexico City,Night — Storm,380-mexico-city-night-storm.png,False,091,,091 (LOW),1,Not yet generated as a standalone canonical background.
+381,MANUALLY_MAPPED_CANDIDATE,São Paulo,Night — Storm,381-sao-paulo-night-storm.png,False,090,,090 (HIGH),1,Not yet generated as a standalone canonical background.
+382,MANUALLY_MAPPED_CANDIDATE,Rio de Janeiro,Night — Storm,382-rio-de-janeiro-night-storm.png,False,092,,092 (HIGH),1,Not yet generated as a standalone canonical background.
+383,STILL_MISSING,Buenos Aires,Night — Storm,383-buenos-aires-night-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+384,STILL_MISSING,Madrid,Night — Storm,384-madrid-night-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+385,MANUALLY_MAPPED_CANDIDATE,Barcelona,Night — Storm,385-barcelona-night-storm.png,False,088,,088 (HIGH),1,Not yet generated as a standalone canonical background.
+386,MANUALLY_MAPPED_CANDIDATE,Rome,Night — Storm,386-rome-night-storm.png,False,089,291,089 (HIGH) | 291 (HIGH),2,Not yet generated as a standalone canonical background.
+387,MANUALLY_MAPPED_CANDIDATE,Milan,Night — Storm,387-milan-night-storm.png,False,079,,079 (HIGH),1,Not yet generated as a standalone canonical background.
+388,MANUALLY_MAPPED_CANDIDATE,Berlin,Night — Storm,388-berlin-night-storm.png,False,081,,081 (HIGH),1,Not yet generated as a standalone canonical background.
+389,MANUALLY_MAPPED_CANDIDATE,Amsterdam,Night — Storm,389-amsterdam-night-storm.png,False,086,,086 (HIGH),1,Not yet generated as a standalone canonical background.
+390,STILL_MISSING,Vienna,Night — Storm,390-vienna-night-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+391,MANUALLY_MAPPED_CANDIDATE,Prague,Night — Storm,391-prague-night-storm.png,False,087,,087 (HIGH),1,Not yet generated as a standalone canonical background.
+392,MANUALLY_MAPPED_CANDIDATE,Istanbul,Night — Storm,392-istanbul-night-storm.png,False,082,,082 (HIGH),1,Not yet generated as a standalone canonical background.
+393,STILL_MISSING,Cairo,Night — Storm,393-cairo-night-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+394,MANUALLY_MAPPED_CANDIDATE,Cape Town,Night — Storm,394-cape-town-night-storm.png,False,084,,084 (HIGH),1,Not yet generated as a standalone canonical background.
+395,MANUALLY_MAPPED_CANDIDATE,Nairobi,Night — Storm,395-nairobi-night-storm.png,False,085,,085 (HIGH),1,Not yet generated as a standalone canonical background.
+396,MANUALLY_MAPPED_CANDIDATE,Bangkok,Night — Storm,396-bangkok-night-storm.png,False,080,,080 (HIGH),1,Not yet generated as a standalone canonical background.
+397,STILL_MISSING,Mumbai,Night — Storm,397-mumbai-night-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+398,MANUALLY_MAPPED_CANDIDATE,Delhi,Night — Storm,398-delhi-night-storm.png,False,077,,077 (LOW),1,Not yet generated as a standalone canonical background.
+399,MANUALLY_MAPPED_CANDIDATE,Kuala Lumpur,Night — Storm,399-kuala-lumpur-night-storm.png,False,069,,069 (HIGH),1,Not yet generated as a standalone canonical background.
+400,STILL_MISSING,Jakarta,Night — Storm,400-jakarta-night-storm.png,False,,,,0,Not yet generated as a standalone canonical background.
+401,MANUALLY_MAPPED_CANDIDATE,Manila,Night — Storm,401-manila-night-storm.png,False,072,,072 (LOW),1,Not yet generated as a standalone canonical background.
+402,MANUALLY_MAPPED_CANDIDATE,Los Angeles,Day — Snow,402-los-angeles-day-snow.png,False,075,,075 (HIGH),1,Not yet generated as a standalone canonical background.
+403,MANUALLY_MAPPED_CANDIDATE,New York,Day — Snow,403-new-york-day-snow.png,False,076,,076 (HIGH),1,Not yet generated as a standalone canonical background.
+404,MANUALLY_MAPPED_CANDIDATE,Boston,Day — Snow,404-boston-day-snow.png,False,071,,071 (MEDIUM),1,Not yet generated as a standalone canonical background.
+405,MANUALLY_MAPPED_CANDIDATE,Tokyo,Day — Snow,405-tokyo-day-snow.png,False,078,,078 (HIGH),1,Not yet generated as a standalone canonical background.
+406,MANUALLY_MAPPED_CANDIDATE,Paris,Day — Snow,406-paris-day-snow.png,False,074,,074 (HIGH),1,Not yet generated as a standalone canonical background.
+407,MANUALLY_MAPPED_CANDIDATE,Hong Kong,Day — Snow,407-hong-kong-day-snow.png,False,064,,064 (HIGH),1,Not yet generated as a standalone canonical background.
+408,MANUALLY_MAPPED_CANDIDATE,Kyoto,Day — Snow,408-kyoto-day-snow.png,False,061,,061 (HIGH),1,Not yet generated as a standalone canonical background.
+409,MANUALLY_MAPPED_CANDIDATE,Shanghai,Day — Snow,409-shanghai-day-snow.png,False,060,,060 (LOW),1,Not yet generated as a standalone canonical background.
+410,MANUALLY_MAPPED_CANDIDATE,London,Day — Snow,410-london-day-snow.png,False,067,,067 (HIGH),1,Not yet generated as a standalone canonical background.
+411,MANUALLY_MAPPED_CANDIDATE,Singapore,Day — Snow,411-singapore-day-snow.png,False,059,,059 (HIGH),1,Not yet generated as a standalone canonical background.
+412,MANUALLY_MAPPED_CANDIDATE,San Francisco,Day — Snow,412-san-francisco-day-snow.png,False,066,,066 (LOW),1,Not yet generated as a standalone canonical background.
+413,MANUALLY_MAPPED_CANDIDATE,Seoul,Day — Snow,413-seoul-day-snow.png,False,062,,062 (LOW),1,Not yet generated as a standalone canonical background.
+414,MANUALLY_MAPPED_CANDIDATE,Beijing,Day — Snow,414-beijing-day-snow.png,False,063,,063 (LOW),1,Not yet generated as a standalone canonical background.
+415,MANUALLY_MAPPED_CANDIDATE,Dubai,Day — Snow,415-dubai-day-snow.png,False,065,,065 (HIGH),1,Not yet generated as a standalone canonical background.
+416,MANUALLY_MAPPED_CANDIDATE,Sydney,Day — Snow,416-sydney-day-snow.png,False,068,,068 (HIGH),1,Not yet generated as a standalone canonical background.
+417,MANUALLY_MAPPED_CANDIDATE,Toronto,Day — Snow,417-toronto-day-snow.png,False,055,,055 (HIGH),1,Not yet generated as a standalone canonical background.
+418,VERIFIED_CANONICAL,Vancouver,Day — Snow,418-vancouver-day-snow.png,True,,058,058 (HIGH),1,Primary mapped image selected from corrected-original archive.
+419,MANUALLY_MAPPED_CANDIDATE,Mexico City,Day — Snow,419-mexico-city-day-snow.png,False,037,054 | 292,037 (MEDIUM) | 054 (LOW) | 292 (LOW),3,Not yet generated as a standalone canonical background.
+420,MANUALLY_MAPPED_CANDIDATE,São Paulo,Day — Snow,420-sao-paulo-day-snow.png,False,047,,047 (LOW),1,Not yet generated as a standalone canonical background.
+421,MANUALLY_MAPPED_CANDIDATE,Rio de Janeiro,Day — Snow,421-rio-de-janeiro-day-snow.png,False,052,,052 (HIGH),1,Not yet generated as a standalone canonical background.
+422,MANUALLY_MAPPED_CANDIDATE,Buenos Aires,Day — Snow,422-buenos-aires-day-snow.png,False,056,,056 (LOW),1,Not yet generated as a standalone canonical background.
+423,MANUALLY_MAPPED_CANDIDATE,Madrid,Day — Snow,423-madrid-day-snow.png,False,053,,053 (LOW),1,Not yet generated as a standalone canonical background.
+424,STILL_MISSING,Barcelona,Day — Snow,424-barcelona-day-snow.png,False,,,,0,Not yet generated as a standalone canonical background.
+425,MANUALLY_MAPPED_CANDIDATE,Rome,Day — Snow,425-rome-day-snow.png,False,057,,057 (HIGH),1,Not yet generated as a standalone canonical background.
+426,MANUALLY_MAPPED_CANDIDATE,Milan,Day — Snow,426-milan-day-snow.png,False,051,,051 (HIGH),1,Not yet generated as a standalone canonical background.
+427,MANUALLY_MAPPED_CANDIDATE,Berlin,Day — Snow,427-berlin-day-snow.png,False,048,,048 (HIGH),1,Not yet generated as a standalone canonical background.
+428,MANUALLY_MAPPED_CANDIDATE,Amsterdam,Day — Snow,428-amsterdam-day-snow.png,False,049,,049 (HIGH),1,Not yet generated as a standalone canonical background.
+429,MANUALLY_MAPPED_CANDIDATE,Vienna,Day — Snow,429-vienna-day-snow.png,False,041,050,041 (HIGH) | 050 (LOW),2,Not yet generated as a standalone canonical background.
+430,MANUALLY_MAPPED_CANDIDATE,Prague,Day — Snow,430-prague-day-snow.png,False,046,,046 (HIGH),1,Not yet generated as a standalone canonical background.
+431,MANUALLY_MAPPED_CANDIDATE,Istanbul,Day — Snow,431-istanbul-day-snow.png,False,045,,045 (HIGH),1,Not yet generated as a standalone canonical background.
+432,MANUALLY_MAPPED_CANDIDATE,Cairo,Day — Snow,432-cairo-day-snow.png,False,042,,042 (HIGH),1,Not yet generated as a standalone canonical background.
+433,MANUALLY_MAPPED_CANDIDATE,Cape Town,Day — Snow,433-cape-town-day-snow.png,False,043,,043 (HIGH),1,Not yet generated as a standalone canonical background.
+434,MANUALLY_MAPPED_CANDIDATE,Nairobi,Day — Snow,434-nairobi-day-snow.png,False,293,,293 (LOW),1,Not yet generated as a standalone canonical background.
+435,MANUALLY_MAPPED_CANDIDATE,Bangkok,Day — Snow,435-bangkok-day-snow.png,False,044,,044 (HIGH),1,Not yet generated as a standalone canonical background.
+436,STILL_MISSING,Mumbai,Day — Snow,436-mumbai-day-snow.png,False,,,,0,Not yet generated as a standalone canonical background.
+437,STILL_MISSING,Delhi,Day — Snow,437-delhi-day-snow.png,False,,,,0,Not yet generated as a standalone canonical background. Earlier conversation output was a night image; a correct Day — Snow replacement is still required.
+438,MANUALLY_MAPPED_CANDIDATE,Kuala Lumpur,Day — Snow,438-kuala-lumpur-day-snow.png,False,035,,035 (HIGH),1,Not yet generated as a standalone canonical background.
+439,STILL_MISSING,Jakarta,Day — Snow,439-jakarta-day-snow.png,False,,,,0,Not yet generated as a standalone canonical background.
+440,MANUALLY_MAPPED_CANDIDATE,Manila,Day — Snow,440-manila-day-snow.png,False,040,,040 (LOW),1,Not yet generated as a standalone canonical background.
+441,MANUALLY_MAPPED_CANDIDATE,Los Angeles,Night — Snow,441-los-angeles-night-snow.png,False,034,,034 (LOW),1,Not yet generated as a standalone canonical background.
+442,MANUALLY_MAPPED_CANDIDATE,Chicago,Night — Snow,442-chicago-night-snow.png,False,027,038,027 (LOW) | 038 (LOW),2,Not yet generated as a standalone canonical background.
+443,MANUALLY_MAPPED_CANDIDATE,New York,Night — Snow,443-new-york-night-snow.png,False,294,,294 (HIGH),1,Not yet generated as a standalone canonical background.
+444,MANUALLY_MAPPED_CANDIDATE,Boston,Night — Snow,444-boston-night-snow.png,False,033,295,033 (LOW) | 295 (LOW),2,Not yet generated as a standalone canonical background.
+445,MANUALLY_MAPPED_CANDIDATE,Tokyo,Night — Snow,445-tokyo-night-snow.png,False,039,,039 (HIGH),1,Not yet generated as a standalone canonical background.
+446,MANUALLY_MAPPED_CANDIDATE,Paris,Night — Snow,446-paris-night-snow.png,False,003,036,003 (LOW) | 036 (HIGH),2,Not yet generated as a standalone canonical background.
+447,MANUALLY_MAPPED_CANDIDATE,Hong Kong,Night — Snow,447-hong-kong-night-snow.png,False,024,,024 (HIGH),1,Not yet generated as a standalone canonical background.
+448,MANUALLY_MAPPED_CANDIDATE,Kyoto,Night — Snow,448-kyoto-night-snow.png,False,026,,026 (HIGH),1,Not yet generated as a standalone canonical background.
+449,MANUALLY_MAPPED_CANDIDATE,Shanghai,Night — Snow,449-shanghai-night-snow.png,False,023,,023 (HIGH),1,Not yet generated as a standalone canonical background.
+450,MANUALLY_MAPPED_CANDIDATE,London,Night — Snow,450-london-night-snow.png,False,004,028,004 (LOW) | 028 (LOW),2,Not yet generated as a standalone canonical background.
+451,MANUALLY_MAPPED_CANDIDATE,Singapore,Night — Snow,451-singapore-night-snow.png,False,032,,032 (HIGH),1,Not yet generated as a standalone canonical background.
+452,MANUALLY_MAPPED_CANDIDATE,San Francisco,Night — Snow,452-san-francisco-night-snow.png,False,030,,030 (HIGH),1,Not yet generated as a standalone canonical background.
+453,MANUALLY_MAPPED_CANDIDATE,Seoul,Night — Snow,453-seoul-night-snow.png,False,008,022,008 (HIGH) | 022 (HIGH),2,Not yet generated as a standalone canonical background.
+454,MANUALLY_MAPPED_CANDIDATE,Beijing,Night — Snow,454-beijing-night-snow.png,False,014,029,014 (LOW) | 029 (LOW),2,Not yet generated as a standalone canonical background.
+455,MANUALLY_MAPPED_CANDIDATE,Dubai,Night — Snow,455-dubai-night-snow.png,False,031,,031 (HIGH),1,Not yet generated as a standalone canonical background.
+456,MANUALLY_MAPPED_CANDIDATE,Sydney,Night — Snow,456-sydney-night-snow.png,False,025,,025 (HIGH),1,Not yet generated as a standalone canonical background.
+457,MANUALLY_MAPPED_CANDIDATE,Toronto,Night — Snow,457-toronto-night-snow.png,False,013,,013 (HIGH),1,Not yet generated as a standalone canonical background.
+458,MANUALLY_MAPPED_CANDIDATE,Vancouver,Night — Snow,458-vancouver-night-snow.png,False,020,,020 (HIGH),1,Not yet generated as a standalone canonical background.
+459,STILL_MISSING,Mexico City,Night — Snow,459-mexico-city-night-snow.png,False,,,,0,Not yet generated as a standalone canonical background.
+460,STILL_MISSING,São Paulo,Night — Snow,460-sao-paulo-night-snow.png,False,,,,0,Not yet generated as a standalone canonical background.
+461,MANUALLY_MAPPED_CANDIDATE,Rio de Janeiro,Night — Snow,461-rio-de-janeiro-night-snow.png,False,015,,015 (LOW),1,Not yet generated as a standalone canonical background.
+462,MANUALLY_MAPPED_CANDIDATE,Buenos Aires,Night — Snow,462-buenos-aires-night-snow.png,False,296,,296 (LOW),1,Not yet generated as a standalone canonical background.
+463,MANUALLY_MAPPED_CANDIDATE,Madrid,Night — Snow,463-madrid-night-snow.png,False,018,019,018 (HIGH) | 019 (LOW),2,Not yet generated as a standalone canonical background.
+464,MANUALLY_MAPPED_CANDIDATE,Barcelona,Night — Snow,464-barcelona-night-snow.png,False,016,,016 (HIGH),1,Not yet generated as a standalone canonical background.
+465,MANUALLY_MAPPED_CANDIDATE,Rome,Night — Snow,465-rome-night-snow.png,False,017,,017 (HIGH),1,Not yet generated as a standalone canonical background.
+466,MANUALLY_MAPPED_CANDIDATE,Milan,Night — Snow,466-milan-night-snow.png,False,021,,021 (HIGH),1,Not yet generated as a standalone canonical background.
+467,MANUALLY_MAPPED_CANDIDATE,Berlin,Night — Snow,467-berlin-night-snow.png,False,002,,002 (HIGH),1,Not yet generated as a standalone canonical background.
+468,MANUALLY_MAPPED_CANDIDATE,Amsterdam,Night — Snow,468-amsterdam-night-snow.png,False,010,,010 (HIGH),1,Not yet generated as a standalone canonical background.
+469,MANUALLY_MAPPED_CANDIDATE,Vienna,Night — Snow,469-vienna-night-snow.png,False,009,012,009 (LOW) | 012 (LOW),2,Not yet generated as a standalone canonical background.
+470,STILL_MISSING,Prague,Night — Snow,470-prague-night-snow.png,False,,,,0,Not yet generated as a standalone canonical background.
+471,MANUALLY_MAPPED_CANDIDATE,Istanbul,Night — Snow,471-istanbul-night-snow.png,False,011,,011 (HIGH),1,Not yet generated as a standalone canonical background.
+472,STILL_MISSING,Cairo,Night — Snow,472-cairo-night-snow.png,False,,,,0,Not yet generated as a standalone canonical background.
+473,MANUALLY_MAPPED_CANDIDATE,Cape Town,Night — Snow,473-cape-town-night-snow.png,False,007,,007 (HIGH),1,Not yet generated as a standalone canonical background.
+474,STILL_MISSING,Nairobi,Night — Snow,474-nairobi-night-snow.png,False,,,,0,Not yet generated as a standalone canonical background.
+475,MANUALLY_MAPPED_CANDIDATE,Bangkok,Night — Snow,475-bangkok-night-snow.png,False,005,,005 (HIGH),1,Not yet generated as a standalone canonical background.
+476,MANUALLY_MAPPED_CANDIDATE,Mumbai,Night — Snow,476-mumbai-night-snow.png,False,297,,297 (HIGH),1,Not yet generated as a standalone canonical background.
+477,STILL_MISSING,Delhi,Night — Snow,477-delhi-night-snow.png,False,,,,0,Not yet generated as a standalone canonical background.
+478,MANUALLY_MAPPED_CANDIDATE,Kuala Lumpur,Night — Snow,478-kuala-lumpur-night-snow.png,False,001,,001 (HIGH),1,Not yet generated as a standalone canonical background.
+479,STILL_MISSING,Jakarta,Night — Snow,479-jakarta-night-snow.png,False,,,,0,Not yet generated as a standalone canonical background.
+480,MANUALLY_MAPPED_CANDIDATE,Manila,Night — Snow,480-manila-night-snow.png,False,006,,006 (LOW),1,Not yet generated as a standalone canonical background.

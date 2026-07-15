@@ -17,6 +17,8 @@
       shirtless:{no:"shirtless-no-umbrella.webp",yes:"shirtless-umbrella.webp"}
     };
     const BACKGROUND_ASSET_BASE="generated-backgrounds/v1/";
+    const CITY_BACKGROUND_ASSET_BASE="city-backgrounds/v1/";
+    const CITY_BACKGROUNDS=window.NAJ_CITY_BACKGROUNDS||{aliases:{},backgrounds:{}};
     const AVATAR_ALT_LABELS={dontgo:"Stay inside",winter:"Winter jacket",heavy:"Heavy jacket",light:"Light jacket",long:"Long sleeve",short:"Short sleeve",shirtless:"Shirtless"};
     const BAND_COPY={
       "Don't Go Outside":{key:"dontgo",headline:"Don't go<br>outside.",title:"Don't Go Outside",desc:"Stay indoors if you can. It is dangerously cold.",icon:"🏠"},
@@ -41,6 +43,22 @@
     const wind=v=>`${Math.round(convertWind(v))} ${state.unit==="fahrenheit"?"mph":"km/h"}`;
     const localHour=(date,zone)=>Number(new Intl.DateTimeFormat("en-US",{timeZone:zone||undefined,hour:"2-digit",hourCycle:"h23"}).format(new Date(date)));
     const formatHour=(date,zone)=>new Date(date).toLocaleTimeString([],{hour:"numeric",timeZone:zone||undefined});
+
+    function locationSlug(value){
+      return String(value||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+    }
+    function cityKeyForLocation(location){
+      const names=[location?.city,String(location?.name||"").split(",")[0]];
+      for(const name of names){const key=CITY_BACKGROUNDS.aliases?.[locationSlug(name)];if(key)return key}
+      return"";
+    }
+    function backgroundAssetFor(location,daypart,condition){
+      const cityKey=cityKeyForLocation(location);
+      const cityAsset=CITY_BACKGROUNDS.backgrounds?.[cityKey]?.[`${daypart}-${condition}`];
+      return cityAsset
+        ?{src:`${CITY_BACKGROUND_ASSET_BASE}${cityAsset}`,source:"city",cityKey}
+        :{src:`${BACKGROUND_ASSET_BASE}${daypart}-${condition}.webp`,source:"generic",cityKey:""};
+    }
 
     function descriptor(item){
       if(item.phrase){
@@ -174,6 +192,8 @@
       const [phrase,icon,type,background]=descriptor(weather.current);
       const hour=localHour(weather.current.time||Date.now(),weather.timezone);
       const isNight=hour<6||hour>=20;
+      const daypart=isNight?"night":"day";
+      const backgroundAsset=backgroundAssetFor(state.location,daypart,background);
       const next24=weather.hourly.slice(0,DISPLAY_HOURS);
       const high=Math.max(weather.current.temperature,...next24.map(entry=>entry.temperature));
       const low=Math.min(weather.current.temperature,...next24.map(entry=>entry.temperature));
@@ -181,11 +201,13 @@
 
       document.body.dataset.weather=type;
       els.hero.dataset.weather=type;
-      els.hero.dataset.daypart=isNight?"night":"day";
+      els.hero.dataset.daypart=daypart;
       els.hero.dataset.background=background;
+      els.hero.dataset.backgroundSource=backgroundAsset.source;
+      if(backgroundAsset.cityKey)els.hero.dataset.backgroundCity=backgroundAsset.cityKey;else delete els.hero.dataset.backgroundCity;
       els.hero.dataset.outfit=decision.key;
       els.hero.classList.add("generated-background");
-      els.hero.style.setProperty("--weather-background",`url("${BACKGROUND_ASSET_BASE}${isNight?"night":"day"}-${background}.webp")`);
+      els.hero.style.setProperty("--weather-background",`url("${backgroundAsset.src}")`);
       els.temperature.textContent=temp(weather.current.temperature);
       els.weatherIcon.textContent=isNight&&type==="clear"?"🌙":icon;
       els.condition.textContent=phrase;
