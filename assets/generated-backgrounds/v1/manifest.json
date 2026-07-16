@@ -1,158 +1,110 @@
 [
   {
     "name": "day-clear.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 102394,
-    "sha256": "78d4bf0056cb1fcb0aec4662cdba9652e64e180bd86e2f267ec9a3d5806c59fa",
-    "source_box": [
-      103,
-      228,
-      320,
-      350
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 210316,
+    "sha256": "538876fe369e2e8d8a0b1bc3317bceee8c8fecd335cdebdb83856b9f4ce65012",
+    "provenance": "final-completion-archive",
+    "source_file": "480-generic-day-clear.png"
   },
   {
     "name": "day-partly-cloudy.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 108986,
-    "sha256": "b41d37e4214d82554f1f8f8a316f5d6fb68c40bb21ddf92ef35ff26c06eb6576",
-    "source_box": [
-      346,
-      218,
-      577,
-      348
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 149454,
+    "sha256": "a15303abcfb420f74f57031c1dfc59a5b0a2fe6da68240f20565dd4f4b338776",
+    "provenance": "final-completion-archive",
+    "source_file": "481-generic-day-partly-cloudy.png"
   },
   {
     "name": "day-cloudy-foggy.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 85242,
-    "sha256": "664a5e1ec572d1397491f0fb506fa0958b62e45b99cdf4621935e9054b46ba4b",
-    "source_box": [
-      603,
-      223,
-      814,
-      342
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 103286,
+    "sha256": "6b5dc63daf94a2fc2fcc66371a8bd82dc5ad22c431a1d0d92667d0e7a33d6b3f",
+    "provenance": "final-completion-archive",
+    "source_file": "482-generic-day-cloudy-foggy.png"
   },
   {
     "name": "day-rain.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 73496,
-    "sha256": "81ea99984dcf6fc8e4c34d5f4826ab74f8c8916ac4898426343c224ff0967bf6",
-    "source_box": [
-      839,
-      223,
-      1051,
-      342
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 183270,
+    "sha256": "d264457a01825998367b17a5712d30779b2a8737abe9ac487a914372c385d222",
+    "provenance": "final-completion-archive",
+    "source_file": "483-generic-day-rain.png"
   },
   {
     "name": "day-storm.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 72222,
-    "sha256": "f3254f402778e04e2b24069564fa382235604efda0a39af174359386d7ce8c46",
-    "source_box": [
-      1077,
-      218,
-      1287,
-      336
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 179252,
+    "sha256": "b4a6115c280e2bb685e1d52ff80192e6c71bcf84814b464f21321733a6060a1a",
+    "provenance": "final-completion-archive",
+    "source_file": "484-generic-day-storm.png"
   },
   {
     "name": "day-snow.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 93938,
-    "sha256": "510dec070663dfeed0c52403bece34263d89dd6b7658dd37d2104ab99a4fd851",
-    "source_box": [
-      1313,
-      218,
-      1519,
-      334
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 189982,
+    "sha256": "509520f1e4dfe70f3503779b28346ddf872e7c7640ba0784a2270076a0f1f5b4",
+    "provenance": "final-completion-archive",
+    "source_file": "485-generic-day-snow.png"
   },
   {
     "name": "night-clear.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 73330,
-    "sha256": "5db18746c0629d9ec8e120416987ed74f8f087eeab80aeb0f05bbb61c74fb000",
-    "source_box": [
-      103,
-      464,
-      320,
-      586
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 121342,
+    "sha256": "2884614b00bf034bc3f09a88048fe33fb1f989815cbe8cbd5e8979bf5b48c5b0",
+    "provenance": "final-completion-archive",
+    "source_file": "486-generic-night-clear.png"
   },
   {
     "name": "night-partly-cloudy.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 75196,
-    "sha256": "529e712069f7e44a2c01f4dc684603696aa9b13eb7a7f8f6d95ad4279a85060b",
-    "source_box": [
-      346,
-      459,
-      577,
-      589
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 162584,
+    "sha256": "4c99dbd7dbadda8b5feaa9252b48c759d0282074ad368f190dad4b5fe32ac664",
+    "provenance": "final-completion-archive",
+    "source_file": "487-generic-night-partly-cloudy.png"
   },
   {
     "name": "night-cloudy-foggy.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 56570,
-    "sha256": "f4d5878c5034a637d78e028113b1f837fedbe5067d82c056c6e6da2bc7954206",
-    "source_box": [
-      603,
-      464,
-      814,
-      583
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 58504,
+    "sha256": "7f7e8ed23b1571dc145ebc67af3d07431d5cae942f4171675e546fa0994a5588",
+    "provenance": "final-completion-archive",
+    "source_file": "488-generic-night-cloudy-foggy.png"
   },
   {
     "name": "night-rain.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 66414,
-    "sha256": "b93d1e90a69ec2243565310e4b4a2c907ca8f083652eb6b05b10d6927f7a0f15",
-    "source_box": [
-      839,
-      464,
-      1051,
-      583
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 164086,
+    "sha256": "d244abaa06b1b92fd964373375b22e2b8ce44d03e9f3936075b8fd318f99d0ab",
+    "provenance": "final-completion-archive",
+    "source_file": "489-generic-night-rain.png"
   },
   {
     "name": "night-storm.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 71232,
-    "sha256": "5b7700f71d4a1c45e65e445bb89f3d130eb8542d97f8d2f9ebec57ae489f8dbf",
-    "source_box": [
-      1077,
-      459,
-      1287,
-      577
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 154314,
+    "sha256": "b8b22961d952f01aebf00efcf64af15c034de1faa2e6f1026d21898fe6656767",
+    "provenance": "final-completion-archive",
+    "source_file": "490-generic-night-storm.png"
   },
   {
     "name": "night-snow.webp",
-    "width": 1920,
-    "height": 1080,
-    "bytes": 107762,
-    "sha256": "00139629beda65a14d761bbafe64dee61ba622206a388c07cf13b62a4a4e5843",
-    "source_box": [
-      1313,
-      459,
-      1519,
-      575
-    ]
+    "width": 1672,
+    "height": 941,
+    "bytes": 225820,
+    "sha256": "c3f9dc8e809f90d4c58327a6989bd1333f2aa98718279a6f711255ea4fbd2501",
+    "provenance": "final-completion-archive",
+    "source_file": "491-generic-night-snow.png"
   }
 ]

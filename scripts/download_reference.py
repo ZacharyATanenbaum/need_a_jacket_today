@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""Download and validate an image reference from a signed attachment URL."""
+"""Download and validate a design reference from a signed attachment URL."""
 
 from __future__ import annotations
 
 import argparse
 import base64
+from io import BytesIO
 import os
 from pathlib import Path
 import sqlite3
 import sys
 import tempfile
+import zipfile
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
@@ -56,7 +58,23 @@ def firefox_cookie(profile: Path) -> str | None:
     return "; ".join(f"{name}={value}" for name, value in rows) or None
 
 
-def download_proton_image(url: str) -> tuple[bytes, str]:
+def validate_zip(data: bytes) -> None:
+    if not zipfile.is_zipfile(BytesIO(data)):
+        raise ValueError("downloaded archive is not a valid ZIP file")
+    with zipfile.ZipFile(BytesIO(data)) as archive:
+        files = [entry for entry in archive.infolist() if not entry.is_dir()]
+        if not files:
+            raise ValueError("downloaded ZIP file is empty")
+        for entry in files:
+            path = Path(entry.filename)
+            if path.is_absolute() or ".." in path.parts:
+                raise ValueError("downloaded ZIP contains an unsafe path")
+        damaged = archive.testzip()
+        if damaged:
+            raise ValueError(f"downloaded ZIP contains a damaged file: {damaged}")
+
+
+def download_proton_reference(url: str) -> tuple[bytes, str]:
     try:
         from playwright.sync_api import sync_playwright
     except ImportError as error:
@@ -71,23 +89,40 @@ def download_proton_image(url: str) -> tuple[bytes, str]:
         try:
             page.goto(url, wait_until="domcontentloaded", timeout=45_000)
             image = page.locator("img[src^='blob:']").first
-            image.wait_for(state="visible", timeout=45_000)
-            payload = image.evaluate(
-                """async image => {
-                    const response = await fetch(image.src);
-                    const bytes = new Uint8Array(await response.arrayBuffer());
-                    let binary = '';
-                    const chunkSize = 0x8000;
-                    for (let offset = 0; offset < bytes.length; offset += chunkSize) {
-                        binary += String.fromCharCode(...bytes.subarray(offset, offset + chunkSize));
-                    }
-                    return {data: btoa(binary), contentType: response.headers.get('content-type') || ''};
-                }"""
-            )
+            download_button = page.locator(
+                "button[data-testid='dropdown-download-button']"
+            ).first
+            page.locator(
+                "img[src^='blob:'], button[data-testid='dropdown-download-button']"
+            ).first.wait_for(state="visible", timeout=45_000)
+            if image.is_visible():
+                payload = image.evaluate(
+                    """async image => {
+                        const response = await fetch(image.src);
+                        const bytes = new Uint8Array(await response.arrayBuffer());
+                        let binary = '';
+                        const chunkSize = 0x8000;
+                        for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+                            binary += String.fromCharCode(...bytes.subarray(offset, offset + chunkSize));
+                        }
+                        return {data: btoa(binary), contentType: response.headers.get('content-type') || ''};
+                    }"""
+                )
+                return base64.b64decode(payload["data"]), payload["contentType"]
+            download_button.click()
+            file_download_button = page.locator(
+                "button[data-testid='download-button']"
+            ).first
+            file_download_button.wait_for(state="visible", timeout=10_000)
+            with page.expect_download(timeout=120_000) as download_info:
+                file_download_button.click()
+            download = download_info.value
+            downloaded_path = download.path()
+            if downloaded_path is None:
+                raise ValueError("Proton download did not produce a local file")
+            return Path(downloaded_path).read_bytes(), "application/zip"
         finally:
             browser.close()
-
-    return base64.b64decode(payload["data"]), payload["contentType"]
 
 
 def download(url: str, destination: Path, firefox_profile: Path | None = None) -> None:
@@ -106,7 +141,7 @@ def download(url: str, destination: Path, firefox_profile: Path | None = None) -
         headers["Cookie"] = cookie
 
     if urlparse(url).hostname == "drive.proton.me":
-        data, content_type = download_proton_image(url)
+        data, content_type = download_proton_reference(url)
     else:
         request = Request(url, headers=headers)
         with urlopen(request, timeout=30) as response:
@@ -114,14 +149,19 @@ def download(url: str, destination: Path, firefox_profile: Path | None = None) -
             content_type = response.headers.get_content_type()
 
     kind = image_kind(data)
-    if not content_type.startswith("image/") or kind is None:
+    if kind is not None and content_type.startswith("image/"):
+        reference_kind = f"{kind} image"
+    elif content_type == "application/zip":
+        validate_zip(data)
+        reference_kind = "ZIP archive"
+    else:
         raise ValueError(
-            f"attachment was not an image (content-type={content_type!r})"
+            f"attachment was not a supported image or ZIP archive (content-type={content_type!r})"
         )
 
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_bytes(data)
-    print(f"Downloaded {kind} image ({len(data)} bytes) to {destination}")
+    print(f"Downloaded {reference_kind} ({len(data)} bytes) to {destination}")
 
 
 def main() -> int:

@@ -18,6 +18,7 @@
     };
     const BACKGROUND_ASSET_BASE="generated-backgrounds/v1/";
     const CITY_BACKGROUND_ASSET_BASE="city-backgrounds/v1/";
+    const BACKGROUND_ASSET_VERSION="20260716-1";
     const CITY_BACKGROUNDS=window.NAJ_CITY_BACKGROUNDS||{aliases:{},backgrounds:{}};
     const CITY_BACKGROUND_CENTERS={
       amsterdam:[52.3676,4.9041],bangkok:[13.7563,100.5018],barcelona:[41.3874,2.1686],beijing:[39.9042,116.4074],berlin:[52.52,13.405],boston:[42.3601,-71.0589],"buenos-aires":[-34.6037,-58.3816],cairo:[30.0444,31.2357],"cape-town":[-33.9249,18.4241],chicago:[41.8781,-87.6298],delhi:[28.6139,77.209],dubai:[25.2048,55.2708],"hong-kong":[22.3193,114.1694],istanbul:[41.0082,28.9784],jakarta:[-6.2088,106.8456],"kuala-lumpur":[3.139,101.6869],kyoto:[35.0116,135.7681],london:[51.5074,-.1278],"los-angeles":[34.0522,-118.2437],madrid:[40.4168,-3.7038],manila:[14.5995,120.9842],"mexico-city":[19.4326,-99.1332],milan:[45.4642,9.19],mumbai:[19.076,72.8777],nairobi:[-1.2921,36.8219],"new-york":[40.7128,-74.006],paris:[48.8566,2.3522],prague:[50.0755,14.4378],"rio-de-janeiro":[-22.9068,-43.1729],rome:[41.9028,12.4964],"san-francisco":[37.7749,-122.4194],"sao-paulo":[-23.5505,-46.6333],seoul:[37.5665,126.978],shanghai:[31.2304,121.4737],singapore:[1.3521,103.8198],sydney:[-33.8688,151.2093],tokyo:[35.6762,139.6503],toronto:[43.6532,-79.3832],vancouver:[49.2827,-123.1207],vienna:[48.2082,16.3738]
@@ -71,8 +72,8 @@
       const cityKey=cityKeyForLocation(location);
       const cityAsset=CITY_BACKGROUNDS.backgrounds?.[cityKey]?.[`${daypart}-${condition}`];
       return cityAsset
-        ?{src:`${CITY_BACKGROUND_ASSET_BASE}${cityAsset}`,source:"city",cityKey}
-        :{src:`${BACKGROUND_ASSET_BASE}${daypart}-${condition}.webp`,source:"generic",cityKey:""};
+        ?{src:`${CITY_BACKGROUND_ASSET_BASE}${cityAsset}?v=${BACKGROUND_ASSET_VERSION}`,source:"city",cityKey}
+        :{src:`${BACKGROUND_ASSET_BASE}${daypart}-${condition}.webp?v=${BACKGROUND_ASSET_VERSION}`,source:"generic",cityKey:""};
     }
 
     function descriptor(item){

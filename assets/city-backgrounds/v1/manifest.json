@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "dimensions": {
     "width": 1672,
     "height": 941
@@ -9,11 +9,12 @@
   "cityAssetBase": "assets/city-backgrounds/v1/",
   "summary": {
     "checklistSlots": 480,
-    "cityAssets": 440,
+    "cityAssets": 480,
     "verifiedCanonical": 193,
     "manualPrimary": 247,
-    "stillMissing": 40,
-    "duplicateAssets": 50
+    "stillMissing": 0,
+    "duplicateAssets": 50,
+    "finalCompletionArchive": 40
   },
   "aliases": {
     "amsterdam": "amsterdam",
@@ -94,7 +95,9 @@
       "night-partly-cloudy": "cities/bangkok/night-partly-cloudy.webp",
       "night-rain": "cities/bangkok/night-rain.webp",
       "night-snow": "cities/bangkok/night-snow.webp",
-      "night-storm": "cities/bangkok/night-storm.webp"
+      "night-storm": "cities/bangkok/night-storm.webp",
+      "night-cloudy-foggy": "cities/bangkok/night-cloudy-foggy.webp",
+      "day-rain": "cities/bangkok/day-rain.webp"
     },
     "barcelona": {
       "day-clear": "cities/barcelona/day-clear.webp",
@@ -105,7 +108,10 @@
       "night-partly-cloudy": "cities/barcelona/night-partly-cloudy.webp",
       "night-rain": "cities/barcelona/night-rain.webp",
       "night-snow": "cities/barcelona/night-snow.webp",
-      "night-storm": "cities/barcelona/night-storm.webp"
+      "night-storm": "cities/barcelona/night-storm.webp",
+      "day-cloudy-foggy": "cities/barcelona/day-cloudy-foggy.webp",
+      "night-cloudy-foggy": "cities/barcelona/night-cloudy-foggy.webp",
+      "day-snow": "cities/barcelona/day-snow.webp"
     },
     "beijing": {
       "day-clear": "cities/beijing/day-clear.webp",
@@ -116,7 +122,10 @@
       "day-storm": "cities/beijing/day-storm.webp",
       "night-clear": "cities/beijing/night-clear.webp",
       "night-partly-cloudy": "cities/beijing/night-partly-cloudy.webp",
-      "night-snow": "cities/beijing/night-snow.webp"
+      "night-snow": "cities/beijing/night-snow.webp",
+      "night-cloudy-foggy": "cities/beijing/night-cloudy-foggy.webp",
+      "night-rain": "cities/beijing/night-rain.webp",
+      "night-storm": "cities/beijing/night-storm.webp"
     },
     "berlin": {
       "day-clear": "cities/berlin/day-clear.webp",
@@ -156,7 +165,9 @@
       "night-clear": "cities/buenos-aires/night-clear.webp",
       "night-cloudy-foggy": "cities/buenos-aires/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/buenos-aires/night-partly-cloudy.webp",
-      "night-snow": "cities/buenos-aires/night-snow.webp"
+      "night-snow": "cities/buenos-aires/night-snow.webp",
+      "night-rain": "cities/buenos-aires/night-rain.webp",
+      "night-storm": "cities/buenos-aires/night-storm.webp"
     },
     "cairo": {
       "day-clear": "cities/cairo/day-clear.webp",
@@ -168,7 +179,9 @@
       "night-clear": "cities/cairo/night-clear.webp",
       "night-cloudy-foggy": "cities/cairo/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/cairo/night-partly-cloudy.webp",
-      "night-rain": "cities/cairo/night-rain.webp"
+      "night-rain": "cities/cairo/night-rain.webp",
+      "night-storm": "cities/cairo/night-storm.webp",
+      "night-snow": "cities/cairo/night-snow.webp"
     },
     "cape-town": {
       "day-clear": "cities/cape-town/day-clear.webp",
@@ -195,7 +208,8 @@
       "night-partly-cloudy": "cities/chicago/night-partly-cloudy.webp",
       "night-rain": "cities/chicago/night-rain.webp",
       "night-snow": "cities/chicago/night-snow.webp",
-      "night-storm": "cities/chicago/night-storm.webp"
+      "night-storm": "cities/chicago/night-storm.webp",
+      "night-cloudy-foggy": "cities/chicago/night-cloudy-foggy.webp"
     },
     "delhi": {
       "day-clear": "cities/delhi/day-clear.webp",
@@ -207,7 +221,9 @@
       "night-cloudy-foggy": "cities/delhi/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/delhi/night-partly-cloudy.webp",
       "night-rain": "cities/delhi/night-rain.webp",
-      "night-storm": "cities/delhi/night-storm.webp"
+      "night-storm": "cities/delhi/night-storm.webp",
+      "day-snow": "cities/delhi/day-snow.webp",
+      "night-snow": "cities/delhi/night-snow.webp"
     },
     "dubai": {
       "day-clear": "cities/dubai/day-clear.webp",
@@ -220,7 +236,8 @@
       "night-partly-cloudy": "cities/dubai/night-partly-cloudy.webp",
       "night-rain": "cities/dubai/night-rain.webp",
       "night-snow": "cities/dubai/night-snow.webp",
-      "night-storm": "cities/dubai/night-storm.webp"
+      "night-storm": "cities/dubai/night-storm.webp",
+      "day-storm": "cities/dubai/day-storm.webp"
     },
     "hong-kong": {
       "day-clear": "cities/hong-kong/day-clear.webp",
@@ -259,7 +276,10 @@
       "night-clear": "cities/jakarta/night-clear.webp",
       "night-cloudy-foggy": "cities/jakarta/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/jakarta/night-partly-cloudy.webp",
-      "night-rain": "cities/jakarta/night-rain.webp"
+      "night-rain": "cities/jakarta/night-rain.webp",
+      "night-storm": "cities/jakarta/night-storm.webp",
+      "day-snow": "cities/jakarta/day-snow.webp",
+      "night-snow": "cities/jakarta/night-snow.webp"
     },
     "kuala-lumpur": {
       "day-clear": "cities/kuala-lumpur/day-clear.webp",
@@ -314,7 +334,8 @@
       "night-partly-cloudy": "cities/los-angeles/night-partly-cloudy.webp",
       "night-rain": "cities/los-angeles/night-rain.webp",
       "night-snow": "cities/los-angeles/night-snow.webp",
-      "night-storm": "cities/los-angeles/night-storm.webp"
+      "night-storm": "cities/los-angeles/night-storm.webp",
+      "night-cloudy-foggy": "cities/los-angeles/night-cloudy-foggy.webp"
     },
     "madrid": {
       "day-clear": "cities/madrid/day-clear.webp",
@@ -327,7 +348,8 @@
       "night-cloudy-foggy": "cities/madrid/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/madrid/night-partly-cloudy.webp",
       "night-rain": "cities/madrid/night-rain.webp",
-      "night-snow": "cities/madrid/night-snow.webp"
+      "night-snow": "cities/madrid/night-snow.webp",
+      "night-storm": "cities/madrid/night-storm.webp"
     },
     "manila": {
       "day-clear": "cities/manila/day-clear.webp",
@@ -339,7 +361,9 @@
       "night-cloudy-foggy": "cities/manila/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/manila/night-partly-cloudy.webp",
       "night-snow": "cities/manila/night-snow.webp",
-      "night-storm": "cities/manila/night-storm.webp"
+      "night-storm": "cities/manila/night-storm.webp",
+      "day-cloudy-foggy": "cities/manila/day-cloudy-foggy.webp",
+      "night-rain": "cities/manila/night-rain.webp"
     },
     "mexico-city": {
       "day-clear": "cities/mexico-city/day-clear.webp",
@@ -352,7 +376,8 @@
       "night-cloudy-foggy": "cities/mexico-city/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/mexico-city/night-partly-cloudy.webp",
       "night-rain": "cities/mexico-city/night-rain.webp",
-      "night-storm": "cities/mexico-city/night-storm.webp"
+      "night-storm": "cities/mexico-city/night-storm.webp",
+      "night-snow": "cities/mexico-city/night-snow.webp"
     },
     "milan": {
       "day-clear": "cities/milan/day-clear.webp",
@@ -365,7 +390,8 @@
       "night-partly-cloudy": "cities/milan/night-partly-cloudy.webp",
       "night-rain": "cities/milan/night-rain.webp",
       "night-snow": "cities/milan/night-snow.webp",
-      "night-storm": "cities/milan/night-storm.webp"
+      "night-storm": "cities/milan/night-storm.webp",
+      "day-storm": "cities/milan/day-storm.webp"
     },
     "mumbai": {
       "day-clear": "cities/mumbai/day-clear.webp",
@@ -375,7 +401,11 @@
       "night-cloudy-foggy": "cities/mumbai/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/mumbai/night-partly-cloudy.webp",
       "night-rain": "cities/mumbai/night-rain.webp",
-      "night-snow": "cities/mumbai/night-snow.webp"
+      "night-snow": "cities/mumbai/night-snow.webp",
+      "day-cloudy-foggy": "cities/mumbai/day-cloudy-foggy.webp",
+      "day-storm": "cities/mumbai/day-storm.webp",
+      "night-storm": "cities/mumbai/night-storm.webp",
+      "day-snow": "cities/mumbai/day-snow.webp"
     },
     "nairobi": {
       "day-clear": "cities/nairobi/day-clear.webp",
@@ -387,7 +417,9 @@
       "night-clear": "cities/nairobi/night-clear.webp",
       "night-cloudy-foggy": "cities/nairobi/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/nairobi/night-partly-cloudy.webp",
-      "night-storm": "cities/nairobi/night-storm.webp"
+      "night-storm": "cities/nairobi/night-storm.webp",
+      "night-rain": "cities/nairobi/night-rain.webp",
+      "night-snow": "cities/nairobi/night-snow.webp"
     },
     "new-york": {
       "day-clear": "cities/new-york/day-clear.webp",
@@ -428,7 +460,8 @@
       "night-cloudy-foggy": "cities/prague/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/prague/night-partly-cloudy.webp",
       "night-rain": "cities/prague/night-rain.webp",
-      "night-storm": "cities/prague/night-storm.webp"
+      "night-storm": "cities/prague/night-storm.webp",
+      "night-snow": "cities/prague/night-snow.webp"
     },
     "rio-de-janeiro": {
       "day-clear": "cities/rio-de-janeiro/day-clear.webp",
@@ -480,7 +513,11 @@
       "night-clear": "cities/sao-paulo/night-clear.webp",
       "night-cloudy-foggy": "cities/sao-paulo/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/sao-paulo/night-partly-cloudy.webp",
-      "night-storm": "cities/sao-paulo/night-storm.webp"
+      "night-storm": "cities/sao-paulo/night-storm.webp",
+      "day-rain": "cities/sao-paulo/day-rain.webp",
+      "night-rain": "cities/sao-paulo/night-rain.webp",
+      "day-storm": "cities/sao-paulo/day-storm.webp",
+      "night-snow": "cities/sao-paulo/night-snow.webp"
     },
     "seoul": {
       "day-clear": "cities/seoul/day-clear.webp",
@@ -521,7 +558,8 @@
       "night-partly-cloudy": "cities/singapore/night-partly-cloudy.webp",
       "night-rain": "cities/singapore/night-rain.webp",
       "night-snow": "cities/singapore/night-snow.webp",
-      "night-storm": "cities/singapore/night-storm.webp"
+      "night-storm": "cities/singapore/night-storm.webp",
+      "day-rain": "cities/singapore/day-rain.webp"
     },
     "sydney": {
       "day-clear": "cities/sydney/day-clear.webp",
@@ -534,7 +572,8 @@
       "night-partly-cloudy": "cities/sydney/night-partly-cloudy.webp",
       "night-rain": "cities/sydney/night-rain.webp",
       "night-snow": "cities/sydney/night-snow.webp",
-      "night-storm": "cities/sydney/night-storm.webp"
+      "night-storm": "cities/sydney/night-storm.webp",
+      "night-cloudy-foggy": "cities/sydney/night-cloudy-foggy.webp"
     },
     "tokyo": {
       "day-clear": "cities/tokyo/day-clear.webp",
@@ -588,7 +627,9 @@
       "night-cloudy-foggy": "cities/vienna/night-cloudy-foggy.webp",
       "night-partly-cloudy": "cities/vienna/night-partly-cloudy.webp",
       "night-rain": "cities/vienna/night-rain.webp",
-      "night-snow": "cities/vienna/night-snow.webp"
+      "night-snow": "cities/vienna/night-snow.webp",
+      "day-storm": "cities/vienna/day-storm.webp",
+      "night-storm": "cities/vienna/night-storm.webp"
     }
   },
   "slots": [
@@ -2825,6 +2866,19 @@
       "sha256": "99a22c3a59454880a72ab21612f9fd9d20d8d55ad26b380a38c0609731e7f2cf"
     },
     {
+      "id": "187",
+      "city": "Barcelona",
+      "cityKey": "barcelona",
+      "condition": "day-cloudy-foggy",
+      "asset": "cities/barcelona/day-cloudy-foggy.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "187-barcelona-day-cloudy-foggy.png",
+      "bytes": 108088,
+      "sha256": "9e0e44ffa08047a2ef8cbebd6477ed10d9d32236ddf0e3d587c8e2fb90689aa9"
+    },
+    {
       "id": "188",
       "city": "Rome",
       "cityKey": "rome",
@@ -2957,6 +3011,19 @@
       "sha256": "28b385336d2d46030a9860ff26354ec46d005081a9641adb280ca7160ee0b96a"
     },
     {
+      "id": "199",
+      "city": "Mumbai",
+      "cityKey": "mumbai",
+      "condition": "day-cloudy-foggy",
+      "asset": "cities/mumbai/day-cloudy-foggy.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "199-mumbai-day-cloudy-foggy.png",
+      "bytes": 72934,
+      "sha256": "67b62a888dd9add96bea4bb7a233dea783e6eef5829d35926aec1beb2e8ff3da"
+    },
+    {
       "id": "200",
       "city": "Delhi",
       "cityKey": "delhi",
@@ -2991,6 +3058,45 @@
       "confidence": "LOW",
       "bytes": 145952,
       "sha256": "1af4d8ee049b3f148edb7679c243469fdd441dfd37fa11e9de98dea560671729"
+    },
+    {
+      "id": "203",
+      "city": "Manila",
+      "cityKey": "manila",
+      "condition": "day-cloudy-foggy",
+      "asset": "cities/manila/day-cloudy-foggy.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "203-manila-day-cloudy-foggy.png",
+      "bytes": 87740,
+      "sha256": "875a73de81b02c971a06e39aad2eae7d3b3bbecbf18255358c81e721cac1ae21"
+    },
+    {
+      "id": "204",
+      "city": "Los Angeles",
+      "cityKey": "los-angeles",
+      "condition": "night-cloudy-foggy",
+      "asset": "cities/los-angeles/night-cloudy-foggy.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "204-los-angeles-night-cloudy-foggy.png",
+      "bytes": 58940,
+      "sha256": "81ae7d7ed94e99aa08ab565892bafc5a502cc61270bf2f4b4a2ce96a5fbf7963"
+    },
+    {
+      "id": "205",
+      "city": "Chicago",
+      "cityKey": "chicago",
+      "condition": "night-cloudy-foggy",
+      "asset": "cities/chicago/night-cloudy-foggy.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "205-chicago-night-cloudy-foggy.png",
+      "bytes": 69114,
+      "sha256": "04294c371325fe57425a9acd7be8c44f940a188931d92b5099437dbec3c6d90d"
     },
     {
       "id": "206",
@@ -3125,6 +3231,19 @@
       "sha256": "546280462db38e255263117b0306e519430fcfa87edd1ef02c7add87e638c6e0"
     },
     {
+      "id": "217",
+      "city": "Beijing",
+      "cityKey": "beijing",
+      "condition": "night-cloudy-foggy",
+      "asset": "cities/beijing/night-cloudy-foggy.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "217-beijing-night-cloudy-foggy.png",
+      "bytes": 79772,
+      "sha256": "964ce50ca74a40334874d54c84c3c9dc8a252808f6bed083f59f04be4299395a"
+    },
+    {
       "id": "218",
       "city": "Dubai",
       "cityKey": "dubai",
@@ -3135,6 +3254,19 @@
       "confidence": "HIGH",
       "bytes": 194980,
       "sha256": "634638eef84976f53a44a8e38e1ce11e7f32b56429c0cb6dddcc0f1205c91f67"
+    },
+    {
+      "id": "219",
+      "city": "Sydney",
+      "cityKey": "sydney",
+      "condition": "night-cloudy-foggy",
+      "asset": "cities/sydney/night-cloudy-foggy.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "219-sydney-night-cloudy-foggy.png",
+      "bytes": 65458,
+      "sha256": "4c68768bbbc8630204faa13023af196acc517636eca39eee1b73ba12fe422309"
     },
     {
       "id": "220",
@@ -3219,6 +3351,19 @@
       "confidence": "LOW",
       "bytes": 152802,
       "sha256": "0f1c60045a49abb0a684d50bc0b9d1580b45cabe266791cf1eddd3a3a93daad9"
+    },
+    {
+      "id": "227",
+      "city": "Barcelona",
+      "cityKey": "barcelona",
+      "condition": "night-cloudy-foggy",
+      "asset": "cities/barcelona/night-cloudy-foggy.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "227-barcelona-night-cloudy-foggy.png",
+      "bytes": 122070,
+      "sha256": "3dede299d7883883765bfc3786bca0020547235d9abd1b2781cd1c50d8342cd9"
     },
     {
       "id": "228",
@@ -3339,6 +3484,19 @@
       "confidence": "LOW",
       "bytes": 128880,
       "sha256": "84cd6ef6cfc4f33ff00ec32937ecb5da051f01e3ffc43d4479c13d40591a029a"
+    },
+    {
+      "id": "238",
+      "city": "Bangkok",
+      "cityKey": "bangkok",
+      "condition": "night-cloudy-foggy",
+      "asset": "cities/bangkok/night-cloudy-foggy.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "238-bangkok-night-cloudy-foggy.png",
+      "bytes": 63600,
+      "sha256": "95de9269d9c4bc223f313d3b905265a3acfacf6d3a0461f19eebf5941589e28d"
     },
     {
       "id": "239",
@@ -3521,6 +3679,19 @@
       "sha256": "c147e29233945a9301e7f4e3ea407b4c7bb73e0aaecf7a4066c4adfaececb778"
     },
     {
+      "id": "254",
+      "city": "Singapore",
+      "cityKey": "singapore",
+      "condition": "day-rain",
+      "asset": "cities/singapore/day-rain.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "254-singapore-day-rain.png",
+      "bytes": 128006,
+      "sha256": "1dbae7fd145a878ddf0bea1e9139994436878c0c933a7a82681744dc903fa899"
+    },
+    {
       "id": "255",
       "city": "San Francisco",
       "cityKey": "san-francisco",
@@ -3615,6 +3786,19 @@
       "confidence": "LOW",
       "bytes": 158926,
       "sha256": "ae59d1cfe595b33d14165685545a1a4ce0797bf3ea152dd06960a506d58a0ec8"
+    },
+    {
+      "id": "263",
+      "city": "São Paulo",
+      "cityKey": "sao-paulo",
+      "condition": "day-rain",
+      "asset": "cities/sao-paulo/day-rain.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "263-sao-paulo-day-rain.png",
+      "bytes": 151910,
+      "sha256": "eac13498654fab90f245d52fed674317ad4dbed963cd26b6c3d89bc749b6ab11"
     },
     {
       "id": "264",
@@ -3783,6 +3967,19 @@
       "confidence": "LOW",
       "bytes": 174622,
       "sha256": "45e10df6faa054e9a0eb4e29ff09c558d3e84f5c911c23d7b6e2d5d56f8cd9e4"
+    },
+    {
+      "id": "278",
+      "city": "Bangkok",
+      "cityKey": "bangkok",
+      "condition": "day-rain",
+      "asset": "cities/bangkok/day-rain.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "278-bangkok-day-rain.png",
+      "bytes": 156656,
+      "sha256": "be8cab5f0b9319482bcf3e72de4a58fcec0088ac36a83104e845e1139d9e4c9d"
     },
     {
       "id": "279",
@@ -3977,6 +4174,19 @@
       "sha256": "492f4f24aeba1aeb60b8627337b6e331b127d496bfdd3bd7a569e887ad9a359a"
     },
     {
+      "id": "295",
+      "city": "Beijing",
+      "cityKey": "beijing",
+      "condition": "night-rain",
+      "asset": "cities/beijing/night-rain.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "295-beijing-night-rain.png",
+      "bytes": 158148,
+      "sha256": "974bfef0f995f58e65faa64fab0088b29a9d4ece13aca9eeae5119b63adcddb1"
+    },
+    {
       "id": "296",
       "city": "Dubai",
       "cityKey": "dubai",
@@ -4037,6 +4247,19 @@
       "sha256": "afb20fe9d2091f93644ac1560c1c7187345fdd67c20fae6b911ccc6e5d3e2a24"
     },
     {
+      "id": "301",
+      "city": "São Paulo",
+      "cityKey": "sao-paulo",
+      "condition": "night-rain",
+      "asset": "cities/sao-paulo/night-rain.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "301-sao-paulo-night-rain.png",
+      "bytes": 126548,
+      "sha256": "b76ad5bc753a6d830ee3a74c7af0e36b4c983b301ba6d8493dfc8bf382646bd6"
+    },
+    {
       "id": "302",
       "city": "Rio de Janeiro",
       "cityKey": "rio-de-janeiro",
@@ -4047,6 +4270,19 @@
       "confidence": "VERIFIED",
       "bytes": 188216,
       "sha256": "22f80951fcf1019d36250342593b81b4a784b29a1d4fe906773030cae5893eb4"
+    },
+    {
+      "id": "303",
+      "city": "Buenos Aires",
+      "cityKey": "buenos-aires",
+      "condition": "night-rain",
+      "asset": "cities/buenos-aires/night-rain.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "303-buenos-aires-night-rain.png",
+      "bytes": 166934,
+      "sha256": "893d7a95e3faa0c0e09cca109ff6513b11dadb379241180a579ecc6cb9813b58"
     },
     {
       "id": "304",
@@ -4181,6 +4417,19 @@
       "sha256": "24f9da656e4f095b72ce3b6925ea6ea4d36fe5693cb6347cbc9c8a7286432ef3"
     },
     {
+      "id": "315",
+      "city": "Nairobi",
+      "cityKey": "nairobi",
+      "condition": "night-rain",
+      "asset": "cities/nairobi/night-rain.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "315-nairobi-night-rain.png",
+      "bytes": 136684,
+      "sha256": "0784eec5480d50b9d26095af486c5c16b677da0a62d052c258a8f447c0614d66"
+    },
+    {
       "id": "316",
       "city": "Bangkok",
       "cityKey": "bangkok",
@@ -4239,6 +4488,19 @@
       "confidence": "LOW",
       "bytes": 198108,
       "sha256": "2bb85889f681c21bb3c9e535c5e854b11eb3371b1c023647ea8f377149647332"
+    },
+    {
+      "id": "321",
+      "city": "Manila",
+      "cityKey": "manila",
+      "condition": "night-rain",
+      "asset": "cities/manila/night-rain.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "321-manila-night-rain.png",
+      "bytes": 169136,
+      "sha256": "417a067b7ffb0b8675bdd98e34556e6b7b975392566ee0865478cf892c2892ea"
     },
     {
       "id": "322",
@@ -4409,6 +4671,19 @@
       "sha256": "43998267d54bed0f35305219c3e26f66d33f59e135d43acd975f484dcb6b5e99"
     },
     {
+      "id": "336",
+      "city": "Dubai",
+      "cityKey": "dubai",
+      "condition": "day-storm",
+      "asset": "cities/dubai/day-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "336-dubai-day-storm.png",
+      "bytes": 140490,
+      "sha256": "a5dca333a8c3ed9684c764ba32559772fdc2ef414ba03a598b985ad0887af8f3"
+    },
+    {
       "id": "337",
       "city": "Sydney",
       "cityKey": "sydney",
@@ -4455,6 +4730,19 @@
       "confidence": "LOW",
       "bytes": 157122,
       "sha256": "7b88d1ec76273b71975b6bca6e3a4f190f5b320fbfa2d117a42c670128bb065d"
+    },
+    {
+      "id": "341",
+      "city": "São Paulo",
+      "cityKey": "sao-paulo",
+      "condition": "day-storm",
+      "asset": "cities/sao-paulo/day-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "341-sao-paulo-day-storm.png",
+      "bytes": 125238,
+      "sha256": "9207c5a798b7ae6e75208115ceeaa941e09d013427c98a2ac45ec2ff10eb0c5e"
     },
     {
       "id": "342",
@@ -4517,6 +4805,19 @@
       "sha256": "12a1c5089542623ad92ce02fa595bfedfa629c44577db78a42c095d59a01d67c"
     },
     {
+      "id": "347",
+      "city": "Milan",
+      "cityKey": "milan",
+      "condition": "day-storm",
+      "asset": "cities/milan/day-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "347-milan-day-storm.png",
+      "bytes": 136348,
+      "sha256": "5fd53d8ab30fcb9bb01df46125ca9236e1471e243fea29a0c4da0daeaad1e75b"
+    },
+    {
       "id": "348",
       "city": "Berlin",
       "cityKey": "berlin",
@@ -4539,6 +4840,19 @@
       "confidence": "HIGH",
       "bytes": 233368,
       "sha256": "e91bbcd4bdcc27d413a8cb1cc36f2eba0456bf7583ae66b86a82b13eb4ae3c26"
+    },
+    {
+      "id": "350",
+      "city": "Vienna",
+      "cityKey": "vienna",
+      "condition": "day-storm",
+      "asset": "cities/vienna/day-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "350-vienna-day-storm.png",
+      "bytes": 164210,
+      "sha256": "ff725fc03dd8722a989211d95fe74a9b08e14a71507de8044c4227e02223c8b1"
     },
     {
       "id": "351",
@@ -4611,6 +4925,19 @@
       "confidence": "LOW",
       "bytes": 160624,
       "sha256": "1b10e16a759209aee65b5a29ce42c77a2357681e360e79d382327e3760f5087e"
+    },
+    {
+      "id": "357",
+      "city": "Mumbai",
+      "cityKey": "mumbai",
+      "condition": "day-storm",
+      "asset": "cities/mumbai/day-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "357-mumbai-day-storm.png",
+      "bytes": 142178,
+      "sha256": "61e7b75cbc5bd7efc68848b0dfce2f30402d28c0ed5575def0feef56d7c5c32c"
     },
     {
       "id": "358",
@@ -4817,6 +5144,19 @@
       "sha256": "8d2ce1fa5663703b43a3c9c77188b8b67774eddba2d0b47279f4fdb8ba0c83bf"
     },
     {
+      "id": "375",
+      "city": "Beijing",
+      "cityKey": "beijing",
+      "condition": "night-storm",
+      "asset": "cities/beijing/night-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "375-beijing-night-storm.png",
+      "bytes": 123770,
+      "sha256": "783387e80b36b074630b7c654c2b709d916d5a4aa50de6bf3cb0394728952c33"
+    },
+    {
       "id": "376",
       "city": "Dubai",
       "cityKey": "dubai",
@@ -4901,6 +5241,32 @@
       "sha256": "29f778d947a99ffd9d096840df6abcb83ea888041e845e5f3e70980555c61a2e"
     },
     {
+      "id": "383",
+      "city": "Buenos Aires",
+      "cityKey": "buenos-aires",
+      "condition": "night-storm",
+      "asset": "cities/buenos-aires/night-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "383-buenos-aires-night-storm.png",
+      "bytes": 171948,
+      "sha256": "76daacbe682105ec52484590e89ab76d98f4a98f52ad14ec9d2eb778326cdb0c"
+    },
+    {
+      "id": "384",
+      "city": "Madrid",
+      "cityKey": "madrid",
+      "condition": "night-storm",
+      "asset": "cities/madrid/night-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "384-madrid-night-storm.png",
+      "bytes": 140396,
+      "sha256": "ff01d2385aeb84b81eaa61ac25bd5da4de3175f90eb7c7e6946b5f3eb005e285"
+    },
+    {
       "id": "385",
       "city": "Barcelona",
       "cityKey": "barcelona",
@@ -4961,6 +5327,19 @@
       "sha256": "d0aab8159162c918c3e688d1e00243c22103a26afed002d41dda5bdeec17f8d5"
     },
     {
+      "id": "390",
+      "city": "Vienna",
+      "cityKey": "vienna",
+      "condition": "night-storm",
+      "asset": "cities/vienna/night-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "390-vienna-night-storm.png",
+      "bytes": 163652,
+      "sha256": "df3072e3172f1686cd9e55ca91067c29a995ca2c5acf58cef60bddc939e2da02"
+    },
+    {
       "id": "391",
       "city": "Prague",
       "cityKey": "prague",
@@ -4983,6 +5362,19 @@
       "confidence": "HIGH",
       "bytes": 120028,
       "sha256": "7fde12ed06c9369790b3229f768e5d5229ef65518b6a6f2d509880efee49e37c"
+    },
+    {
+      "id": "393",
+      "city": "Cairo",
+      "cityKey": "cairo",
+      "condition": "night-storm",
+      "asset": "cities/cairo/night-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "393-cairo-night-storm.png",
+      "bytes": 114022,
+      "sha256": "21016a4fa6f989c23e160c25f9e4b2477e6f7e9e0a65f224c03b8223a97b2277"
     },
     {
       "id": "394",
@@ -5021,6 +5413,19 @@
       "sha256": "8672b1ba040ea5431087f1e944b412e7c74c9235bce8e4ecc2a7abb00f1057b5"
     },
     {
+      "id": "397",
+      "city": "Mumbai",
+      "cityKey": "mumbai",
+      "condition": "night-storm",
+      "asset": "cities/mumbai/night-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "397-mumbai-night-storm.png",
+      "bytes": 119354,
+      "sha256": "5d9a9e8629b4de9e3781338e5898dabaa7f4f068bf2fdbc4de474f5f972c93c5"
+    },
+    {
       "id": "398",
       "city": "Delhi",
       "cityKey": "delhi",
@@ -5043,6 +5448,19 @@
       "confidence": "HIGH",
       "bytes": 208022,
       "sha256": "7c0d3e55cec2981f567bac79cef2afd35a7e53f836672fb6f5b222240a719061"
+    },
+    {
+      "id": "400",
+      "city": "Jakarta",
+      "cityKey": "jakarta",
+      "condition": "night-storm",
+      "asset": "cities/jakarta/night-storm.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "400-jakarta-night-storm.png",
+      "bytes": 131388,
+      "sha256": "30002c55a6a0d7170d906ae32ae1d6c4a4c45ca4d8533b0474d2c7ea1c32db08"
     },
     {
       "id": "401",
@@ -5321,6 +5739,19 @@
       "sha256": "005cbc8d2fa157dfc258be33f7fb553d45efe164f60eaa352eb50d7a82bef2ee"
     },
     {
+      "id": "424",
+      "city": "Barcelona",
+      "cityKey": "barcelona",
+      "condition": "day-snow",
+      "asset": "cities/barcelona/day-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "424-barcelona-day-snow.png",
+      "bytes": 128226,
+      "sha256": "9e3b233a69db2680658f62e49f31736c8903fa99d907c0027f348b06fe45e24e"
+    },
+    {
       "id": "425",
       "city": "Rome",
       "cityKey": "rome",
@@ -5453,6 +5884,32 @@
       "sha256": "2375c69106ddadad471a5dbd69a49e98f57d326ae7db807e27754353f923b89a"
     },
     {
+      "id": "436",
+      "city": "Mumbai",
+      "cityKey": "mumbai",
+      "condition": "day-snow",
+      "asset": "cities/mumbai/day-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "436-mumbai-day-snow.png",
+      "bytes": 208720,
+      "sha256": "83bd31f72955a1cadfb976327b3cf8cb7c60aee42ad122de92591b881e25f2c4"
+    },
+    {
+      "id": "437",
+      "city": "Delhi",
+      "cityKey": "delhi",
+      "condition": "day-snow",
+      "asset": "cities/delhi/day-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "437-delhi-day-snow.png",
+      "bytes": 156644,
+      "sha256": "be863091564c8e24308e118bebe295f55bd3a73c4a4d590d3e6f2540ae45e35a"
+    },
+    {
       "id": "438",
       "city": "Kuala Lumpur",
       "cityKey": "kuala-lumpur",
@@ -5463,6 +5920,19 @@
       "confidence": "HIGH",
       "bytes": 323312,
       "sha256": "6b4a5ac0de3e75eb9d9a74dc8f69effe37798a1fb39bffcefb3144954d988b4b"
+    },
+    {
+      "id": "439",
+      "city": "Jakarta",
+      "cityKey": "jakarta",
+      "condition": "day-snow",
+      "asset": "cities/jakarta/day-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "439-jakarta-day-snow.png",
+      "bytes": 147950,
+      "sha256": "721513184bba9f2b931ed78475689fb2019ad405f604393a00384bfa140007e6"
     },
     {
       "id": "440",
@@ -5693,6 +6163,32 @@
       "sha256": "19ac0d0850d81ece1072ed5f63db360c47fbf326882b1a3f9a89d3b2866dfdad"
     },
     {
+      "id": "459",
+      "city": "Mexico City",
+      "cityKey": "mexico-city",
+      "condition": "night-snow",
+      "asset": "cities/mexico-city/night-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "459-mexico-city-night-snow.png",
+      "bytes": 191698,
+      "sha256": "089c4ae97493c0994974b9990451bf00a9c3ba38876f8880dc5878d18c13192c"
+    },
+    {
+      "id": "460",
+      "city": "São Paulo",
+      "cityKey": "sao-paulo",
+      "condition": "night-snow",
+      "asset": "cities/sao-paulo/night-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "460-sao-paulo-night-snow.png",
+      "bytes": 169026,
+      "sha256": "365aa85ad77be64f151fc21a79d80f311087c938b9d61334849f200427455e27"
+    },
+    {
       "id": "461",
       "city": "Rio de Janeiro",
       "cityKey": "rio-de-janeiro",
@@ -5801,6 +6297,19 @@
       "sha256": "597825c33a04813c099be4a26a63a4e6698a4dd243deb7715b4b9fa72a1b8005"
     },
     {
+      "id": "470",
+      "city": "Prague",
+      "cityKey": "prague",
+      "condition": "night-snow",
+      "asset": "cities/prague/night-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "470-prague-night-snow.png",
+      "bytes": 169382,
+      "sha256": "07266f691435205683de59f47cf4a83c903c5477063563514e254872a3f77f43"
+    },
+    {
       "id": "471",
       "city": "Istanbul",
       "cityKey": "istanbul",
@@ -5813,6 +6322,19 @@
       "sha256": "17c12d83239e8560073d5bab009330333e276ee2ff3a8f00996c98bf14f2dc90"
     },
     {
+      "id": "472",
+      "city": "Cairo",
+      "cityKey": "cairo",
+      "condition": "night-snow",
+      "asset": "cities/cairo/night-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "472-cairo-night-snow.png",
+      "bytes": 194114,
+      "sha256": "22aa68195af02fe527194b1e21e08fb230318db4527acc1f1315f27850b423ba"
+    },
+    {
       "id": "473",
       "city": "Cape Town",
       "cityKey": "cape-town",
@@ -5823,6 +6345,19 @@
       "confidence": "HIGH",
       "bytes": 232414,
       "sha256": "5f98c2306849b899a2c485bd6462d7a0ec5aae2f264550789514ea9fde4fb38c"
+    },
+    {
+      "id": "474",
+      "city": "Nairobi",
+      "cityKey": "nairobi",
+      "condition": "night-snow",
+      "asset": "cities/nairobi/night-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "474-nairobi-night-snow.png",
+      "bytes": 195126,
+      "sha256": "25be76fd6d54643534207f7feb939ffff2523a2dbb64527ceedd939ad19b831a"
     },
     {
       "id": "475",
@@ -5849,6 +6384,19 @@
       "sha256": "cd26c3573df924381dc59a1ab85306f66cd712f648c967027e878cb7e17b4e40"
     },
     {
+      "id": "477",
+      "city": "Delhi",
+      "cityKey": "delhi",
+      "condition": "night-snow",
+      "asset": "cities/delhi/night-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "477-delhi-night-snow.png",
+      "bytes": 246316,
+      "sha256": "86f299d26087848d0ee3f6c4ca3c0763ed9ca5ef89485cf1b54427af945470a1"
+    },
+    {
       "id": "478",
       "city": "Kuala Lumpur",
       "cityKey": "kuala-lumpur",
@@ -5859,6 +6407,19 @@
       "confidence": "HIGH",
       "bytes": 304668,
       "sha256": "589057e48b707844a3c9d3820b262420ed4a21118063df951d198265e2c1ebbf"
+    },
+    {
+      "id": "479",
+      "city": "Jakarta",
+      "cityKey": "jakarta",
+      "condition": "night-snow",
+      "asset": "cities/jakarta/night-snow.webp",
+      "provenance": "final-completion-archive",
+      "rawIndex": "",
+      "confidence": "PROVIDED",
+      "sourceFile": "479-jakarta-night-snow.png",
+      "bytes": 146898,
+      "sha256": "8e7f0dad93dd4269b645594c6e3433983fc08314f9a8b301faee526a50039cb0"
     },
     {
       "id": "480",
