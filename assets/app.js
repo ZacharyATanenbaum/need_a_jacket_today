@@ -2,7 +2,8 @@
     const HORIZON_HOURS=6;
     const DISPLAY_HOURS=24;
     const CONFIG={
-      weatherCompanyProxy:window.NAJ_CONFIG?.weatherCompanyProxy||"",
+      weatherCompanyApiBase:"https://api.weather.com",
+      weatherCompanyApiKey:"e1f10a1e78da46f5b10a1e78da96f525",
       defaultLocation:{name:"New York, NY",latitude:40.7128,longitude:-74.0060},
       cacheMaxAgeMs:30*60*1000
     };
@@ -274,11 +275,7 @@
       render();
       if(!preserveCurrent)renderPendingWeather();
       try{
-        let data,primaryError;
-        if(CONFIG.weatherCompanyProxy){
-          try{data=await fetchWeatherCompanyProxy(location)}catch(error){primaryError=error;console.warn("Primary provider failed",error)}
-        }
-        if(!data)data=await fetchOpenMeteo(location);
+        const data=await fetchWeatherUnderground(location);
         if(requestToken!==state.weatherRequestToken)return;
         data.fetchedAt=new Date().toISOString();
         state.weather=data;
@@ -287,7 +284,6 @@
         if(mode==="manual")storageSet("naj.manualLocation",JSON.stringify(location));
         storageSet("naj.locationMode",mode);
         render();
-        if(primaryError)toast("The primary weather source was unavailable; a live forecast is still shown.");
       }catch(error){
         if(requestToken!==state.weatherRequestToken)return;
         console.error(error);
@@ -304,36 +300,54 @@
       finally{els.refreshWeather.disabled=false;els.refreshWeather.classList.remove("refreshing")}
     }
 
-    async function fetchWeatherCompanyProxy(location){
-      const url=new URL(CONFIG.weatherCompanyProxy,window.location.href);
-      url.searchParams.set("lat",location.latitude);
-      url.searchParams.set("lon",location.longitude);
+    async function fetchWeatherCompany(path,params={}){
+      const url=new URL(path,CONFIG.weatherCompanyApiBase);
+      url.search=new URLSearchParams({...params,language:"en-US",format:"json",apiKey:CONFIG.weatherCompanyApiKey});
       const response=await fetch(url,{headers:{Accept:"application/json"},cache:"no-store"});
-      if(!response.ok)throw new Error(`Weather Company proxy returned ${response.status}`);
-      const data=await response.json();
-      if(!data?.current||!Array.isArray(data?.hourly))throw new Error("Invalid proxy response");
-      return data;
+      if(!response.ok)throw new Error(`Weather Underground returned ${response.status}`);
+      return response.json();
     }
 
-    async function fetchOpenMeteo(location){
+    async function fetchWeatherUnderground(location){
       const demoMode=new URLSearchParams(window.location.search||"").get("demo");
       if(demoMode)return demoWeather(demoMode);
-      const url=new URL("https://api.open-meteo.com/v1/forecast");
-      url.search=new URLSearchParams({latitude:location.latitude,longitude:location.longitude,current:"temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation,rain",hourly:"temperature_2m,apparent_temperature,precipitation_probability,weather_code,wind_speed_10m",temperature_unit:"fahrenheit",wind_speed_unit:"mph",precipitation_unit:"inch",timezone:"auto",timeformat:"unixtime",forecast_days:"2"});
-      const response=await fetch(url,{cache:"no-store"});
-      if(!response.ok)throw new Error(`Open-Meteo returned ${response.status}`);
-      const raw=await response.json();
-      const currentEpoch=Number(raw.current.time);
-      const start=Math.max(0,raw.hourly.time.findIndex(time=>Number(time)>=currentEpoch-1800));
-      const hourly=raw.hourly.time.slice(start,start+DISPLAY_HOURS).map((time,index)=>{
-        const i=start+index;
-        return{time:new Date(Number(time)*1000).toISOString(),temperature:raw.hourly.temperature_2m[i],feelsLike:raw.hourly.apparent_temperature[i],precipProbability:raw.hourly.precipitation_probability[i]??0,weatherCode:raw.hourly.weather_code[i],windSpeed:raw.hourly.wind_speed_10m[i]};
-      });
-      return{provider:"Open-Meteo",updatedAt:new Date(currentEpoch*1000).toISOString(),timezone:raw.timezone,current:{time:new Date(currentEpoch*1000).toISOString(),temperature:raw.current.temperature_2m,feelsLike:raw.current.apparent_temperature,precipProbability:hourly[0]?.precipProbability||0,weatherCode:raw.current.weather_code,windSpeed:raw.current.wind_speed_10m,precipitation:raw.current.precipitation||raw.current.rain||0},hourly};
+      const geocode=`${location.latitude},${location.longitude}`;
+      const common={geocode,units:"e"};
+      const[current,forecast]=await Promise.all([
+        fetchWeatherCompany("/v3/wx/observations/current",common),
+        fetchWeatherCompany("/v3/wx/forecast/hourly/2day",common)
+      ]);
+      const count=Math.min(DISPLAY_HOURS,forecast.validTimeLocal?.length||0);
+      const hourly=Array.from({length:count},(_,index)=>({
+        time:forecast.validTimeLocal[index],
+        temperature:forecast.temperature?.[index],
+        feelsLike:forecast.temperatureFeelsLike?.[index]??forecast.temperature?.[index],
+        precipProbability:forecast.precipChance?.[index]??0,
+        phrase:forecast.wxPhraseLong?.[index]||forecast.wxPhraseShort?.[index]||"Variable conditions",
+        windSpeed:forecast.windSpeed?.[index]??0,
+        iconCode:forecast.iconCode?.[index]
+      })).filter(hour=>Number.isFinite(hour.temperature));
+      if(!Number.isFinite(current.temperature)||!hourly.length)throw new Error("Weather Underground returned an incomplete forecast");
+      return{
+        provider:"Weather Underground / The Weather Company",
+        updatedAt:current.validTimeLocal||new Date().toISOString(),
+        timezone:current.timezone||null,
+        current:{
+          time:current.validTimeLocal||hourly[0].time,
+          temperature:current.temperature,
+          feelsLike:current.temperatureFeelsLike??current.temperature,
+          precipProbability:hourly[0].precipProbability,
+          phrase:current.wxPhraseLong||current.wxPhraseMedium||current.wxPhraseShort||hourly[0].phrase,
+          windSpeed:current.windSpeed??0,
+          precipitation:current.precip1Hour??0,
+          iconCode:current.iconCode
+        },
+        hourly
+      };
     }
 
-    function saveCache(location,mode,data){try{storageSet("naj.weatherCache",JSON.stringify({location,mode,data,savedAt:Date.now()}))}catch{}}
-    function loadCache(location){try{const cached=JSON.parse(storageGet("naj.weatherCache")||"null");if(!cached||Date.now()-cached.savedAt>CONFIG.cacheMaxAgeMs)return null;return Math.abs(cached.location.latitude-location.latitude)<.03&&Math.abs(cached.location.longitude-location.longitude)<.03?cached:null}catch{return null}}
+    function saveCache(location,mode,data){try{storageSet("naj.weatherCache.wu",JSON.stringify({location,mode,data,savedAt:Date.now()}))}catch{}}
+    function loadCache(location){try{const cached=JSON.parse(storageGet("naj.weatherCache.wu")||"null");if(!cached||Date.now()-cached.savedAt>CONFIG.cacheMaxAgeMs)return null;return Math.abs(cached.location.latitude-location.latitude)<.03&&Math.abs(cached.location.longitude-location.longitude)<.03?cached:null}catch{return null}}
     function openModal(){els.locationModal.classList.add("open");els.locationButton.setAttribute("aria-expanded","true");setTimeout(()=>els.searchInput.focus(),80)}
     function closeModal(){els.locationModal.classList.remove("open");els.locationButton.setAttribute("aria-expanded","false");els.modalStatus.textContent=""}
 
@@ -343,25 +357,29 @@
       try{
         const coordinate=parseCoordinateQuery(clean);
         if(coordinate){const name=await resolveLocationName(coordinate.latitude,coordinate.longitude);closeModal();return loadWeather({name,latitude:coordinate.latitude,longitude:coordinate.longitude},"manual")}
-        const url=new URL("https://geocoding-api.open-meteo.com/v1/search");
-        url.search=new URLSearchParams({name:clean,count:"7",language:"en",format:"json"});
-        const response=await fetch(url);if(!response.ok)throw new Error("Search failed");
-        const data=await response.json(),results=data.results||[];
+        const data=await fetchWeatherCompany("/v3/location/search",{query:clean});
+        const locations=data.location||{},count=Math.min(7,locations.latitude?.length||0);
+        const results=Array.from({length:count},(_,index)=>({
+          name:locations.displayName?.[index]||locations.city?.[index]||clean,
+          admin1:locations.adminDistrict?.[index],
+          country:locations.country?.[index],
+          countryCode:locations.countryCode?.[index],
+          latitude:locations.latitude?.[index],
+          longitude:locations.longitude?.[index]
+        })).filter(result=>Number.isFinite(result.latitude)&&Number.isFinite(result.longitude));
         els.modalStatus.textContent=results.length?"":"No matching locations found.";
         els.searchResults.innerHTML=results.map((result,index)=>{const sub=[result.admin1,result.country].filter(Boolean).join(", ");return`<button class="result-button" type="button" data-result="${index}"><span><span class="result-main">${escapeHtml(result.name)}</span><span class="result-sub">${escapeHtml(sub)}</span></span><span>→</span></button>`}).join("");
-        els.searchResults.querySelectorAll("[data-result]").forEach(button=>button.addEventListener("click",()=>{const result=results[Number(button.dataset.result)],sub=[result.admin1,result.country_code==="US"?null:result.country].filter(Boolean).join(", "),name=sub?`${result.name}, ${sub}`:result.name;closeModal();loadWeather({name,latitude:result.latitude,longitude:result.longitude},"manual")}));
+        els.searchResults.querySelectorAll("[data-result]").forEach(button=>button.addEventListener("click",()=>{const result=results[Number(button.dataset.result)],sub=[result.admin1,result.countryCode==="US"?null:result.country].filter(Boolean).join(", "),name=sub?`${result.name}, ${sub}`:result.name;closeModal();loadWeather({name,latitude:result.latitude,longitude:result.longitude},"manual")}));
       }catch{els.modalStatus.textContent="Location search is unavailable right now."}
     }
 
     function parseCoordinateQuery(query){const match=query.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);if(!match)return null;const latitude=Number(match[1]),longitude=Number(match[2]);return Number.isFinite(latitude)&&Number.isFinite(longitude)?{latitude,longitude}:null}
     async function resolveLocationName(latitude,longitude){
       try{
-        const url=new URL("https://api.bigdatacloud.net/data/reverse-geocode-client");
-        url.search=new URLSearchParams({latitude:String(latitude),longitude:String(longitude),localityLanguage:"en"});
-        const response=await fetch(url);if(!response.ok)throw new Error("Reverse geocoding failed");
-        const data=await response.json();
-        const locality=data.city||data.locality||data.principalSubdivision;
-        const region=data.countryCode==="US"?data.principalSubdivisionCode?.split("-").pop():data.countryName;
+        const data=await fetchWeatherCompany("/v3/location/point",{geocode:`${latitude},${longitude}`});
+        const location=data.location||{};
+        const locality=location.city||location.displayName;
+        const region=location.countryCode==="US"?(location.adminDistrictCode||location.adminDistrict):location.country;
         return[locality,region].filter(Boolean).join(", ")||"Current location";
       }catch{return"Current location"}
     }

@@ -2,6 +2,10 @@
 
 Static site that recommends what to wear (and whether to grab an umbrella) based on the next few hours of weather at a chosen location.
 
+## Weather source
+
+The browser requests current conditions, hourly forecasts, and location results directly from the Weather Underground / The Weather Company API. The API uses the same public client credential as the Weather Underground website; there is no server-side weather proxy and no Open-Meteo weather fallback.
+
 ## Local Preview
 
 Geolocation only works from secure origins (HTTPS or `localhost`), so serve the files rather than opening `index.html` directly.
@@ -18,7 +22,7 @@ Then visit [http://localhost:8000](http://localhost:8000) in your browser.
 
 ## Deploying to GitHub Pages
 
-1. Commit and push `index.html`, `styles.css`, `app.js`, and this `README.md` to your repository.
+1. Commit and push `index.html`, `assets/`, and this `README.md` to your repository.
 2. In GitHub, open **Settings → Pages**.
 3. Under **Build and deployment**, choose **Deploy from a branch**.
 4. Select the branch you want to publish (e.g., `main`) and use the root (`/`) folder.
