@@ -106,7 +106,7 @@
       if(value<=55)return"Heavy Jacket";
       if(value<=65)return"Light Jacket";
       if(value<=70)return"Long Sleeve";
-      if(value<=85)return"Short Sleeve";
+      if(value<92)return"Short Sleeve";
       return"Shirtless";
     }
     function outfitKeyForBand(label){
@@ -418,7 +418,7 @@
     function demoWeather(mode="heavy-rain"){
       const rainy=mode.includes("rain")||mode==="storm";
       const baseMode=mode.replace(/-?rain/g,"");
-      const presets={dontgo:{temperature:-3,feelsLike:-8,code:71,wind:18},winter:{temperature:30,feelsLike:24,code:71,wind:12},heavy:{temperature:51,feelsLike:48,code:3,wind:10},light:{temperature:63,feelsLike:60,code:2,wind:9},long:{temperature:70,feelsLike:68,code:2,wind:7},short:{temperature:80,feelsLike:78,code:1,wind:5},shirtless:{temperature:94,feelsLike:90,code:0,wind:4},storm:{temperature:62,feelsLike:58,code:95,wind:28}};
+      const presets={dontgo:{temperature:-3,feelsLike:-8,code:71,wind:18},winter:{temperature:30,feelsLike:24,code:71,wind:12},heavy:{temperature:51,feelsLike:48,code:3,wind:10},light:{temperature:63,feelsLike:60,code:2,wind:9},long:{temperature:70,feelsLike:68,code:2,wind:7},short:{temperature:80,feelsLike:78,code:1,wind:5},shirtless:{temperature:94,feelsLike:94,code:0,wind:4},storm:{temperature:62,feelsLike:58,code:95,wind:28}};
       const preset=presets[baseMode]||presets[mode]||presets.heavy;
       const start=new Date();start.setMinutes(0,0,0);
       const rain=rainy?78:12;
