@@ -1,5 +1,12 @@
 # Repository instructions
 
+## Location behavior
+
+Defaulting to New York is intentional and acceptable. On startup, restore a saved
+manual city when available; otherwise load New York. Do not request device location
+or show a location permission prompt on startup, even if permission was previously
+granted. Request device location only when the user clicks **Use my current location**.
+
 ## Downloading design references
 
 When a design reference is supplied as a signed ChatGPT/Estuary attachment URL or an

@@ -5,7 +5,9 @@
       weatherCompanyApiBase:"https://api.weather.com",
       weatherCompanyApiKey:"e1f10a1e78da46f5b10a1e78da96f525",
       defaultLocation:{name:"New York, NY",latitude:40.7128,longitude:-74.0060},
-      cacheMaxAgeMs:30*60*1000
+      cacheMaxAgeMs:30*60*1000,
+      requestTimeoutMs:12000,
+      locationNameTimeoutMs:5000
     };
     const OTTER_ASSET_BASE="assets/generated-otters/v1/";
     const OTTER_FILES={
@@ -37,7 +39,7 @@
     };
     const storageGet=key=>{try{return localStorage.getItem(key)}catch{return null}};
     const storageSet=(key,value)=>{try{localStorage.setItem(key,value)}catch{}};
-    const state={unit:storageGet("naj.unit")||"fahrenheit",profile:storageGet("naj.profile")||"regular",location:{...CONFIG.defaultLocation,name:"Finding location…"},locationMode:"loading",weather:null,loading:false,dataMode:"loading",mascotToken:0,weatherRequestToken:0};
+    const state={unit:storageGet("naj.unit")||"fahrenheit",profile:storageGet("naj.profile")||"regular",location:{...CONFIG.defaultLocation,name:"Finding location…"},locationMode:"loading",weather:null,loading:false,locating:false,dataMode:"loading",mascotToken:0,weatherRequestToken:0,locationRequestToken:0};
     const $=id=>document.getElementById(id);
     const els={locationButton:$("locationButton"),locationName:$("locationName"),geoStatusText:$("geoStatusText"),refreshWeather:$("refreshWeather"),locationModal:$("locationModal"),closeModal:$("closeModal"),searchForm:$("searchForm"),searchInput:$("searchInput"),searchResults:$("searchResults"),modalStatus:$("modalStatus"),useCurrentLocation:$("useCurrentLocation"),useCurrentLocationTop:$("useCurrentLocationTop"),toast:$("toast"),temperature:$("temperature"),weatherIcon:$("weatherIcon"),condition:$("condition"),highLow:$("highLow"),verdict:$("verdict"),reason:$("reason"),updated:$("updated"),hero:$("hero"),mascot:$("mascot"),mascotImage:$("mascotImage"),jacketCard:$("jacketCard"),jacketIcon:$("jacketIcon"),jacketTitle:$("jacketTitle"),jacketStatus:$("jacketStatus"),jacketDescription:$("jacketDescription"),umbrellaCard:$("umbrellaCard"),umbrellaStatus:$("umbrellaStatus"),umbrellaDescription:$("umbrellaDescription"),feelsLike:$("feelsLike"),feelsNote:$("feelsNote"),wind:$("wind"),windNote:$("windNote"),rain:$("rain"),rainNote:$("rainNote"),sixHourLow:$("sixHourLow"),trendNote:$("trendNote"),hourlyForecast:$("hourlyForecast")};
     const CODES={0:["Clear","☀️","clear"],1:["Mostly clear","🌤️","clear"],2:["Partly cloudy","⛅","cloud"],3:["Cloudy","☁️","cloud"],45:["Foggy","🌫️","cloud"],48:["Foggy","🌫️","cloud"],51:["Light drizzle","🌦️","rain"],53:["Drizzle","🌦️","rain"],55:["Heavy drizzle","🌧️","rain"],56:["Freezing drizzle","🌧️","rain"],57:["Freezing drizzle","🌧️","rain"],61:["Light rain","🌦️","rain"],63:["Rain","🌧️","rain"],65:["Heavy rain","🌧️","rain"],66:["Freezing rain","🌧️","rain"],67:["Freezing rain","🌧️","rain"],71:["Light snow","🌨️","snow"],73:["Snow","🌨️","snow"],75:["Heavy snow","❄️","snow"],77:["Snow grains","❄️","snow"],80:["Rain showers","🌦️","rain"],81:["Rain showers","🌧️","rain"],82:["Heavy showers","⛈️","storm"],85:["Snow showers","🌨️","snow"],86:["Heavy snow showers","❄️","snow"],95:["Thunderstorms","⛈️","storm"],96:["Thunderstorms","⛈️","storm"],99:["Severe thunderstorms","⛈️","storm"]};
@@ -175,6 +177,24 @@
     }
 
     function setLoading(value){state.loading=value}
+    const locationButtons=[els.useCurrentLocation,els.useCurrentLocationTop].map(button=>({button,html:button.innerHTML}));
+    function renderLocation(){
+      els.locationName.textContent=state.locationMode==="default"?`${state.location.name} (default)`:state.location.name;
+      els.geoStatusText.textContent=state.locating?"Finding location…":state.locationMode==="geolocation"?"Using current location":state.locationMode==="default"?`Default: ${state.location.name}`:state.location.name;
+    }
+    function setLocating(value){
+      state.locating=value;
+      for(const {button,html} of locationButtons){
+        button.disabled=value;
+        button.setAttribute("aria-busy",String(value));
+        if(value)button.textContent="Finding location…";else button.innerHTML=html;
+      }
+      renderLocation();
+    }
+    function beginLocationRequest(){
+      setLocating(false);
+      return ++state.locationRequestToken;
+    }
     let toastTimer;
     function toast(message){clearTimeout(toastTimer);els.toast.textContent=message;els.toast.classList.add("show");toastTimer=setTimeout(()=>els.toast.classList.remove("show"),5200)}
     function relativeTime(iso){
@@ -200,8 +220,7 @@
     function render(){
       document.querySelectorAll(".unit-button").forEach(button=>button.classList.toggle("active",button.dataset.unit===state.unit));
       document.querySelectorAll(".profile-button").forEach(button=>button.classList.toggle("active",button.dataset.profile===state.profile));
-      els.locationName.textContent=state.location.name;
-      els.geoStatusText.textContent=state.locationMode==="geolocation"?"Using current location":state.location.name;
+      renderLocation();
       if(!state.weather)return;
       const weather=state.weather;
       const decision=decideFromWeather(weather);
@@ -271,6 +290,9 @@
       setLoading(true);
       state.location=location;
       state.locationMode=mode;
+      // Remember the user's choice even when the forecast service is offline.
+      if(mode==="manual")storageSet("naj.manualLocation",JSON.stringify(location));
+      storageSet("naj.locationMode",mode);
       if(!preserveCurrent)state.weather=null;
       render();
       if(!preserveCurrent)renderPendingWeather();
@@ -281,8 +303,6 @@
         state.weather=data;
         state.dataMode=data.provider==="Weather demo"?"demo":"live";
         saveCache(location,mode,data);
-        if(mode==="manual")storageSet("naj.manualLocation",JSON.stringify(location));
-        storageSet("naj.locationMode",mode);
         render();
       }catch(error){
         if(requestToken!==state.weatherRequestToken)return;
@@ -294,18 +314,21 @@
     }
 
     async function refreshWeather(){
-      if(state.loading||!Number.isFinite(state.location?.latitude)||!Number.isFinite(state.location?.longitude))return;
+      if(state.loading||state.locating||state.locationMode==="loading"||!validCoordinates(state.location))return;
       els.refreshWeather.disabled=true;els.refreshWeather.classList.add("refreshing");
       try{await loadWeather({...state.location},state.locationMode,{preserveCurrent:true})}
       finally{els.refreshWeather.disabled=false;els.refreshWeather.classList.remove("refreshing")}
     }
 
-    async function fetchWeatherCompany(path,params={}){
+    async function fetchWeatherCompany(path,params={},timeoutMs=CONFIG.requestTimeoutMs){
       const url=new URL(path,CONFIG.weatherCompanyApiBase);
       url.search=new URLSearchParams({...params,language:"en-US",format:"json",apiKey:CONFIG.weatherCompanyApiKey});
-      const response=await fetch(url,{headers:{Accept:"application/json"},cache:"no-store"});
-      if(!response.ok)throw new Error(`Weather Underground returned ${response.status}`);
-      return response.json();
+      const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
+      try{
+        const response=await fetch(url,{headers:{Accept:"application/json"},cache:"no-store",signal:controller.signal});
+        if(!response.ok)throw new Error(`Weather Underground returned ${response.status}`);
+        return await response.json();
+      }finally{clearTimeout(timer)}
     }
 
     async function fetchWeatherUnderground(location){
@@ -353,11 +376,18 @@
 
     async function searchLocations(query){
       const clean=query.trim();if(!clean)return;
+      const requestToken=beginLocationRequest();
       els.modalStatus.textContent="Searching…";els.searchResults.innerHTML="";
       try{
         const coordinate=parseCoordinateQuery(clean);
-        if(coordinate){const name=await resolveLocationName(coordinate.latitude,coordinate.longitude);closeModal();return loadWeather({name,latitude:coordinate.latitude,longitude:coordinate.longitude},"manual")}
+        if(coordinate){
+          if(!validCoordinates(coordinate)){els.modalStatus.textContent="Enter latitude from -90 to 90 and longitude from -180 to 180.";return}
+          const name=await resolveLocationName(coordinate.latitude,coordinate.longitude);
+          if(requestToken!==state.locationRequestToken)return;
+          closeModal();return loadWeather({name,...coordinate},"manual");
+        }
         const data=await fetchWeatherCompany("/v3/location/search",{query:clean});
+        if(requestToken!==state.locationRequestToken)return;
         const locations=data.location||{},count=Math.min(7,locations.latitude?.length||0);
         const results=Array.from({length:count},(_,index)=>({
           name:locations.displayName?.[index]||locations.city?.[index]||clean,
@@ -366,53 +396,69 @@
           countryCode:locations.countryCode?.[index],
           latitude:locations.latitude?.[index],
           longitude:locations.longitude?.[index]
-        })).filter(result=>Number.isFinite(result.latitude)&&Number.isFinite(result.longitude));
+        })).filter(validCoordinates);
         els.modalStatus.textContent=results.length?"":"No matching locations found.";
         els.searchResults.innerHTML=results.map((result,index)=>{const sub=[result.admin1,result.country].filter(Boolean).join(", ");return`<button class="result-button" type="button" data-result="${index}"><span><span class="result-main">${escapeHtml(result.name)}</span><span class="result-sub">${escapeHtml(sub)}</span></span><span>→</span></button>`}).join("");
-        els.searchResults.querySelectorAll("[data-result]").forEach(button=>button.addEventListener("click",()=>{const result=results[Number(button.dataset.result)],sub=[result.admin1,result.countryCode==="US"?null:result.country].filter(Boolean).join(", "),name=sub?`${result.name}, ${sub}`:result.name;closeModal();loadWeather({name,latitude:result.latitude,longitude:result.longitude},"manual")}));
-      }catch{els.modalStatus.textContent="Location search is unavailable right now."}
+        els.searchResults.querySelectorAll("[data-result]").forEach(button=>button.addEventListener("click",()=>{if(requestToken!==state.locationRequestToken)return;beginLocationRequest();const result=results[Number(button.dataset.result)],sub=[result.admin1,result.countryCode==="US"?null:result.country].filter(Boolean).join(", "),name=sub?`${result.name}, ${sub}`:result.name;closeModal();loadWeather({name,latitude:result.latitude,longitude:result.longitude},"manual")}));
+      }catch{if(requestToken===state.locationRequestToken)els.modalStatus.textContent="Location search is unavailable right now. Try again or enter latitude,longitude."}
     }
 
+    function validCoordinates(location){return Number.isFinite(location?.latitude)&&Math.abs(location.latitude)<=90&&Number.isFinite(location?.longitude)&&Math.abs(location.longitude)<=180}
     function parseCoordinateQuery(query){const match=query.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);if(!match)return null;const latitude=Number(match[1]),longitude=Number(match[2]);return Number.isFinite(latitude)&&Number.isFinite(longitude)?{latitude,longitude}:null}
     async function resolveLocationName(latitude,longitude){
       try{
-        const data=await fetchWeatherCompany("/v3/location/point",{geocode:`${latitude},${longitude}`});
+        const data=await fetchWeatherCompany("/v3/location/point",{geocode:`${latitude},${longitude}`},CONFIG.locationNameTimeoutMs);
         const location=data.location||{};
         const locality=location.city||location.displayName;
         const region=location.countryCode==="US"?(location.adminDistrictCode||location.adminDistrict):location.country;
-        return[locality,region].filter(Boolean).join(", ")||"Current location";
-      }catch{return"Current location"}
+        return[locality,region].filter(Boolean).join(", ")||`${latitude.toFixed(3)}, ${longitude.toFixed(3)}`;
+      }catch{return`${latitude.toFixed(3)}, ${longitude.toFixed(3)}`}
     }
 
-    function requestCurrentLocation({automatic=false}={}){
-      if(!navigator.geolocation){if(!automatic)toast("This browser does not support location access.");return Promise.reject(new Error("Unsupported"))}
-      if(!automatic)els.modalStatus.textContent="Getting your location…";
-      return new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(async position=>{
+    async function requestCurrentLocation(){
+      const requestToken=beginLocationRequest();
+      setLocating(true);
+      els.searchResults.innerHTML="";
+      els.modalStatus.textContent="Getting your location…";
+      try{
+        if(!window.isSecureContext)throw new Error("Location access requires HTTPS or localhost. Choose a city instead.");
+        if(!navigator.geolocation)throw new Error("This browser does not support location access. Choose a city instead.");
+        const position=await new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(resolve,reject,{
+          enableHighAccuracy:true,timeout:25000,maximumAge:0
+        }));
+        if(requestToken!==state.locationRequestToken)return false;
         const latitude=position.coords.latitude,longitude=position.coords.longitude;
+        if(!validCoordinates({latitude,longitude}))throw new Error("The browser returned an invalid location. Choose a city instead.");
         const name=await resolveLocationName(latitude,longitude);
+        if(requestToken!==state.locationRequestToken)return false;
         closeModal();
-        loadWeather({name,latitude,longitude},"geolocation").then(resolve,reject);
-      },error=>{
-        if(!automatic){
-          const message=error.code===1
-            ?"Location access was blocked. Allow it in your browser settings, or choose a city."
-            :error.code===3
-              ?"Location lookup timed out. Try again, or choose a city."
-              :"We could not determine your location. Try again, or choose a city.";
-          els.modalStatus.textContent=message;
-          toast(message);
-        }
-        reject(error);
-      },{enableHighAccuracy:false,timeout:25000,maximumAge:5*60*1000}));
+        setLocating(false);
+        await loadWeather({name,latitude,longitude},"geolocation");
+        return requestToken===state.locationRequestToken;
+      }catch(error){
+        if(requestToken!==state.locationRequestToken)return false;
+        const message=error.code===1
+          ?"Location access was blocked. Allow it in your browser settings, or choose a city."
+          :error.code===3
+            ?"Location lookup timed out. Try again, or choose a city."
+            :error.code===2
+              ?"We could not determine your location. Try again, or choose a city."
+              :error.message||"Location is unavailable. Choose a city instead.";
+        els.modalStatus.textContent=message;
+        toast(message);
+        throw error;
+      }finally{if(requestToken===state.locationRequestToken)setLocating(false)}
     }
 
     async function initializeLocation(){
-      if(navigator.permissions?.query){
-        try{const permission=await navigator.permissions.query({name:"geolocation"});if(permission.state==="granted"){document.documentElement.dataset.locationBootstrap="granted";try{await requestCurrentLocation({automatic:true});document.documentElement.dataset.locationBootstrap="current";return}catch{document.documentElement.dataset.locationBootstrap="current-failed"}}}catch{}
-      }
       const previousMode=storageGet("naj.locationMode"),manual=safeJson(storageGet("naj.manualLocation"));
-      if(previousMode==="manual"&&manual?.latitude&&manual?.longitude)await loadWeather(manual,"manual");
-      else{document.documentElement.dataset.locationBootstrap="fallback";await loadWeather(CONFIG.defaultLocation,"default")}
+      if(previousMode==="manual"&&validCoordinates(manual)&&typeof manual.name==="string"&&manual.name.trim()){
+        document.documentElement.dataset.locationBootstrap="manual";
+        beginLocationRequest();await loadWeather(manual,"manual");return;
+      }
+      // New York is intentional; device location is requested only by a button click.
+      document.documentElement.dataset.locationBootstrap="default";
+      beginLocationRequest();await loadWeather(CONFIG.defaultLocation,"default");
     }
 
     function demoWeather(mode="heavy-rain"){
