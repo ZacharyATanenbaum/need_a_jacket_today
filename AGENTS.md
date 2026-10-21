@@ -25,3 +25,11 @@ files, logs, commits, or assistant responses. If authentication is required, pro
 the cookie through the `CHATGPT_COOKIE` environment variable or pass a Firefox profile
 with `--firefox-profile`. The downloader must read only `chatgpt.com` cookies and must
 never print or persist their values.
+
+## Weather provider
+
+Weather Underground / The Weather Company must be the only weather provider.
+Do not add automatic fallback to Open-Meteo or any other weather or location-search
+provider. Fix Weather Underground integration failures directly. If that provider
+is unavailable, report the failure or show a recent saved Weather Underground
+forecast; do not silently substitute another provider.
