@@ -3,7 +3,8 @@
     const DISPLAY_HOURS=24;
     const CONFIG={
       weatherCompanyApiBase:"https://api.weather.com",
-      weatherCompanyApiKey:"e1f10a1e78da46f5b10a1e78da96f525",
+      // Public browser credential used by wunderground.com (verified 2026-10-21).
+      weatherCompanyApiKey:"f6d2efe5720d47ea92efe5720df7eaa8",
       defaultLocation:{name:"New York, NY",latitude:40.7128,longitude:-74.0060},
       cacheMaxAgeMs:30*60*1000,
       requestTimeoutMs:12000,
@@ -207,7 +208,7 @@
     function updateFreshness(){
       if(!state.weather)return;
       const status=state.dataMode==="cached"?"Saved forecast":state.dataMode==="demo"?"Preview weather":"Live weather";
-      els.updated.textContent=`${status} · ${state.weather.provider} · ${relativeTime(state.weather.fetchedAt||state.weather.updatedAt)}`;
+      els.updated.textContent=`${status} · ${relativeTime(state.weather.fetchedAt||state.weather.updatedAt)}`;
     }
     function renderPendingWeather(){
       els.temperature.textContent="—";els.weatherIcon.textContent="";els.condition.textContent="Updating conditions…";els.highLow.textContent="";
@@ -297,9 +298,7 @@
       render();
       if(!preserveCurrent)renderPendingWeather();
       try{
-        let data;
-        try{data=await fetchWeatherUnderground(location)}
-        catch{data=await fetchOpenMeteo(location)}
+        const data=await fetchWeatherUnderground(location);
         if(requestToken!==state.weatherRequestToken)return;
         data.fetchedAt=new Date().toISOString();
         state.weather=data;
@@ -325,14 +324,10 @@
     async function fetchWeatherCompany(path,params={},timeoutMs=CONFIG.requestTimeoutMs){
       const url=new URL(path,CONFIG.weatherCompanyApiBase);
       url.search=new URLSearchParams({...params,language:"en-US",format:"json",apiKey:CONFIG.weatherCompanyApiKey});
-      return fetchJson(url,timeoutMs,"Weather Underground");
-    }
-
-    async function fetchJson(url,timeoutMs=CONFIG.requestTimeoutMs,provider="Open-Meteo"){
       const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
       try{
         const response=await fetch(url,{headers:{Accept:"application/json"},cache:"no-store",signal:controller.signal});
-        if(!response.ok)throw new Error(`${provider} returned ${response.status}`);
+        if(!response.ok)throw new Error(`Weather Underground returned ${response.status}`);
         return await response.json();
       }finally{clearTimeout(timer)}
     }
@@ -375,42 +370,8 @@
       };
     }
 
-    async function fetchOpenMeteo(location){
-      const url=new URL("https://api.open-meteo.com/v1/forecast");
-      url.search=new URLSearchParams({latitude:location.latitude,longitude:location.longitude,current:"temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation",hourly:"temperature_2m,apparent_temperature,precipitation_probability,weather_code,wind_speed_10m",temperature_unit:"fahrenheit",wind_speed_unit:"mph",precipitation_unit:"inch",timezone:"auto",timeformat:"unixtime",forecast_days:"3"});
-      const raw=await fetchJson(url);
-      const current=raw.current,forecast=raw.hourly;
-      if(!Number.isFinite(current?.temperature_2m)||!Number.isFinite(current?.time)||!Array.isArray(forecast?.time))throw new Error("Open-Meteo returned incomplete conditions");
-      // Unix timestamps avoid interpreting the selected city's hours in the browser's timezone.
-      const start=forecast.time.findIndex(time=>time>=Math.floor(current.time/3600)*3600);
-      const hourly=start<0?[]:forecast.time.slice(start,start+DISPLAY_HOURS).map((time,index)=>{
-        const i=start+index;
-        return{time:new Date(time*1000).toISOString(),temperature:forecast.temperature_2m?.[i],feelsLike:forecast.apparent_temperature?.[i]??forecast.temperature_2m?.[i],precipProbability:forecast.precipitation_probability?.[i]??0,weatherCode:forecast.weather_code?.[i],windSpeed:forecast.wind_speed_10m?.[i]??0};
-      }).filter(hour=>Number.isFinite(hour.temperature));
-      if(hourly.length<HORIZON_HOURS)throw new Error("Open-Meteo returned an incomplete forecast");
-      const time=new Date(current.time*1000).toISOString();
-      return{provider:"Open-Meteo",updatedAt:time,timezone:raw.timezone,current:{time,temperature:current.temperature_2m,feelsLike:current.apparent_temperature??current.temperature_2m,precipProbability:hourly[0].precipProbability,weatherCode:current.weather_code,windSpeed:current.wind_speed_10m??0,precipitation:current.precipitation??0},hourly};
-    }
-
-    async function findLocations(query){
-      try{
-        const data=await fetchWeatherCompany("/v3/location/search",{query});
-        const locations=data.location||{},count=Math.min(7,locations.latitude?.length||0);
-        return Array.from({length:count},(_,index)=>({
-          name:locations.displayName?.[index]||locations.city?.[index]||query,
-          admin1:locations.adminDistrict?.[index],country:locations.country?.[index],
-          countryCode:locations.countryCode?.[index],latitude:locations.latitude?.[index],longitude:locations.longitude?.[index]
-        })).filter(validCoordinates);
-      }catch{
-        const url=new URL("https://geocoding-api.open-meteo.com/v1/search");
-        url.search=new URLSearchParams({name:query,count:"7",language:"en",format:"json"});
-        const data=await fetchJson(url);
-        return(data.results||[]).map(result=>({...result,countryCode:result.country_code})).filter(validCoordinates);
-      }
-    }
-
     function saveCache(location,mode,data){try{storageSet("naj.weatherCache.wu",JSON.stringify({location,mode,data,savedAt:Date.now()}))}catch{}}
-    function loadCache(location){try{const cached=JSON.parse(storageGet("naj.weatherCache.wu")||"null");if(!cached||Date.now()-cached.savedAt>CONFIG.cacheMaxAgeMs)return null;return Math.abs(cached.location.latitude-location.latitude)<.03&&Math.abs(cached.location.longitude-location.longitude)<.03?cached:null}catch{return null}}
+    function loadCache(location){try{const cached=JSON.parse(storageGet("naj.weatherCache.wu")||"null");if(!cached||cached.data?.provider!=="Weather Underground / The Weather Company"||Date.now()-cached.savedAt>CONFIG.cacheMaxAgeMs)return null;return Math.abs(cached.location.latitude-location.latitude)<.03&&Math.abs(cached.location.longitude-location.longitude)<.03?cached:null}catch{return null}}
     function openModal(){els.locationModal.classList.add("open");els.locationButton.setAttribute("aria-expanded","true");setTimeout(()=>els.searchInput.focus(),80)}
     function closeModal(){els.locationModal.classList.remove("open");els.locationButton.setAttribute("aria-expanded","false");els.modalStatus.textContent=""}
 
@@ -426,8 +387,17 @@
           if(requestToken!==state.locationRequestToken)return;
           closeModal();return loadWeather({name,...coordinate},"manual");
         }
-        const results=await findLocations(clean);
+        const data=await fetchWeatherCompany("/v3/location/search",{query:clean});
         if(requestToken!==state.locationRequestToken)return;
+        const locations=data.location||{},count=Math.min(7,locations.latitude?.length||0);
+        const results=Array.from({length:count},(_,index)=>({
+          name:locations.displayName?.[index]||locations.city?.[index]||clean,
+          admin1:locations.adminDistrict?.[index],
+          country:locations.country?.[index],
+          countryCode:locations.countryCode?.[index],
+          latitude:locations.latitude?.[index],
+          longitude:locations.longitude?.[index]
+        })).filter(validCoordinates);
         els.modalStatus.textContent=results.length?"":"No matching locations found.";
         els.searchResults.innerHTML=results.map((result,index)=>{const sub=[result.admin1,result.country].filter(Boolean).join(", ");return`<button class="result-button" type="button" data-result="${index}"><span><span class="result-main">${escapeHtml(result.name)}</span><span class="result-sub">${escapeHtml(sub)}</span></span><span>→</span></button>`}).join("");
         els.searchResults.querySelectorAll("[data-result]").forEach(button=>button.addEventListener("click",()=>{if(requestToken!==state.locationRequestToken)return;beginLocationRequest();const result=results[Number(button.dataset.result)],sub=[result.admin1,result.countryCode==="US"?null:result.country].filter(Boolean).join(", "),name=sub?`${result.name}, ${sub}`:result.name;closeModal();loadWeather({name,latitude:result.latitude,longitude:result.longitude},"manual")}));

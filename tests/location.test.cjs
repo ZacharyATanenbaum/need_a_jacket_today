@@ -163,8 +163,6 @@ test('a stalled search reports a recoverable error after its timeout',async()=>{
   })});await settle();await page.search('Boston');
   const timeout=page.timers.find(timer=>timer.delay===12000&&!timer.cleared);
   assert.ok(timeout);timeout.callback();await settle();
-  const fallbackTimeout=page.timers.find(timer=>timer.delay===12000&&!timer.cleared);
-  assert.ok(fallbackTimeout);fallbackTimeout.callback();await settle();
   assert.match(page.get('modalStatus').textContent,/unavailable.*Try again/);
 });
 
@@ -177,54 +175,45 @@ test('a failed explicit fix preserves the selected city and enables retry',async
   assert.match(page.get('toast').textContent,/timed out/);
 });
 
-const epoch=Math.floor(Date.now()/3600000)*3600;
-const fallbackWeather=()=>({timezone:'America/New_York',current:{time:epoch+900,temperature_2m:60,apparent_temperature:58,weather_code:3,wind_speed_10m:8,precipitation:0},hourly:{time:Array.from({length:48},(_,i)=>epoch+(i-12)*3600),temperature_2m:Array(48).fill(60),apparent_temperature:Array(48).fill(58),precipitation_probability:Array(48).fill(20),weather_code:Array(48).fill(3),wind_speed_10m:Array(48).fill(8)}});
-const throttled=()=>({ok:false,status:401,json:async()=>{throw new Error('API key is throttled')}});
+const wuProvider='Weather Underground / The Weather Company';
+const wuCurrent={temperature:65,temperatureFeelsLike:63,windSpeed:8,iconCode:30,validTimeLocal:'2026-10-21T12:00:00-04:00'};
+const wuForecast={validTimeLocal:Array.from({length:24},(_,i)=>new Date(Date.UTC(2026,9,21,16+i)).toISOString()),temperature:Array(24).fill(65),temperatureFeelsLike:Array(24).fill(63),precipChance:Array(24).fill(10)};
 
-test('throttled Weather Underground falls back to live weather with correct units, hours and attribution',async()=>{
+test('live mode loads current conditions and hourly forecasts exclusively from Weather Underground',async()=>{
   const calls=[];
   const page=app({live:true,fetch:async url=>{
     calls.push(url);
-    return url.hostname==='api.weather.com'?throttled():response(fallbackWeather());
+    assert.equal(url.hostname,'api.weather.com');
+    assert.equal(url.searchParams.get('apiKey'),'f6d2efe5720d47ea92efe5720df7eaa8');
+    assert.equal(url.searchParams.get('units'),'e');
+    return response(url.pathname.includes('observations')?wuCurrent:wuForecast);
   }});await settle();
-  assert.equal(page.get('temperature').textContent,'60°');
-  assert.match(page.get('updated').textContent,/Live weather · Open-Meteo/);
-  const url=calls.find(url=>url.hostname==='api.open-meteo.com');
-  for(const [key,value] of Object.entries({temperature_unit:'fahrenheit',wind_speed_unit:'mph',precipitation_unit:'inch',timeformat:'unixtime'}))assert.equal(url.searchParams.get(key),value);
+  assert.equal(calls.length,2);
+  assert.equal(page.get('temperature').textContent,'65°');
   const data=JSON.parse(page.storage.get('naj.weatherCache.wu')).data;
+  assert.equal(data.provider,wuProvider);
   assert.equal(data.hourly.length,24);
-  assert.equal(data.hourly[0].time,new Date(epoch*1000).toISOString());
-  assert.equal(data.current.feelsLike,58);
+  assert.equal(data.current.feelsLike,63);
   assert.equal(page.positions.length,0);
 });
 
-test('successful Weather Underground requests do not use fallback',async()=>{
+test('provider throttling reports failure without requesting any alternative provider',async()=>{
   const calls=[];
-  const page=app({live:true,fetch:async url=>{
-    calls.push(url);
-    return response(url.pathname.includes('observations')?{temperature:65}: {validTimeLocal:[new Date().toISOString()],temperature:[65]});
-  }});await settle();
-  assert.equal(page.get('temperature').textContent,'65°');
-  assert.equal(calls.length,2);
+  const page=app({live:true,fetch:async url=>{calls.push(url);return{ok:false,status:401}}});
+  await settle();await page.search('London');
+  assert.equal(page.get('condition').textContent,'Could not load weather');
+  assert.match(page.get('modalStatus').textContent,/unavailable/);
+  assert.equal(calls.length,3);
   assert.ok(calls.every(url=>url.hostname==='api.weather.com'));
 });
 
-test('city search survives shared-key throttling',async()=>{
-  const page=app({fetch:async url=>url.hostname==='api.weather.com'?throttled():response({results:[{name:'London',latitude:51.5,longitude:-0.12,country_code:'GB',country:'United Kingdom'}]})});
-  await settle();await page.search('London');
-  assert.match(page.get('searchResults').innerHTML,/London/);
-});
-
-test('incomplete fallback data is rejected instead of displaying invalid weather',async()=>{
-  const page=app({live:true,fetch:async url=>url.hostname==='api.weather.com'?throttled():response({current:{temperature_2m:null}})});
-  await settle();
-  assert.equal(page.get('condition').textContent,'Could not load weather');
-  assert.equal(page.storage.get('naj.weatherCache.wu'),undefined);
-});
-
-test('both providers failing preserves a recent saved forecast',async()=>{
-  const stored={'naj.weatherCache.wu':JSON.stringify({location:{latitude:40.7128,longitude:-74.006},savedAt:Date.now(),data:{provider:'Open-Meteo',current:{temperature:60,feelsLike:58},hourly:Array.from({length:24},(_,i)=>({time:new Date((epoch+i*3600)*1000).toISOString(),temperature:60,feelsLike:58}))}})};
-  const page=app({live:true,stored,fetch:async()=>{throw new Error('offline')}});await settle();
-  assert.equal(page.get('temperature').textContent,'60°');
-  assert.match(page.get('updated').textContent,/Saved forecast/);
+test('only recent Weather Underground forecasts can be reused after a provider failure',async()=>{
+  for(const provider of [wuProvider,'Open-Meteo','Weather demo']){
+    const stored={'naj.weatherCache.wu':JSON.stringify({location:{latitude:40.7128,longitude:-74.006},savedAt:Date.now(),data:{provider,current:{temperature:60,feelsLike:58},hourly:Array.from({length:24},(_,i)=>({time:new Date(Date.now()+i*3600000).toISOString(),temperature:60,feelsLike:58}))}})};
+    const page=app({live:true,stored,fetch:async()=>({ok:false,status:401})});await settle();
+    if(provider===wuProvider){
+      assert.equal(page.get('temperature').textContent,'60°');
+      assert.match(page.get('updated').textContent,/Saved forecast/);
+    }else assert.equal(page.get('condition').textContent,'Could not load weather');
+  }
 });
