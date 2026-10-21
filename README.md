@@ -4,7 +4,9 @@ Static site that recommends what to wear (and whether to grab an umbrella) based
 
 ## Weather source
 
-The browser requests current conditions, hourly forecasts, and location results directly from the Weather Underground / The Weather Company API. The API uses the same public client credential as the Weather Underground website; there is no server-side weather proxy and no Open-Meteo weather fallback.
+The browser requests current conditions, hourly forecasts, and location results directly from the Weather Underground / The Weather Company API. The API uses the same public client credential as the Weather Underground website; there is no server-side weather proxy. If Weather Underground fails (including HTTP 401 “API key is throttled”), forecasts and city searches automatically fall back to Open-Meteo. Each request has a timeout, and the page identifies the weather source used. If both providers fail, a recent saved forecast is used when available. Reverse geocoding still falls back to coordinates.
+
+Open-Meteo requests use Fahrenheit, mph, inches, and Unix timestamps so forecasts remain correct when the selected city and browser have different timezones. See the [forecast API](https://open-meteo.com/en/docs) and [geocoding API](https://open-meteo.com/en/docs/geocoding-api) documentation.
 
 ## Local Preview
 

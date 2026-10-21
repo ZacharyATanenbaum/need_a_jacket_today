@@ -10,7 +10,7 @@ const response=data=>({ok:true,json:async()=>data});
 const boston={name:'Boston, MA',latitude:42.36,longitude:-71.06};
 const london={name:'London, UK',latitude:51.5,longitude:-0.12};
 
-function app({permission='prompt',stored={},fetch,permissions=true,weatherFails=false}={}){
+function app({permission='prompt',stored={},fetch,permissions=true,weatherFails=false,live=false}={}){
   const elements=new Map(),storage=new Map(Object.entries(stored)),positions=[],timers=[];
   function element(){
     const listeners={},classes=new Set();
@@ -27,7 +27,7 @@ function app({permission='prompt',stored={},fetch,permissions=true,weatherFails=
   const navigator={geolocation:{getCurrentPosition(success,error,options){positions.push({success,error,options})}}};
   if(permissions)navigator.permissions={query:async()=>({state:permission})};
   const context={URL,URLSearchParams,AbortController,Intl,Date,Promise,console:{error(){}},navigator,
-    window:{location:{search:weatherFails?'':'?demo=short'},isSecureContext:true},
+    window:{location:{search:weatherFails||live?'':'?demo=short'},isSecureContext:true},
     document:{getElementById:get,documentElement:root,body:element(),querySelectorAll:()=>[],addEventListener(){}},
     localStorage:{getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value)},
     Image:class{},setInterval(){},setTimeout(callback,delay){const timer={callback,delay};timers.push(timer);return timer},clearTimeout(timer){if(timer)timer.cleared=true},
@@ -163,6 +163,8 @@ test('a stalled search reports a recoverable error after its timeout',async()=>{
   })});await settle();await page.search('Boston');
   const timeout=page.timers.find(timer=>timer.delay===12000&&!timer.cleared);
   assert.ok(timeout);timeout.callback();await settle();
+  const fallbackTimeout=page.timers.find(timer=>timer.delay===12000&&!timer.cleared);
+  assert.ok(fallbackTimeout);fallbackTimeout.callback();await settle();
   assert.match(page.get('modalStatus').textContent,/unavailable.*Try again/);
 });
 
@@ -173,4 +175,56 @@ test('a failed explicit fix preserves the selected city and enables retry',async
   assert.equal(page.get('locationName').textContent,london.name);
   assert.equal(page.get('useCurrentLocationTop').disabled,false);
   assert.match(page.get('toast').textContent,/timed out/);
+});
+
+const epoch=Math.floor(Date.now()/3600000)*3600;
+const fallbackWeather=()=>({timezone:'America/New_York',current:{time:epoch+900,temperature_2m:60,apparent_temperature:58,weather_code:3,wind_speed_10m:8,precipitation:0},hourly:{time:Array.from({length:48},(_,i)=>epoch+(i-12)*3600),temperature_2m:Array(48).fill(60),apparent_temperature:Array(48).fill(58),precipitation_probability:Array(48).fill(20),weather_code:Array(48).fill(3),wind_speed_10m:Array(48).fill(8)}});
+const throttled=()=>({ok:false,status:401,json:async()=>{throw new Error('API key is throttled')}});
+
+test('throttled Weather Underground falls back to live weather with correct units, hours and attribution',async()=>{
+  const calls=[];
+  const page=app({live:true,fetch:async url=>{
+    calls.push(url);
+    return url.hostname==='api.weather.com'?throttled():response(fallbackWeather());
+  }});await settle();
+  assert.equal(page.get('temperature').textContent,'60°');
+  assert.match(page.get('updated').textContent,/Live weather · Open-Meteo/);
+  const url=calls.find(url=>url.hostname==='api.open-meteo.com');
+  for(const [key,value] of Object.entries({temperature_unit:'fahrenheit',wind_speed_unit:'mph',precipitation_unit:'inch',timeformat:'unixtime'}))assert.equal(url.searchParams.get(key),value);
+  const data=JSON.parse(page.storage.get('naj.weatherCache.wu')).data;
+  assert.equal(data.hourly.length,24);
+  assert.equal(data.hourly[0].time,new Date(epoch*1000).toISOString());
+  assert.equal(data.current.feelsLike,58);
+  assert.equal(page.positions.length,0);
+});
+
+test('successful Weather Underground requests do not use fallback',async()=>{
+  const calls=[];
+  const page=app({live:true,fetch:async url=>{
+    calls.push(url);
+    return response(url.pathname.includes('observations')?{temperature:65}: {validTimeLocal:[new Date().toISOString()],temperature:[65]});
+  }});await settle();
+  assert.equal(page.get('temperature').textContent,'65°');
+  assert.equal(calls.length,2);
+  assert.ok(calls.every(url=>url.hostname==='api.weather.com'));
+});
+
+test('city search survives shared-key throttling',async()=>{
+  const page=app({fetch:async url=>url.hostname==='api.weather.com'?throttled():response({results:[{name:'London',latitude:51.5,longitude:-0.12,country_code:'GB',country:'United Kingdom'}]})});
+  await settle();await page.search('London');
+  assert.match(page.get('searchResults').innerHTML,/London/);
+});
+
+test('incomplete fallback data is rejected instead of displaying invalid weather',async()=>{
+  const page=app({live:true,fetch:async url=>url.hostname==='api.weather.com'?throttled():response({current:{temperature_2m:null}})});
+  await settle();
+  assert.equal(page.get('condition').textContent,'Could not load weather');
+  assert.equal(page.storage.get('naj.weatherCache.wu'),undefined);
+});
+
+test('both providers failing preserves a recent saved forecast',async()=>{
+  const stored={'naj.weatherCache.wu':JSON.stringify({location:{latitude:40.7128,longitude:-74.006},savedAt:Date.now(),data:{provider:'Open-Meteo',current:{temperature:60,feelsLike:58},hourly:Array.from({length:24},(_,i)=>({time:new Date((epoch+i*3600)*1000).toISOString(),temperature:60,feelsLike:58}))}})};
+  const page=app({live:true,stored,fetch:async()=>{throw new Error('offline')}});await settle();
+  assert.equal(page.get('temperature').textContent,'60°');
+  assert.match(page.get('updated').textContent,/Saved forecast/);
 });
